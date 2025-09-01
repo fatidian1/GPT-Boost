@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "GPT Boost",
+  "version": "1.0.0",
+  "description": "Lazy-load long ChatGPT conversations by showing only the most recent messages (configurable). Reduces lag on long chats.",
+  "permissions": [
+    "storage"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://chatgpt.com/*",
+        "*://chat.openai.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
