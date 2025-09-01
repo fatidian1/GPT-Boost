@@ -10,7 +10,7 @@ GPT Boost reduces lag on long ChatGPT conversations by **lazy-loading**: it show
 - Works on `chatgpt.com` (and `chat.openai.com` for backward compatibility).
 
 ## Install (Developer Mode)
-1. Download the ZIP from this chat and extract it.
+1. Download the ZIP from the releases tab and extract it.
 2. Open **chrome://extensions** (or **edge://extensions**).
 3. Enable **Developer mode** (top right).
 4. Click **Load unpacked** and select the extracted `gpt-boost` folder.
