@@ -91,6 +91,7 @@
 
     // Cache of last applied state to avoid redundant DOM writes
     let lastApply = {total: null, hiddenTop: null};
+    let sawZeroThenGrew = false; // detect chat reload: total 0 -> >0 transition
 
     // Find the main scrollable container
     function findContainer() {
@@ -215,6 +216,8 @@
 
         // Edge case: if no messages yet, do nothing (with backoff)
         if (total === 0) {
+            // mark that we saw zero; when it grows we'll auto-collapse
+            sawZeroThenGrew = true;
             log("applyWindowing: no messages yet");
             updateStatus(0, 0);
             // do not use timers; rely on DOM changes in #thread (articles count) to trigger windowing
@@ -236,6 +239,15 @@
             hiddenCountTop = Math.min(hiddenCountTop, Math.max(0, total - threshold));
         }
         log("applyWindowing: hiddenCountTop after calc", hiddenCountTop);
+
+        // If we just transitioned from 0 -> >0 total, collapse by default once
+        if (sawZeroThenGrew && total > 0) {
+            log("applyWindowing: detected chat load (0 -> >0). Collapsing to threshold by default");
+            sawZeroThenGrew = false; // reset the flag
+            // compute hiddenCountTop to collapse now
+            const threshold = Math.max(1, Number(settings.maxVisible) || DEFAULTS.maxVisible);
+            hiddenCountTop = Math.max(0, total - threshold);
+        }
 
         // Skip redundant apply if nothing changed
         if (lastApply.total === total && lastApply.hiddenTop === hiddenCountTop) {
@@ -446,6 +458,7 @@
             lastAppliedOnPath = path;
             hiddenCountTop = 0;
             hiddenCountBottom = 0;
+            sawZeroThenGrew = false;
             // reattach observer for new container without timers
             observeDom();
             scheduleApplyWindowing("route change");
