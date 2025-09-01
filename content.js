@@ -79,6 +79,7 @@
 
     // Internal state
     let container = null;
+    let threadContainer = null;
     let observer = null;
     let lastAppliedOnPath = null;
 
@@ -91,9 +92,10 @@
 
     // Cache of last applied state to avoid redundant DOM writes
     let lastApply = {total: null, hiddenTop: null};
+    let currentStatus = {total: null, hiddenTop: null};
     let sawZeroThenGrew = false; // detect chat reload: total 0 -> >0 transition
 
-    // Find the main scrollable container
+    // Find the main container
     function findContainer() {
         for (const sel of CONTAINER_SELECTORS) {
             const node = document.querySelector(sel);
@@ -103,6 +105,16 @@
             }
         }
         log("findContainer: no container found; using fallback later");
+        return null;
+    }
+
+    // Find the thread scrollable container
+    function findThreadContainer() {
+        let elements = document.getElementsByClassName('@thread-xl/thread:pt-header-height');
+        if (elements.length > 0) {
+            return elements[0];
+        }
+        log("findThreadContainer: no container found");
         return null;
     }
 
@@ -168,15 +180,17 @@
             (document.body || document.documentElement).appendChild(uiBar);
         }
 
-        if (container && !topSentinel) {
-            log("ensureUI: creating top sentinel");
-            topSentinel = document.createElement("div");
-            topSentinel.className = "gpt-boost-sentinel";
-            container.prepend(topSentinel);
+        if (threadContainer && !topSentinel) {
             if (settings.autoloadOnScroll) {
+                log("ensureUI: creating top sentinel");
+                topSentinel = document.createElement("div");
+                topSentinel.className = "gpt-boost-sentinel";
+                threadContainer.prepend(topSentinel);
                 const io = new IntersectionObserver((entries) => {
                     for (const e of entries) {
-                        if (e.isIntersecting) {
+                        //todo fix bug with initial double reveal
+                        if (e.isIntersecting && currentStatus.total > 0 && currentStatus.total !== currentStatus.visible &&
+                            threadContainer.parentElement.scrollHeight > 500 && threadContainer.parentElement.scrollTop > 0) {
                             log("IntersectionObserver: top sentinel intersecting → revealOlder");
                             revealOlder();
                         }
@@ -188,6 +202,7 @@
     }
 
     function updateStatus(total, visible) {
+        currentStatus = {total, visible};
         const el = document.getElementById("gpt-boost-status");
         if (el) {
             el.textContent = `GPT Boost · visible ${visible}/${total}`;
@@ -288,13 +303,17 @@
                     container.appendChild(placeholder);
                 }
             }
-            placeholder.textContent = `${hiddenCountTop} older message${hiddenCountTop === 1 ? "" : "s"} hidden — click to load`;
+            placeholder.textContent = revealOlderText(hiddenCountTop);
         } else {
             if (placeholder) {
                 log("applyWindowing: removing placeholder");
                 placeholder.remove();
             }
         }
+    }
+
+    function revealOlderText(hiddenCountTop) {
+        return `${hiddenCountTop} older message${hiddenCountTop === 1 ? "" : "s"} hidden — click to load next ${settings.batchSize}`;
     }
 
     function revealOlder() {
@@ -313,7 +332,7 @@
         let placeholder = container.querySelector(".gpt-boost-hidden-placeholder");
         if (hiddenCountTop > 0) {
             if (placeholder) {
-                placeholder.textContent = `${hiddenCountTop} older message${hiddenCountTop === 1 ? "" : "s"} hidden — click to load`;
+                placeholder.textContent = revealOlderText(hiddenCountTop);
                 messages[hiddenCountTop].before(placeholder);
             }
         } else if (placeholder) {
@@ -381,6 +400,7 @@
             return;
         }
         container = target;
+        threadContainer = findThreadContainer();
 
         // Also observe #thread for article count changes to avoid timers
         const thread = document.querySelector('#thread') || container.querySelector('#thread');
