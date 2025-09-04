@@ -16,8 +16,8 @@
   "content_scripts": [
     {
       "matches": [
-        "*://chatgpt.com/*",
-        "*://chat.openai.com/*"
+        "*://chatgpt.com/share/*",
+        "*://chatgpt.com/c/*"
       ],
       "js": [
         "content.js"

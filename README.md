@@ -7,7 +7,7 @@ GPT Boost reduces lag on long ChatGPT conversations by **lazy-loading**: it show
 - Click **Show older** in the sticky pill to reveal the next batch (default **10**).
 - Optional auto-reveal when you scroll to the top.
 - Simple, non-intrusive UI; per-site content script (no background service worker).
-- Works on `chatgpt.com` (and `chat.openai.com` for backward compatibility).
+- Works on conversation URLs like `https://chatgpt.com/share/*` and `https://chatgpt.com/c/*`.
 
 ## Install (Developer Mode)
 1. Download the ZIP from the releases tab and extract it.
