@@ -100,6 +100,7 @@
     let lastApply = {total: null, hiddenTop: null};
     let currentStatus = {total: null, hiddenTop: null};
     let sawZeroThenGrew = false; // detect chat reload: total 0 -> >0 transition
+    let conversationLoaded = false; // ensure autoload waits for initial collapse
 
     // Find the main container
     function findContainer() {
@@ -203,7 +204,8 @@
                 threadContainer.prepend(topSentinel);
                 topSentinelObserver = new IntersectionObserver((entries) => {
                     for (const e of entries) {
-                        if (e.isIntersecting &&
+                        if (conversationLoaded &&
+                            e.isIntersecting &&
                             currentStatus.total > 0 &&
                             currentStatus.total !== currentStatus.visible &&
                             threadContainer.scrollHeight > threadContainer.clientHeight) {
@@ -326,6 +328,8 @@
                 placeholder.remove();
             }
         }
+
+        conversationLoaded = true;
     }
 
     function revealOlderText(hiddenCountTop) {
@@ -495,6 +499,7 @@
             hiddenCountTop = 0;
             hiddenCountBottom = 0;
             sawZeroThenGrew = false;
+            conversationLoaded = false;
             // reattach observer for new container without timers
             observeDom();
             scheduleApplyWindowing("route change");
