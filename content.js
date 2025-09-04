@@ -1,4 +1,9 @@
 (() => {
+    // Only run on conversation URLs like /share/* or /c/*
+    if (!/^\/(share|c)\//.test(location.pathname)) {
+        return;
+    }
+
     // Enable verbose logging to debug infinite loading issues
     const DEBUG = false;
     const log = (...args) => {
