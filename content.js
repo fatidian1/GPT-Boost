@@ -93,12 +93,14 @@
     let hiddenCountBottom = 0; // (we typically don't hide bottom)
 
     let topSentinel = null;
+    let topSentinelObserver = null;
     let uiBar = null;
 
     // Cache of last applied state to avoid redundant DOM writes
     let lastApply = {total: null, hiddenTop: null};
     let currentStatus = {total: null, hiddenTop: null};
     let sawZeroThenGrew = false; // detect chat reload: total 0 -> >0 transition
+    let conversationLoaded = false; // ensure autoload waits for initial collapse
 
     // Find the main container
     function findContainer() {
@@ -185,23 +187,34 @@
             (document.body || document.documentElement).appendChild(uiBar);
         }
 
-        if (threadContainer && !topSentinel) {
-            if (settings.autoloadOnScroll) {
+        if (threadContainer) {
+            if (!settings.autoloadOnScroll) {
+                if (topSentinel) {
+                    topSentinelObserver?.disconnect();
+                    topSentinel.remove();
+                    topSentinel = null;
+                    topSentinelObserver = null;
+                }
+            } else if (!topSentinel || !topSentinel.isConnected || topSentinel.parentElement !== threadContainer) {
+                if (topSentinelObserver) topSentinelObserver.disconnect();
+                if (topSentinel) topSentinel.remove();
                 log("ensureUI: creating top sentinel");
                 topSentinel = document.createElement("div");
                 topSentinel.className = "gpt-boost-sentinel";
                 threadContainer.prepend(topSentinel);
-                const io = new IntersectionObserver((entries) => {
+                topSentinelObserver = new IntersectionObserver((entries) => {
                     for (const e of entries) {
-                        //todo fix bug with initial double reveal
-                        if (e.isIntersecting && currentStatus.total > 0 && currentStatus.total !== currentStatus.visible &&
-                            threadContainer.parentElement.scrollHeight > 500 && threadContainer.parentElement.scrollTop > 0) {
+                        if (conversationLoaded &&
+                            e.isIntersecting &&
+                            currentStatus.total > 0 &&
+                            currentStatus.total !== currentStatus.visible &&
+                            threadContainer.scrollHeight > threadContainer.clientHeight) {
                             log("IntersectionObserver: top sentinel intersecting → revealOlder");
                             revealOlder();
                         }
                     }
-                }, {root: null, threshold: 0});
-                io.observe(topSentinel);
+                }, {root: threadContainer, threshold: 0});
+                topSentinelObserver.observe(topSentinel);
             }
         }
     }
@@ -315,6 +328,8 @@
                 placeholder.remove();
             }
         }
+
+        conversationLoaded = true;
     }
 
     function revealOlderText(hiddenCountTop) {
@@ -484,6 +499,7 @@
             hiddenCountTop = 0;
             hiddenCountBottom = 0;
             sawZeroThenGrew = false;
+            conversationLoaded = false;
             // reattach observer for new container without timers
             observeDom();
             scheduleApplyWindowing("route change");
