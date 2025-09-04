@@ -196,12 +196,12 @@
                         if (e.isIntersecting &&
                             currentStatus.total > 0 &&
                             currentStatus.total !== currentStatus.visible &&
-                            threadContainer.parentElement.scrollHeight > threadContainer.parentElement.clientHeight) {
+                            threadContainer.scrollHeight > threadContainer.clientHeight) {
                             log("IntersectionObserver: top sentinel intersecting → revealOlder");
                             revealOlder();
                         }
                     }
-                }, {root: threadContainer.parentElement, threshold: 0});
+                }, {root: threadContainer, threshold: 0});
                 io.observe(topSentinel);
             }
         }
