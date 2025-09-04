@@ -93,6 +93,7 @@
     let hiddenCountBottom = 0; // (we typically don't hide bottom)
 
     let topSentinel = null;
+    let topSentinelObserver = null;
     let uiBar = null;
 
     // Cache of last applied state to avoid redundant DOM writes
@@ -185,13 +186,22 @@
             (document.body || document.documentElement).appendChild(uiBar);
         }
 
-        if (threadContainer && !topSentinel) {
-            if (settings.autoloadOnScroll) {
+        if (threadContainer) {
+            if (!settings.autoloadOnScroll) {
+                if (topSentinel) {
+                    topSentinelObserver?.disconnect();
+                    topSentinel.remove();
+                    topSentinel = null;
+                    topSentinelObserver = null;
+                }
+            } else if (!topSentinel || !topSentinel.isConnected || topSentinel.parentElement !== threadContainer) {
+                if (topSentinelObserver) topSentinelObserver.disconnect();
+                if (topSentinel) topSentinel.remove();
                 log("ensureUI: creating top sentinel");
                 topSentinel = document.createElement("div");
                 topSentinel.className = "gpt-boost-sentinel";
                 threadContainer.prepend(topSentinel);
-                const io = new IntersectionObserver((entries) => {
+                topSentinelObserver = new IntersectionObserver((entries) => {
                     for (const e of entries) {
                         if (e.isIntersecting &&
                             currentStatus.total > 0 &&
@@ -202,7 +212,7 @@
                         }
                     }
                 }, {root: threadContainer, threshold: 0});
-                io.observe(topSentinel);
+                topSentinelObserver.observe(topSentinel);
             }
         }
     }
