@@ -1,4 +1,4 @@
-# GPT Boost (Chrome/Edge extension)
+# GPT Boost (Chrome/Edge/Firefox extension)
 
 GPT Boost reduces lag on long ChatGPT conversations by **lazy-loading**: it shows only the latest messages and hides older ones until you scroll to the top or click **Show older**. Thresholds are configurable.
 
