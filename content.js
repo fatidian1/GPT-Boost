@@ -13,6 +13,32 @@
         }
     };
 
+    // Cross-browser API shim (Firefox exposes `browser`, Chrome exposes `chrome`)
+    const BROWSER = typeof window.browser !== "undefined" ? window.browser : window.chrome;
+
+    function storageGet(defaults) {
+        try {
+            // Promise-based in Firefox/Chrome MV3 if callback not expected
+            if (BROWSER.storage && BROWSER.storage.sync && BROWSER.storage.sync.get.length <= 1) {
+                return BROWSER.storage.sync.get(defaults);
+            }
+            return new Promise((resolve) => BROWSER.storage.sync.get(defaults, resolve));
+        } catch (_) {
+            return Promise.resolve({...defaults});
+        }
+    }
+
+    function storageSet(values) {
+        try {
+            if (BROWSER.storage && BROWSER.storage.sync && BROWSER.storage.sync.set.length <= 1) {
+                return BROWSER.storage.sync.set(values);
+            }
+            return new Promise((resolve) => BROWSER.storage.sync.set(values, resolve));
+        } catch (_) {
+            return Promise.resolve();
+        }
+    }
+
     const DEFAULTS = Object.freeze({
         maxVisible: 10,         // show at most last N messages
         batchSize: 10,          // number of messages to reveal/hide in a batch
@@ -24,27 +50,24 @@
     // Utility: get settings from storage
     function loadSettings() {
         log("loadSettings: start");
-        return new Promise((resolve) => {
-            try {
-                chrome.storage.sync.get(DEFAULTS, (res) => {
-                    settings = {...DEFAULTS, ...res};
-                    log("loadSettings: resolved from chrome.storage.sync", settings);
-                    resolve(settings);
-                });
-            } catch (e) {
-                // Firefox/quasi environments might not have chrome.*; fallback to defaults
+        return storageGet(DEFAULTS)
+            .then((res) => {
+                settings = {...DEFAULTS, ...res};
+                log("loadSettings: resolved from storage", settings);
+                return settings;
+            })
+            .catch((e) => {
                 settings = {...DEFAULTS};
                 log("loadSettings: using DEFAULTS due to error", e);
-                resolve(settings);
-            }
-        });
+                return settings;
+            });
     }
 
     // Observe storage changes to update live
     function watchSettings() {
         log("watchSettings: attaching listener");
         try {
-            chrome.storage.onChanged.addListener((changes, area) => {
+            BROWSER.storage.onChanged.addListener((changes, area) => {
                 log("storage.onChanged", {area, changes});
                 if (area !== "sync") return;
                 let changed = false;
