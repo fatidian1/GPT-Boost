@@ -2,6 +2,7 @@ const DEFAULTS = {
   maxVisible: 10,
   batchSize: 10,
   autoloadOnScroll: true,
+  hideOldestOnNew: true,
 };
 
 function load() {
@@ -9,6 +10,7 @@ function load() {
     document.getElementById("maxVisible").value = res.maxVisible;
     document.getElementById("batchSize").value = res.batchSize;
     document.getElementById("autoloadOnScroll").checked = !!res.autoloadOnScroll;
+    document.getElementById("hideOldestOnNew").checked = !!res.hideOldestOnNew;
   });
 }
 
@@ -17,7 +19,8 @@ function save(e) {
   const maxVisible = Math.max(1, parseInt(document.getElementById("maxVisible").value || "10", 10));
   const batchSize = Math.max(1, parseInt(document.getElementById("batchSize").value || "10", 10));
   const autoloadOnScroll = !!document.getElementById("autoloadOnScroll").checked;
-  chrome.storage.sync.set({ maxVisible, batchSize, autoloadOnScroll });
+  const hideOldestOnNew = !!document.getElementById("hideOldestOnNew").checked;
+  chrome.storage.sync.set({ maxVisible, batchSize, autoloadOnScroll, hideOldestOnNew });
 }
 
 function reset() {

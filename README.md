@@ -6,6 +6,7 @@ GPT Boost reduces lag on long ChatGPT conversations by **lazy-loading**: it show
 - Auto-collapses older messages when a chat exceeds *Max visible messages* (default **10**).
 - Click **Show older** in the sticky pill to reveal the next batch (default **10**).
 - Optional auto-reveal when you scroll to the top.
+- Optional trimming of the oldest visible message when new ones arrive.
 - Simple, non-intrusive UI; per-site content script (no background service worker).
 - Works on conversation URLs like `https://chatgpt.com/share/*` and `https://chatgpt.com/c/*`.
 
@@ -24,6 +25,7 @@ Open the extension’s **Options** page from your browser’s extensions list.
 - **Max visible messages**: how many messages are kept on-screen (default 10).
 - **Batch size**: how many older messages are revealed per click/scroll (default 10).
 - **Auto-reveal on scroll**: automatically reveal older messages when you reach the top.
+- **Hide the oldest message when a new appears**: keep the current number of visible messages constant (default on).
 
 ## Notes
 - GPT Boost hides older DOM nodes (display: none) to reduce layout/paint cost. It does **not** modify or exfiltrate content.
