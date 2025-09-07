@@ -12,9 +12,11 @@
         maxVisible: 10,         // show at most last N messages
         batchSize: 10,          // number of messages to reveal/hide in a batch
         autoloadOnScroll: true, // reveal older messages when user scrolls to top
+        hideOldestOnNew: true,  // hide oldest visible message when new ones arrive
     });
 
     let settings = {...DEFAULTS};
+    let visibleLimit = DEFAULTS.maxVisible; // dynamic visible count when auto-hiding on new
 
     // Utility: get settings from storage
     function loadSettings() {
@@ -23,12 +25,14 @@
             try {
                 chrome.storage.sync.get(DEFAULTS, (res) => {
                     settings = {...DEFAULTS, ...res};
+                    visibleLimit = settings.maxVisible;
                     log("loadSettings: resolved from chrome.storage.sync", settings);
                     resolve(settings);
                 });
             } catch (e) {
                 // Firefox/quasi environments might not have chrome.*; fallback to defaults
                 settings = {...DEFAULTS};
+                visibleLimit = settings.maxVisible;
                 log("loadSettings: using DEFAULTS due to error", e);
                 resolve(settings);
             }
@@ -46,6 +50,7 @@
                 for (const k of Object.keys(DEFAULTS)) {
                     if (k in changes) {
                         settings[k] = changes[k].newValue;
+                        if (k === 'maxVisible') visibleLimit = settings.maxVisible;
                         changed = true;
                     }
                 }
@@ -252,12 +257,17 @@
 
         // messages present; proceed normally
 
-        // If we haven't hidden anything yet or messages changed radically, recalc hidden top
-        if (hiddenCountTop + threshold > total) {
-            hiddenCountTop = Math.max(0, total - threshold);
+        if (settings.hideOldestOnNew) {
+            if (visibleLimit < threshold) visibleLimit = threshold;
+            hiddenCountTop = Math.max(0, total - visibleLimit);
         } else {
-            // Keep hiddenCountTop bounded
-            hiddenCountTop = Math.min(hiddenCountTop, Math.max(0, total - threshold));
+            // If we haven't hidden anything yet or messages changed radically, recalc hidden top
+            if (hiddenCountTop + threshold > total) {
+                hiddenCountTop = Math.max(0, total - threshold);
+            } else {
+                // Keep hiddenCountTop bounded
+                hiddenCountTop = Math.min(hiddenCountTop, Math.max(0, total - threshold));
+            }
         }
         log("applyWindowing: hiddenCountTop after calc", hiddenCountTop);
 
@@ -268,6 +278,7 @@
             // compute hiddenCountTop to collapse now
             const threshold = Math.max(1, Number(settings.maxVisible) || DEFAULTS.maxVisible);
             hiddenCountTop = Math.max(0, total - threshold);
+            if (settings.hideOldestOnNew) visibleLimit = threshold;
         }
 
         // Skip redundant apply if nothing changed
@@ -333,6 +344,7 @@
         const batchSize = Math.max(1, Number(settings.batchSize) || DEFAULTS.batchSize);
         const before = hiddenCountTop;
         hiddenCountTop = Math.max(0, hiddenCountTop - batchSize);
+        visibleLimit += before - hiddenCountTop;
         log("revealOlder: hiddenCountTop", {before, after: hiddenCountTop, batchSize, total: messages.length});
 
         let placeholder = container.querySelector(".gpt-boost-hidden-placeholder");
@@ -361,6 +373,7 @@
         const total = messages.length;
         const threshold = Math.max(1, Number(settings.maxVisible) || DEFAULTS.maxVisible);
         hiddenCountTop = Math.max(0, total - threshold);
+        visibleLimit = threshold;
         log("collapseToThreshold: computing hiddenCountTop", {total, threshold, hiddenCountTop});
         applyWindowing();
         // Scroll to bottom after collapsing to keep the newest in view
@@ -485,6 +498,7 @@
             hiddenCountTop = 0;
             hiddenCountBottom = 0;
             sawZeroThenGrew = false;
+            visibleLimit = settings.maxVisible;
             // reattach observer for new container without timers
             observeDom();
             scheduleApplyWindowing("route change");
