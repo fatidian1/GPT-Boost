@@ -12,6 +12,11 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "gpt-boost@fatidian1"
+    }
+  },
   "options_page": "options.html",
   "content_scripts": [
     {

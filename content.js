@@ -1,9 +1,4 @@
 (() => {
-    // Only run on conversation URLs like /share/* or /c/*
-    if (!/^\/(share|c)\//.test(location.pathname)) {
-        return;
-    }
-
     // Enable verbose logging to debug infinite loading issues
     const DEBUG = false;
     const log = (...args) => {
@@ -115,7 +110,7 @@
 
     // Find the thread scrollable container
     function findThreadContainer() {
-        let elements = document.getElementsByClassName('@thread-xl/thread:pt-header-height');
+        let elements = document.getElementsByClassName('thread-xl:pt-header-height');
         if (elements.length > 0) {
             return elements[0];
         }
@@ -184,6 +179,8 @@
             log("ensureUI: re-attaching UI bar to body");
             (document.body || document.documentElement).appendChild(uiBar);
         }
+        // Only show on conversation URLs like /share/* or /c/*
+        uiBar.style.display = !/^\/(share|c)\//.test(location.pathname) ? "none" : "";
 
         if (threadContainer && !topSentinel) {
             if (settings.autoloadOnScroll) {
@@ -195,7 +192,7 @@
                     for (const e of entries) {
                         //todo fix bug with initial double reveal
                         if (e.isIntersecting && currentStatus.total > 0 && currentStatus.total !== currentStatus.visible &&
-                            threadContainer.parentElement.scrollHeight > 500 && threadContainer.parentElement.scrollTop > 0) {
+                            threadContainer.parentElement.scrollHeight > threadContainer.parentElement.clientHeight) {
                             log("IntersectionObserver: top sentinel intersecting → revealOlder");
                             revealOlder();
                         }

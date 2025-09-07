@@ -1,4 +1,4 @@
-# GPT Boost (Chrome/Edge extension)
+# GPT Boost (Chrome/Edge/Firefox extension)
 
 GPT Boost reduces lag on long ChatGPT conversations by **lazy-loading**: it shows only the latest messages and hides older ones until you scroll to the top or click **Show older**. Thresholds are configurable.
 
@@ -9,9 +9,12 @@ GPT Boost reduces lag on long ChatGPT conversations by **lazy-loading**: it show
 - Simple, non-intrusive UI; per-site content script (no background service worker).
 - Works on conversation URLs like `https://chatgpt.com/share/*` and `https://chatgpt.com/c/*`.
 
+## Install (Chrome Web Store)
+You can download the extension from: https://chromewebstore.google.com/detail/elieiaigindaijkbgndpolchbngejadc?utm_source=item-share-cb
+
 ## Install (Developer Mode)
 1. Download the ZIP from the releases tab and extract it.
-2. Open **chrome://extensions** (or **edge://extensions**).
+2. Open **chrome://extensions**, **edge://extensions** or **about:debugging**.
 3. Enable **Developer mode** (top right).
 4. Click **Load unpacked** and select the extracted `gpt-boost` folder.
 5. Visit ChatGPT and open a long conversation.
