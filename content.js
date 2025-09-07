@@ -152,6 +152,12 @@
     }
 
     function ensureUI() {
+        // Only show on conversation URLs like /share/* or /c/*
+        if(!/^\/(share|c)\//.test(location.pathname)) {
+            uiBar?.remove();
+            uiBar = null;
+            return;
+        }
         // Ensure container for sentinel, but UI bar is mounted on body so it survives SPA re-renders
         if (!uiBar) {
             log("ensureUI: creating UI bar");
@@ -179,8 +185,6 @@
             log("ensureUI: re-attaching UI bar to body");
             (document.body || document.documentElement).appendChild(uiBar);
         }
-        // Only show on conversation URLs like /share/* or /c/*
-        uiBar.style.display = !/^\/(share|c)\//.test(location.pathname) ? "none" : "";
 
         if (threadContainer && !topSentinel) {
             if (settings.autoloadOnScroll) {
