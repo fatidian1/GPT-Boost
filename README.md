@@ -30,6 +30,23 @@ Open the extension’s **Options** page from your browser’s extensions list.
 - **Auto-reveal on scroll**: automatically reveal older messages when you reach the top.
 - **Hide the oldest message when a new appears**: keep the current number of visible messages constant (default on).
 
+## Development
+
+This extension was created with [Extension CLI](https://oss.mobilefirst.me/extension-cli/)
+
+### Available Commands
+
+| Commands | Description |
+| --- | --- |
+| `npm run start` | build extension, watch file changes |
+| `npm run build` | generate release version |
+| `npm run docs` | generate source code docs |
+| `npm run clean` | remove temporary files |
+| `npm run test` | run unit tests |
+| `npm run sync` | update config files |
+
+For CLI instructions see [User Guide &rarr;](https://oss.mobilefirst.me/extension-cli/)
+
 ## Notes
 - GPT Boost hides older DOM nodes (display: none) to reduce layout/paint cost. It does **not** modify or exfiltrate content.
 - The ChatGPT DOM evolves. The extension attempts to detect messages via several robust selectors and re-applies windowing as the page updates.

@@ -1,0 +1,8 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Lazy-load long ChatGPT conversations by showing only the most recent messages (configurable). Reduces lag on long chats."
+  }
+}

@@ -158,7 +158,7 @@
 
     function ensureUI() {
         // Only show on conversation URLs like /share/* or /c/*
-        if(!/^\/(share|c)\//.test(location.pathname)) {
+        if (!/^\/(share|c)\//.test(location.pathname)) {
             uiBar?.remove();
             uiBar = null;
             return;

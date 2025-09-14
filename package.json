@@ -1,0 +1,68 @@
+{
+  "name": "gpt-boost",
+  "description": "Lazy-load long ChatGPT conversations by showing only the most recent messages (configurable). Reduces lag on long chats.",
+  "version": "1.1.0",
+  "homepage": "https://github.com/fatidian1/GPT-Boost",
+  "author": "fatidian1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fatidian1/GPT-Boost.git"
+  },
+  "scripts": {
+    "start": "xt-build -e dev -w",
+    "start:firefox": "xt-build -e dev -p firefox -w",
+    "build": "xt-build -e prod",
+    "build:firefox": "xt-build -e prod -p firefox",
+    "clean": "xt-clean",
+    "docs": "xt-docs",
+    "test": "xt-test",
+    "coverage": "nyc --reporter=lcov npm run test",
+    "sync": "xt-sync"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "eslintIgnore": [
+    "test/**/*"
+  ],
+  "devDependencies": {
+    "extension-cli": "latest"
+  },
+  "xtdocs": {
+    "source": {
+      "include": [
+        "README.md",
+        "LICENSE",
+        "src"
+      ]
+    }
+  },
+  "xtbuild": {
+    "js_bundles": [
+      {
+        "name": "content",
+        "src": "./src/content.js"
+      },
+      {
+        "name": "options",
+        "src": "./src/options.js"
+      }
+    ],
+    "scss_bundles": [
+      {
+        "src": [
+          "./src/scss/content.scss"
+        ],
+        "name": "content"
+      },
+      {
+        "src": [
+          "./src/scss/options.scss"
+        ],
+        "name": "options"
+      }
+    ]
+  }
+}
