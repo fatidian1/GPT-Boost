@@ -13,6 +13,9 @@ GPT Boost reduces lag on long ChatGPT conversations by **lazy-loading**: it show
 ## Install (Chrome Web Store)
 You can download the extension from: https://chromewebstore.google.com/detail/elieiaigindaijkbgndpolchbngejadc?utm_source=github
 
+## Install (Microsoft Edge)
+You can download the extension from: https://microsoftedge.microsoft.com/addons/detail/gpt-boost/ncklidjanbceeolimmgnjebcjjhnmjla?utm_source=github
+
 ## Install (Firefox)
 You can download the extension from: https://addons.mozilla.org/en-US/firefox/addon/gpt-boost/?utm_source=github
 
