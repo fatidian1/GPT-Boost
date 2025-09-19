@@ -33,7 +33,8 @@ jobs:
           extension_id: ${{ secrets.EXTENSION_ID }}
           zip_file: release.zip
 
-      - uses: wdzeng/edge-addon@v2
+      - name: Upload to Microsoft Edge Add-ons
+        uses: wdzeng/edge-addon@v2
         with:
           product-id: ${{ secrets.MICROSOFT_PRODUCT_ID }}
           zip-path: release.zip
