@@ -24,14 +24,13 @@ jobs:
         run: npm run build
 
       - name: Upload to Chrome Web Store
-        uses: mobilefirstllc/cws-publish@latest
+        uses: wdzeng/chrome-extension@v1
         with:
-          action: publish
-          client_id: ${{ secrets.CLIENT }}
-          client_secret: ${{ secrets.SECRET }}
-          refresh_token: ${{ secrets.TOKEN }}
-          extension_id: ${{ secrets.EXTENSION_ID }}
-          zip_file: release.zip
+          extension-id: ${{ secrets.EXTENSION_ID }}
+          zip-path: release.zip
+          client-id: ${{ secrets.CLIENT }}
+          client-secret: ${{ secrets.SECRET }}
+          refresh-token: ${{ secrets.TOKEN }}
 
       - name: Upload to Microsoft Edge Add-ons
         uses: wdzeng/edge-addon@v2
