@@ -1,0 +1,50 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build chrome/edge zip file
+        run: npm run build
+
+      - name: Upload to Chrome Web Store
+        uses: mobilefirstllc/cws-publish@latest
+        with:
+          action: publish
+          client_id: ${{ secrets.CLIENT }}
+          client_secret: ${{ secrets.SECRET }}
+          refresh_token: ${{ secrets.TOKEN }}
+          extension_id: ${{ secrets.EXTENSION_ID }}
+          zip_file: release.zip
+
+      - uses: wdzeng/edge-addon@v2
+        with:
+          product-id: ${{ secrets.MICROSOFT_PRODUCT_ID }}
+          zip-path: release.zip
+          api-key: ${{ secrets.MICROSOFT_API_KEY }}
+          client-id: ${{ secrets.MICROSOFT_CLIENT_ID }}
+
+      - name: Build firefox zip file
+        run: npm run build:firefox
+
+      - name: Upload to Firefox Add-ons
+        uses: wdzeng/firefox-addon@v1
+        with:
+          addon-guid: ${{ secrets.FIREFOX_GUID }}
+          xpi-path: release.zip
+          self-hosted: false
+          jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
+          jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}

@@ -158,7 +158,7 @@
 
     function ensureUI() {
         // Only show on conversation URLs like /share/* or /c/*
-        if (!/^\/(share|c)\//.test(location.pathname)) {
+        if (!/\/(share|c)\//.test(location.pathname)) {
             uiBar?.remove();
             uiBar = null;
             return;
@@ -171,9 +171,17 @@
             const pill = document.createElement("div");
             pill.className = "gpt-boost-pill";
             pill.innerHTML = `
-        <span id=\"gpt-boost-status\">GPT Boost active</span>
-        <button id=\"gpt-boost-show-older\" title=\"Show older messages\">Show older</button>
-        <button id=\"gpt-boost-collapse\" title=\"Collapse older messages\">Collapse</button>
+        <span id="gpt-boost-status">GPT Boost active</span>
+        <button id="gpt-boost-show-older" title="Show older messages">Show older</button>
+        <button id="gpt-boost-collapse" title="Collapse older messages">Collapse</button>
+        <span class="gpt-boost-drag-handle" title="Drag">
+          <span class="gpt-boost-drag-dot"></span>
+          <span class="gpt-boost-drag-dot"></span>
+          <span class="gpt-boost-drag-dot"></span>
+          <span class="gpt-boost-drag-dot"></span>
+          <span class="gpt-boost-drag-dot"></span>
+          <span class="gpt-boost-drag-dot"></span>
+        </span>
       `;
             uiBar.appendChild(pill);
             (document.body || document.documentElement).appendChild(uiBar);
@@ -186,6 +194,76 @@
                 log("UI: Collapse clicked");
                 collapseToThreshold();
             });
+
+            // Dragging: only via the handle on the right edge
+            const handle = pill.querySelector('.gpt-boost-drag-handle');
+            if (handle && !pill.dataset.dragInit) {
+                pill.dataset.dragInit = '1';
+                let dragging = false;
+                let startX = 0, startY = 0;
+                let offsetX = 0, offsetY = 0;
+
+                const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
+
+                const onMove = (clientX, clientY) => {
+                    const vw = window.innerWidth;
+                    const vh = window.innerHeight;
+                    const rect = pill.getBoundingClientRect();
+                    const newLeft = clamp(clientX - offsetX, 4, vw - rect.width - 4);
+                    const newTop = clamp(clientY - offsetY, 4, vh - rect.height - 4);
+                    pill.style.left = `${newLeft}px`;
+                    pill.style.top = `${newTop}px`;
+                };
+
+                const onMouseMove = (e) => {
+                    if (!dragging) return;
+                    e.preventDefault();
+                    onMove(e.clientX, e.clientY);
+                };
+                const onTouchMove = (e) => {
+                    if (!dragging) return;
+                    const t = e.touches[0];
+                    if (!t) return;
+                    e.preventDefault();
+                    onMove(t.clientX, t.clientY);
+                };
+                const endDrag = () => {
+                    if (!dragging) return;
+                    dragging = false;
+                    document.removeEventListener('mousemove', onMouseMove, {passive: false});
+                    document.removeEventListener('mouseup', endDrag);
+                    document.removeEventListener('touchmove', onTouchMove, {passive: false});
+                    document.removeEventListener('touchend', endDrag);
+                    handle.classList.remove('dragging');
+                };
+
+                const begin = (clientX, clientY) => {
+                    const rect = pill.getBoundingClientRect();
+                    // Switch from centered transform to absolute pixel positioning on first drag
+                    pill.style.transform = 'none';
+                    pill.style.left = `${rect.left}px`;
+                    pill.style.top = `${rect.top}px`;
+                    offsetX = clientX - rect.left;
+                    offsetY = clientY - rect.top;
+                    dragging = true;
+                    handle.classList.add('dragging');
+                    document.addEventListener('mousemove', onMouseMove, {passive: false});
+                    document.addEventListener('mouseup', endDrag);
+                    document.addEventListener('touchmove', onTouchMove, {passive: false});
+                    document.addEventListener('touchend', endDrag);
+                };
+
+                handle.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    begin(e.clientX, e.clientY);
+                });
+                handle.addEventListener('touchstart', (e) => {
+                    const t = e.touches[0];
+                    if (!t) return;
+                    e.preventDefault();
+                    begin(t.clientX, t.clientY);
+                }, {passive: false});
+            }
         } else if (!uiBar.isConnected) {
             log("ensureUI: re-attaching UI bar to body");
             (document.body || document.documentElement).appendChild(uiBar);

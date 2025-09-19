@@ -12,7 +12,10 @@
 
 .gpt-boost-pill {
   pointer-events: auto;
-  margin: 8px auto;
+  position: fixed;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 6px 10px;
   border-radius: 999px;
   background: rgba(0, 0, 0, .6);
@@ -36,6 +39,26 @@
       background: rgba(255, 255, 255, .25);
     }
   }
+}
+
+.gpt-boost-drag-handle {
+  display: inline-grid;
+  grid-template-columns: repeat(2, 4px);
+  grid-template-rows: repeat(3, 4px);
+  align-items: center;
+  justify-items: center;
+  gap: 2px;
+  margin-left: 4px;
+  padding: 6px 4px 6px 6px; /* a bit more right padding for easier grab */
+  cursor: grab;
+  user-select: none;
+}
+.gpt-boost-drag-handle:active { cursor: grabbing; }
+.gpt-boost-drag-dot {
+  width: 2px;
+  height: 2px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
 }
 
 

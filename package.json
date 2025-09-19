@@ -1,7 +1,7 @@
 {
   "name": "gpt-boost",
   "description": "Lazy-load long ChatGPT conversations by showing only the most recent messages (configurable). Reduces lag on long chats.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "homepage": "https://github.com/fatidian1/GPT-Boost",
   "author": "fatidian1",
   "repository": {
