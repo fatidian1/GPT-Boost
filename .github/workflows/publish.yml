@@ -1,5 +1,9 @@
 name: Publish
 
+permissions:
+  contents: write
+  discussions: write
+
 on:
   push:
     tags:
