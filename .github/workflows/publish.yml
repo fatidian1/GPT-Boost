@@ -9,8 +9,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
         with:
           node-version: 22
 
@@ -37,6 +40,9 @@ jobs:
           api-key: ${{ secrets.MICROSOFT_API_KEY }}
           client-id: ${{ secrets.MICROSOFT_CLIENT_ID }}
 
+      - name: Rename chrome release file
+        run: mv release.zip gpt-boost-chrome-${{ github.ref_name }}.zip
+
       - name: Build firefox zip file
         run: npm run build:firefox
 
@@ -48,3 +54,13 @@ jobs:
           self-hosted: false
           jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
           jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
+
+      - name: Rename firefox release file
+        run: mv release.zip gpt-boost-firefox-${{ github.ref_name }}.zip
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            gpt-boost-chrome-${{ github.ref_name }}.zip
+            gpt-boost-firefox-${{ github.ref_name }}.zip
