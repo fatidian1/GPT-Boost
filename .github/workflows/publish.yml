@@ -11,61 +11,103 @@ on:
 
 jobs:
   build:
-    environment: publish
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v5
         with:
           node-version: 22
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build chrome/edge zip file
         run: npm run build
 
-      - name: Upload to Chrome Web Store
-        uses: wdzeng/chrome-extension@v1
+      - name: Upload chrome artifact
+        uses: actions/upload-artifact@v4
         with:
-          extension-id: ${{ secrets.EXTENSION_ID }}
-          zip-path: release.zip
-          client-id: ${{ secrets.CLIENT }}
-          client-secret: ${{ secrets.SECRET }}
-          refresh-token: ${{ secrets.TOKEN }}
+          name: gpt-boost-chrome-${{ github.ref_name }}.zip
+          path: release.zip
 
-      - name: Upload to Microsoft Edge Add-ons
-        uses: wdzeng/edge-addon@v2
+      - name: Upload edge artifact
+        uses: actions/upload-artifact@v4
         with:
-          product-id: ${{ secrets.MICROSOFT_PRODUCT_ID }}
-          zip-path: release.zip
-          api-key: ${{ secrets.MICROSOFT_API_KEY }}
-          client-id: ${{ secrets.MICROSOFT_CLIENT_ID }}
-
-      - name: Rename chrome release file
-        run: mv release.zip gpt-boost-chrome-${{ github.ref_name }}.zip
+          name: gpt-boost-edge-${{ github.ref_name }}.zip
+          path: release.zip
 
       - name: Build firefox zip file
         run: npm run build:firefox
 
+      - name: Upload firefox artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gpt-boost-firefox-${{ github.ref_name }}.zip
+          path: release.zip
+
+  publish_chrome:
+    environment: publish
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: gpt-boost-chrome-${{ github.ref_name }}.zip
+      - name: Upload to Chrome Web Store
+        uses: wdzeng/chrome-extension@v1
+        with:
+          extension-id: ${{ secrets.EXTENSION_ID }}
+          zip-path: gpt-boost-chrome-${{ github.ref_name }}.zip
+          client-id: ${{ secrets.CLIENT }}
+          client-secret: ${{ secrets.SECRET }}
+          refresh-token: ${{ secrets.TOKEN }}
+
+  publish_edge:
+    environment: publish
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: gpt-boost-edge-${{ github.ref_name }}.zip
+      - name: Upload to Microsoft Edge Add-ons
+        uses: wdzeng/edge-addon@v2
+        with:
+          product-id: ${{ secrets.MICROSOFT_PRODUCT_ID }}
+          zip-path: gpt-boost-edge-${{ github.ref_name }}.zip
+          api-key: ${{ secrets.MICROSOFT_API_KEY }}
+          client-id: ${{ secrets.MICROSOFT_CLIENT_ID }}
+
+  publish_firefox:
+    environment: publish
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: gpt-boost-firefox-${{ github.ref_name }}.zip
       - name: Upload to Firefox Add-ons
         uses: wdzeng/firefox-addon@v1
         with:
           addon-guid: ${{ secrets.FIREFOX_GUID }}
-          xpi-path: release.zip
+          xpi-path: gpt-boost-firefox-${{ github.ref_name }}.zip
           self-hosted: false
           jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
           jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
 
-      - name: Rename firefox release file
-        run: mv release.zip gpt-boost-firefox-${{ github.ref_name }}.zip
-
+  github_release:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v5
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
             gpt-boost-chrome-${{ github.ref_name }}.zip
+            gpt-boost-edge-${{ github.ref_name }}.zip
             gpt-boost-firefox-${{ github.ref_name }}.zip
