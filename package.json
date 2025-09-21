@@ -17,7 +17,9 @@
     "docs": "xt-docs",
     "test": "xt-test",
     "coverage": "nyc --reporter=lcov npm run test",
-    "sync": "xt-sync"
+    "sync": "xt-sync",
+    "format": "prettier --write ./src ./assets/locales",
+    "format:check": "prettier --check ./src ./assets/locales"
   },
   "babel": {
     "presets": [
@@ -28,7 +30,8 @@
     "test/**/*"
   ],
   "devDependencies": {
-    "extension-cli": "latest"
+    "extension-cli": "latest",
+    "prettier": "^3.6.2"
   },
   "xtdocs": {
     "source": {
@@ -40,6 +43,10 @@
     }
   },
   "xtbuild": {
+    "locales_list": [
+      "en",
+      "pl"
+    ],
     "js_bundles": [
       {
         "name": "content",

@@ -18,7 +18,8 @@
     "it": true,
     "expect": true,
     "sinon": true,
-    "chrome": true
+    "chrome": true,
+    "browser": true
   },
   "plugins": [],
   "parserOptions": {

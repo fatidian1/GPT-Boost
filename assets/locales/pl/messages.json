@@ -1,0 +1,8 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Zoptymalizowanie długich konwersacji ChatGPT poprzez wyświetlanie tylko najnowszych wiadomości (konfigurowalne). Zmniejsza opóźnienia przy długich czatach."
+  }
+}

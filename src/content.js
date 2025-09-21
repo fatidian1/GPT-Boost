@@ -1,9 +1,13 @@
+import {getMessage} from "./i18n";
+
 (() => {
+    console.log('translations test', getMessage('appDescription'));
     // Enable verbose logging to debug infinite loading issues
     const DEBUG = false;
     const log = (...args) => {
         try {
             if (DEBUG) console.log("[GPT Boost]", ...args);
+            // eslint-disable-next-line no-empty
         } catch (_) {
         }
     };
@@ -200,6 +204,7 @@
             if (handle && !pill.dataset.dragInit) {
                 pill.dataset.dragInit = '1';
                 let dragging = false;
+                // eslint-disable-next-line no-unused-vars
                 let startX = 0, startY = 0;
                 let offsetX = 0, offsetY = 0;
 
@@ -464,6 +469,7 @@
 
     // Throttle applyWindowing using requestAnimationFrame (no setTimeout)
     let applyScheduled = false;
+    // eslint-disable-next-line no-unused-vars
     let rafId = null;
 
     function scheduleApplyWindowing(reason) {
