@@ -1,44 +1,48 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>GPT Boost – Options</title>
-    <link rel="stylesheet" href="options.css">
-</head>
-<body>
-<div class="wrap">
-    <h1>GPT Boost – Options</h1>
-    <form id="form">
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>GPT Boost – Options</h1>
+      <form id="form">
         <label>
-            Max visible messages
-            <input type="number" id="maxVisible" min="1" step="1">
-            <small>Default: 10</small>
+          Max visible messages
+          <input type="number" id="maxVisible" min="1" step="1" />
+          <small>Default: 10</small>
         </label>
         <label>
-            Batch size (per reveal)
-            <input type="number" id="batchSize" min="1" step="1">
-            <small>Default: 10</small>
+          Batch size (per reveal)
+          <input type="number" id="batchSize" min="1" step="1" />
+          <small>Default: 10</small>
         </label>
         <label class="row">
-            <input type="checkbox" id="autoloadOnScroll">
-            Reveal older messages automatically when I scroll to the top
+          <input type="checkbox" id="autoloadOnScroll" />
+          Reveal older messages automatically when I scroll to the top
         </label>
         <label class="row">
-            <input type="checkbox" id="hideOldestOnNew">
-            Hide the oldest message when a new appears
+          <input type="checkbox" id="hideOldestOnNew" />
+          Hide the oldest message when a new appears
         </label>
         <div class="actions">
-            <button type="submit">Save</button>
-            <button type="button" id="reset">Reset to defaults</button>
+          <button type="submit">Save</button>
+          <button type="button" id="reset">Reset to defaults</button>
         </div>
         <p class="hint">Changes apply instantly to open ChatGPT tabs.</p>
-    </form>
-    <footer>
-        <p><strong>GPT Boost</strong> reduces lag on long conversations by only keeping a window of messages in the DOM.
+      </form>
+      <footer>
+        <p>
+          <strong>GPT Boost</strong> reduces lag on long conversations by only keeping a window of messages in the DOM.
         </p>
-        <p>If you like this extension consider buying me <a href="https://buymeacoffee.com/fatidian1">a coffee</a>.</p>
-    </footer>
-</div>
-<script src="options.js"></script>
-</body>
+        <p>
+          If you like this extension consider buying me
+          <a href="https://buymeacoffee.com/fatidian1">a coffee</a>.
+        </p>
+      </footer>
+    </div>
+    <script src="options.js"></script>
+  </body>
 </html>

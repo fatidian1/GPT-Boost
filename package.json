@@ -18,8 +18,8 @@
     "test": "xt-test",
     "coverage": "nyc --reporter=lcov npm run test",
     "sync": "xt-sync",
-    "format": "prettier --write ./src ./assets/locales",
-    "format:check": "prettier --check ./src ./assets/locales"
+    "format": "prettier --write ./src ./assets/locales .github/workflows",
+    "format:check": "prettier --check ./src ./assets/locales .github/workflows"
   },
   "babel": {
     "presets": [

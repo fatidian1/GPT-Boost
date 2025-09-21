@@ -5,9 +5,7 @@
   "version": "1.1.1",
   "default_locale": "en",
   "description": "__MSG_appDescription__",
-  "permissions": [
-    "storage"
-  ],
+  "permissions": ["storage"],
   "icons": {
     "16": "assets/img/icon16.png",
     "32": "assets/img/icon32.png",
@@ -23,16 +21,9 @@
   "options_page": "options.html",
   "content_scripts": [
     {
-      "matches": [
-        "*://chatgpt.com/*",
-        "*://chat.openai.com/*"
-      ],
-      "js": [
-        "content.js"
-      ],
-      "css": [
-        "content.css"
-      ],
+      "matches": ["*://chatgpt.com/*", "*://chat.openai.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
       "run_at": "document_idle"
     }
   ]
