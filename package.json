@@ -45,7 +45,24 @@
   "xtbuild": {
     "locales_list": [
       "en",
-      "pl"
+      "pl",
+      "de",
+      "es",
+      "ru",
+      "zh_CN",
+      "zh_TW",
+      "uk",
+      "hi",
+      "ja",
+      "cs",
+      "ar",
+      "it",
+      "fi",
+      "no",
+      "nl",
+      "sr",
+      "tr",
+      "el"
     ],
     "js_bundles": [
       {

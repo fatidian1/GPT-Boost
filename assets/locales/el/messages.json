@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Φορτώστε σταδιακά τις μεγάλες συνομιλίες του ChatGPT προβάλλοντας μόνο τα πιο πρόσφατα μηνύματα (παραμετροποιήσιμο). Μειώνει την καθυστέρηση σε μεγάλες συνομιλίες."
+  },
+  "statusBar": {
+    "message": "GPT Boost · ορατά $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "Έχει αποκρυφτεί 1 παλαιότερο μήνυμα — κάντε κλικ για να φορτώσετε τα επόμενα $1"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "Έχουν αποκρυφτεί $1 παλαιότερα μηνύματα — κάντε κλικ για να φορτώσετε τα επόμενα $2"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – Επιλογές"
+  },
+  "labelMaxVisible": {
+    "message": "Μέγιστος αριθμός ορατών μηνυμάτων"
+  },
+  "defaultNumber": {
+    "message": "Προεπιλογή: $1"
+  },
+  "labelBatchSize": {
+    "message": "Μέγεθος παρτίδας (ανά εμφάνιση)"
+  },
+  "labelAutoload": {
+    "message": "Να εμφανίζονται αυτόματα τα παλαιότερα μηνύματα όταν κάνω κύλιση προς τα πάνω"
+  },
+  "labelHideOldest": {
+    "message": "Απόκρυψη του παλαιότερου μηνύματος όταν εμφανίζεται ένα νέο"
+  },
+  "save": {
+    "message": "Αποθήκευση"
+  },
+  "reset": {
+    "message": "Επαναφορά στις προεπιλογές"
+  },
+  "hintApply": {
+    "message": "Οι αλλαγές εφαρμόζονται αμέσως στις ανοιχτές καρτέλες του ChatGPT."
+  },
+  "footerDescription": {
+    "message": "Το $1 μειώνει την καθυστέρηση σε μεγάλες συνομιλίες διατηρώντας μόνο ένα παράθυρο μηνυμάτων στο DOM."
+  },
+  "footerSupportPrefix": {
+    "message": "Αν σας αρέσει αυτή η επέκταση, σκεφτείτε να μου αγοράσετε "
+  },
+  "footerSupportLinkText": {
+    "message": "έναν καφέ"
+  },
+  "footerSupportSuffix": {
+    "message": "."
+  },
+  "settingsSaved": {
+    "message": "Οι ρυθμίσεις αποθηκεύτηκαν"
+  },
+  "settingsRestored": {
+    "message": "Οι ρυθμίσεις επανήλθαν στις προεπιλογές"
+  },
+  "showOlder": {
+    "message": "Εμφάνιση παλαιότερων"
+  },
+  "showOlderTitle": {
+    "message": "Εμφάνιση παλαιότερων μηνυμάτων"
+  },
+  "collapse": {
+    "message": "Σύμπτυξη"
+  },
+  "collapseTitle": {
+    "message": "Σύμπτυξη παλαιότερων μηνυμάτων"
+  },
+  "dragTitle": {
+    "message": "Σύρετε"
+  },
+  "statusActive": {
+    "message": "Το GPT Boost είναι ενεργό"
+  }
+}

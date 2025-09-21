@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Laad lange ChatGPT-gesprekken geleidelijk door alleen de meest recente berichten te tonen (instelbaar). Vermindert vertraging in lange chats."
+  },
+  "statusBar": {
+    "message": "GPT Boost · zichtbaar $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "1 ouder bericht verborgen — klik om de volgende $1 te laden"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "$1 oudere berichten verborgen — klik om de volgende $2 te laden"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – Opties"
+  },
+  "labelMaxVisible": {
+    "message": "Maximaal aantal zichtbare berichten"
+  },
+  "defaultNumber": {
+    "message": "Standaard: $1"
+  },
+  "labelBatchSize": {
+    "message": "Batchgrootte (per keer tonen)"
+  },
+  "labelAutoload": {
+    "message": "Toon oudere berichten automatisch wanneer ik naar boven scroll"
+  },
+  "labelHideOldest": {
+    "message": "Verberg het oudste bericht wanneer er een nieuw binnenkomt"
+  },
+  "save": {
+    "message": "Opslaan"
+  },
+  "reset": {
+    "message": "Standaardinstellingen herstellen"
+  },
+  "hintApply": {
+    "message": "Wijzigingen worden direct toegepast op geopende ChatGPT-tabbladen."
+  },
+  "footerDescription": {
+    "message": "$1 vermindert vertraging in lange gesprekken door alleen een venster met berichten in de DOM te laten."
+  },
+  "footerSupportPrefix": {
+    "message": "Als je deze extensie waardeert, overweeg dan om mij "
+  },
+  "footerSupportLinkText": {
+    "message": "een kop koffie"
+  },
+  "footerSupportSuffix": {
+    "message": " te trakteren."
+  },
+  "settingsSaved": {
+    "message": "Instellingen opgeslagen"
+  },
+  "settingsRestored": {
+    "message": "Instellingen hersteld naar standaardwaarden"
+  },
+  "showOlder": {
+    "message": "Toon oudere"
+  },
+  "showOlderTitle": {
+    "message": "Toon oudere berichten"
+  },
+  "collapse": {
+    "message": "Samenvouwen"
+  },
+  "collapseTitle": {
+    "message": "Vouw oudere berichten samen"
+  },
+  "dragTitle": {
+    "message": "Slepen"
+  },
+  "statusActive": {
+    "message": "GPT Boost actief"
+  }
+}

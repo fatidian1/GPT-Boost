@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Lädt lange ChatGPT-Unterhaltungen nach Bedarf, indem nur die neuesten Nachrichten angezeigt werden (konfigurierbar). Reduziert Verzögerungen in langen Chats."
+  },
+  "statusBar": {
+    "message": "GPT Boost · sichtbar $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "1 ältere Nachricht verborgen — klicken, um die nächsten $1 zu laden"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "$1 ältere Nachrichten verborgen — klicken, um die nächsten $2 zu laden"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – Optionen"
+  },
+  "labelMaxVisible": {
+    "message": "Maximale Anzahl sichtbarer Nachrichten"
+  },
+  "defaultNumber": {
+    "message": "Standard: $1"
+  },
+  "labelBatchSize": {
+    "message": "Stapelgröße (pro Anzeige)"
+  },
+  "labelAutoload": {
+    "message": "Ältere Nachrichten automatisch anzeigen, wenn ich nach oben scrolle"
+  },
+  "labelHideOldest": {
+    "message": "Älteste Nachricht ausblenden, wenn eine neue erscheint"
+  },
+  "save": {
+    "message": "Speichern"
+  },
+  "reset": {
+    "message": "Auf Standard zurücksetzen"
+  },
+  "hintApply": {
+    "message": "Änderungen gelten sofort für geöffnete ChatGPT-Tabs."
+  },
+  "footerDescription": {
+    "message": "$1 verringert Verzögerungen in langen Unterhaltungen, indem nur ein Nachrichtenfenster im DOM bleibt."
+  },
+  "footerSupportPrefix": {
+    "message": "Wenn dir diese Erweiterung gefällt, spendiere mir doch "
+  },
+  "footerSupportLinkText": {
+    "message": "einen Kaffee"
+  },
+  "footerSupportSuffix": {
+    "message": "."
+  },
+  "settingsSaved": {
+    "message": "Einstellungen gespeichert"
+  },
+  "settingsRestored": {
+    "message": "Einstellungen auf Standard zurückgesetzt"
+  },
+  "showOlder": {
+    "message": "Ältere anzeigen"
+  },
+  "showOlderTitle": {
+    "message": "Ältere Nachrichten anzeigen"
+  },
+  "collapse": {
+    "message": "Einklappen"
+  },
+  "collapseTitle": {
+    "message": "Ältere Nachrichten einklappen"
+  },
+  "dragTitle": {
+    "message": "Ziehen"
+  },
+  "statusActive": {
+    "message": "GPT Boost aktiv"
+  }
+}

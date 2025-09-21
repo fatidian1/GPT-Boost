@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "حمِّل محادثات ChatGPT الطويلة تدريجيًا عبر عرض أحدث الرسائل فقط (قابل للتخصيص). يقلل التأخير في الدردشات الطويلة."
+  },
+  "statusBar": {
+    "message": "GPT Boost · مرئية $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "تم إخفاء رسالة قديمة واحدة — انقر لتحميل $1 التالية"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "تم إخفاء $1 رسالة قديمة — انقر لتحميل $2 التالية"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – الإعدادات"
+  },
+  "labelMaxVisible": {
+    "message": "الحد الأقصى للرسائل الظاهرة"
+  },
+  "defaultNumber": {
+    "message": "الإعداد الافتراضي: $1"
+  },
+  "labelBatchSize": {
+    "message": "حجم الدفعة (لكل إظهار)"
+  },
+  "labelAutoload": {
+    "message": "اعرض الرسائل الأقدم تلقائيًا عند التمرير إلى الأعلى"
+  },
+  "labelHideOldest": {
+    "message": "إخفاء أقدم رسالة عند ظهور رسالة جديدة"
+  },
+  "save": {
+    "message": "حفظ"
+  },
+  "reset": {
+    "message": "إعادة التعيين إلى الافتراضي"
+  },
+  "hintApply": {
+    "message": "يتم تطبيق التغييرات فورًا على علامات تبويب ChatGPT المفتوحة."
+  },
+  "footerDescription": {
+    "message": "$1 يقلل التأخير في المحادثات الطويلة عبر إبقاء نافذة من الرسائل فقط داخل DOM."
+  },
+  "footerSupportPrefix": {
+    "message": "إذا أعجبك هذا الامتداد، فكر في أن تشتري لي "
+  },
+  "footerSupportLinkText": {
+    "message": "قهوة"
+  },
+  "footerSupportSuffix": {
+    "message": "."
+  },
+  "settingsSaved": {
+    "message": "تم حفظ الإعدادات"
+  },
+  "settingsRestored": {
+    "message": "تمت إعادة الإعدادات إلى الوضع الافتراضي"
+  },
+  "showOlder": {
+    "message": "عرض الأقدم"
+  },
+  "showOlderTitle": {
+    "message": "عرض الرسائل الأقدم"
+  },
+  "collapse": {
+    "message": "طي"
+  },
+  "collapseTitle": {
+    "message": "طي الرسائل الأقدم"
+  },
+  "dragTitle": {
+    "message": "سحب"
+  },
+  "statusActive": {
+    "message": "GPT Boost نشط"
+  }
+}

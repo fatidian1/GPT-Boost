@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Uzun ChatGPT sohbetlerini yalnızca en yeni iletileri göstererek (özelleştirilebilir) kademeli olarak yükleyin. Uzun sohbetlerdeki gecikmeyi azaltır."
+  },
+  "statusBar": {
+    "message": "GPT Boost · görünür $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "1 eski ileti gizlendi — sonraki $1 iletiyi yüklemek için tıklayın"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "$1 eski ileti gizlendi — sonraki $2 iletiyi yüklemek için tıklayın"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – Seçenekler"
+  },
+  "labelMaxVisible": {
+    "message": "Görünür iletilerin en yüksek sayısı"
+  },
+  "defaultNumber": {
+    "message": "Varsayılan: $1"
+  },
+  "labelBatchSize": {
+    "message": "Toplu gösterim boyutu (her seferinde)"
+  },
+  "labelAutoload": {
+    "message": "Yukarı kaydırdığımda eski iletileri otomatik olarak göster"
+  },
+  "labelHideOldest": {
+    "message": "Yeni bir ileti geldiğinde en eski iletiyi gizle"
+  },
+  "save": {
+    "message": "Kaydet"
+  },
+  "reset": {
+    "message": "Varsayılanlara sıfırla"
+  },
+  "hintApply": {
+    "message": "Değişiklikler açık ChatGPT sekmelerine anında uygulanır."
+  },
+  "footerDescription": {
+    "message": "$1, DOM'da yalnızca bir ileti penceresi tutarak uzun konuşmalardaki gecikmeyi azaltır."
+  },
+  "footerSupportPrefix": {
+    "message": "Bu uzantıyı beğendiyseniz, lütfen bana "
+  },
+  "footerSupportLinkText": {
+    "message": "bir kahve"
+  },
+  "footerSupportSuffix": {
+    "message": " ısmarlamayı düşünün."
+  },
+  "settingsSaved": {
+    "message": "Ayarlar kaydedildi"
+  },
+  "settingsRestored": {
+    "message": "Ayarlar varsayılanlara sıfırlandı"
+  },
+  "showOlder": {
+    "message": "Eskileri göster"
+  },
+  "showOlderTitle": {
+    "message": "Eski iletileri göster"
+  },
+  "collapse": {
+    "message": "Daralt"
+  },
+  "collapseTitle": {
+    "message": "Eski iletileri daralt"
+  },
+  "dragTitle": {
+    "message": "Sürükle"
+  },
+  "statusActive": {
+    "message": "GPT Boost etkin"
+  }
+}

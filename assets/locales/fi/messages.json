@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Lataa pitkät ChatGPT-keskustelut vaiheittain näyttämällä vain uusimmat viestit (muokattavissa). Vähentää viivettä pitkillä chatteilla."
+  },
+  "statusBar": {
+    "message": "GPT Boost · näkyvissä $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "1 vanhempi viesti piilotettu — lataa seuraavat $1 napsauttamalla"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "$1 vanhempaa viestiä piilotettu — lataa seuraavat $2 napsauttamalla"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – Asetukset"
+  },
+  "labelMaxVisible": {
+    "message": "Näkyvissä olevien viestien enimmäismäärä"
+  },
+  "defaultNumber": {
+    "message": "Oletus: $1"
+  },
+  "labelBatchSize": {
+    "message": "Eräkoko (per paljastus)"
+  },
+  "labelAutoload": {
+    "message": "Näytä vanhemmat viestit automaattisesti, kun vieritän ylös"
+  },
+  "labelHideOldest": {
+    "message": "Piilota vanhin viesti, kun uusi saapuu"
+  },
+  "save": {
+    "message": "Tallenna"
+  },
+  "reset": {
+    "message": "Palauta oletukset"
+  },
+  "hintApply": {
+    "message": "Muutokset tulevat voimaan heti avoimissa ChatGPT-välilehdissä."
+  },
+  "footerDescription": {
+    "message": "$1 vähentää viivettä pitkissä keskusteluissa pitämällä DOMissa vain viesti-ikkunan."
+  },
+  "footerSupportPrefix": {
+    "message": "Jos pidät tästä laajennuksesta, harkitse että tarjoat minulle "
+  },
+  "footerSupportLinkText": {
+    "message": "kahvin"
+  },
+  "footerSupportSuffix": {
+    "message": "."
+  },
+  "settingsSaved": {
+    "message": "Asetukset tallennettu"
+  },
+  "settingsRestored": {
+    "message": "Asetukset palautettu oletuksiin"
+  },
+  "showOlder": {
+    "message": "Näytä vanhemmat"
+  },
+  "showOlderTitle": {
+    "message": "Näytä vanhemmat viestit"
+  },
+  "collapse": {
+    "message": "Tiivistä"
+  },
+  "collapseTitle": {
+    "message": "Tiivistä vanhemmat viestit"
+  },
+  "dragTitle": {
+    "message": "Vedä"
+  },
+  "statusActive": {
+    "message": "GPT Boost käytössä"
+  }
+}

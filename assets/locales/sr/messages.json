@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Учитавајте дуге ChatGPT разговоре постепено приказујући само најновије поруке (може се подесити). Смањује кашњење у дугим четовима."
+  },
+  "statusBar": {
+    "message": "GPT Boost · видљиво $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "1 старија порука је скривена — кликните да учитате наредних $1"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "Скривено је $1 старијих порука — кликните да учитате наредних $2"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – Подешавања"
+  },
+  "labelMaxVisible": {
+    "message": "Максималан број видљивих порука"
+  },
+  "defaultNumber": {
+    "message": "Подразумевано: $1"
+  },
+  "labelBatchSize": {
+    "message": "Величина серије (по откривању)"
+  },
+  "labelAutoload": {
+    "message": "Аутоматски прикажи старије поруке када се померам на врх"
+  },
+  "labelHideOldest": {
+    "message": "Сакриј најстарију поруку када се појави нова"
+  },
+  "save": {
+    "message": "Сачувај"
+  },
+  "reset": {
+    "message": "Врати на подразумевано"
+  },
+  "hintApply": {
+    "message": "Промене се одмах примењују на отвореним ChatGPT картицама."
+  },
+  "footerDescription": {
+    "message": "$1 смањује кашњење у дугим разговорима тако што у DOM-у задржава само прозор порука."
+  },
+  "footerSupportPrefix": {
+    "message": "Ако вам се допада ово проширење, размислите да ми купите "
+  },
+  "footerSupportLinkText": {
+    "message": "кафу"
+  },
+  "footerSupportSuffix": {
+    "message": "."
+  },
+  "settingsSaved": {
+    "message": "Подешавања су сачувана"
+  },
+  "settingsRestored": {
+    "message": "Подешавања враћена на подразумеване вредности"
+  },
+  "showOlder": {
+    "message": "Прикажи старије"
+  },
+  "showOlderTitle": {
+    "message": "Прикажи старије поруке"
+  },
+  "collapse": {
+    "message": "Скупи"
+  },
+  "collapseTitle": {
+    "message": "Скупи старије поруке"
+  },
+  "dragTitle": {
+    "message": "Превуци"
+  },
+  "statusActive": {
+    "message": "GPT Boost је активан"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "透過只顯示最新訊息（可設定）來按需載入冗長的 ChatGPT 對話。減少長時間聊天的延遲。"
+  },
+  "statusBar": {
+    "message": "GPT Boost · 可見 $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "已隱藏 1 則較早的訊息 — 點擊載入接下來的 $1 則"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "已隱藏 $1 則較早的訊息 — 點擊載入接下來的 $2 則"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – 選項"
+  },
+  "labelMaxVisible": {
+    "message": "最多可見訊息數"
+  },
+  "defaultNumber": {
+    "message": "預設：$1"
+  },
+  "labelBatchSize": {
+    "message": "批次大小（每次顯示）"
+  },
+  "labelAutoload": {
+    "message": "當我捲動到頂端時自動顯示較早的訊息"
+  },
+  "labelHideOldest": {
+    "message": "出現新訊息時隱藏最早的那一則"
+  },
+  "save": {
+    "message": "儲存"
+  },
+  "reset": {
+    "message": "重設為預設值"
+  },
+  "hintApply": {
+    "message": "變更會立即套用到開啟的 ChatGPT 分頁。"
+  },
+  "footerDescription": {
+    "message": "$1 透過只在 DOM 中保留一個訊息視窗來減少長對話的延遲。"
+  },
+  "footerSupportPrefix": {
+    "message": "如果你喜歡這個擴充功能，請考慮請我喝"
+  },
+  "footerSupportLinkText": {
+    "message": "杯咖啡"
+  },
+  "footerSupportSuffix": {
+    "message": "。"
+  },
+  "settingsSaved": {
+    "message": "設定已儲存"
+  },
+  "settingsRestored": {
+    "message": "設定已重設為預設值"
+  },
+  "showOlder": {
+    "message": "顯示較早"
+  },
+  "showOlderTitle": {
+    "message": "顯示較早的訊息"
+  },
+  "collapse": {
+    "message": "收合"
+  },
+  "collapseTitle": {
+    "message": "收合較早的訊息"
+  },
+  "dragTitle": {
+    "message": "拖曳"
+  },
+  "statusActive": {
+    "message": "GPT Boost 已啟用"
+  }
+}

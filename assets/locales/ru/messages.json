@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Загружайте длинные беседы ChatGPT по мере необходимости, показывая только самые последние сообщения (настраивается). Уменьшает задержки в длинных чатах."
+  },
+  "statusBar": {
+    "message": "GPT Boost · видно $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "Скрыто 1 старое сообщение — нажмите, чтобы загрузить следующие $1"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "Скрыто $1 старых сообщений — нажмите, чтобы загрузить следующие $2"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – Настройки"
+  },
+  "labelMaxVisible": {
+    "message": "Максимум видимых сообщений"
+  },
+  "defaultNumber": {
+    "message": "По умолчанию: $1"
+  },
+  "labelBatchSize": {
+    "message": "Размер пакета (за одно раскрытие)"
+  },
+  "labelAutoload": {
+    "message": "Автоматически показывать старые сообщения при прокрутке вверх"
+  },
+  "labelHideOldest": {
+    "message": "Скрывать самое старое сообщение, когда появляется новое"
+  },
+  "save": {
+    "message": "Сохранить"
+  },
+  "reset": {
+    "message": "Сбросить по умолчанию"
+  },
+  "hintApply": {
+    "message": "Изменения применяются мгновенно на открытых вкладках ChatGPT."
+  },
+  "footerDescription": {
+    "message": "$1 уменьшает задержки в длинных беседах, оставляя в DOM только окно сообщений."
+  },
+  "footerSupportPrefix": {
+    "message": "Если вам нравится это расширение, подумайте о том, чтобы угостить меня "
+  },
+  "footerSupportLinkText": {
+    "message": "кофе"
+  },
+  "footerSupportSuffix": {
+    "message": "."
+  },
+  "settingsSaved": {
+    "message": "Настройки сохранены"
+  },
+  "settingsRestored": {
+    "message": "Настройки сброшены к значениям по умолчанию"
+  },
+  "showOlder": {
+    "message": "Показать старые"
+  },
+  "showOlderTitle": {
+    "message": "Показать старые сообщения"
+  },
+  "collapse": {
+    "message": "Свернуть"
+  },
+  "collapseTitle": {
+    "message": "Свернуть старые сообщения"
+  },
+  "dragTitle": {
+    "message": "Перетащить"
+  },
+  "statusActive": {
+    "message": "GPT Boost активен"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "लंबी ChatGPT बातचीत को केवल नवीनतम संदेश दिखाते हुए (अनुकूलन योग्य) धीरे-धीरे लोड करें। लंबे चैट में लग कम करता है।"
+  },
+  "statusBar": {
+    "message": "GPT Boost · दृश्यमान $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "1 पुराना संदेश छिपाया गया है — अगले $1 लोड करने के लिए क्लिक करें"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "$1 पुराने संदेश छिपाए गए हैं — अगले $2 लोड करने के लिए क्लिक करें"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – विकल्प"
+  },
+  "labelMaxVisible": {
+    "message": "अधिकतम दृश्य संदेश"
+  },
+  "defaultNumber": {
+    "message": "डिफ़ॉल्ट: $1"
+  },
+  "labelBatchSize": {
+    "message": "बैच का आकार (प्रत्येक बार)"
+  },
+  "labelAutoload": {
+    "message": "जब मैं ऊपर स्क्रॉल करूँ तो पुराने संदेश स्वतः दिखाएँ"
+  },
+  "labelHideOldest": {
+    "message": "नया संदेश आने पर सबसे पुराना संदेश छिपाएँ"
+  },
+  "save": {
+    "message": "सहेजें"
+  },
+  "reset": {
+    "message": "डिफ़ॉल्ट पर रीसेट करें"
+  },
+  "hintApply": {
+    "message": "परिवर्तन खुले ChatGPT टैब पर तुरंत लागू होते हैं।"
+  },
+  "footerDescription": {
+    "message": "$1 लंबे वार्तालापों में केवल संदेशों की एक विंडो DOM में रखकर लग कम करता है।"
+  },
+  "footerSupportPrefix": {
+    "message": "यदि आपको यह एक्सटेंशन पसंद है, तो कृपया मुझे "
+  },
+  "footerSupportLinkText": {
+    "message": "एक कॉफी"
+  },
+  "footerSupportSuffix": {
+    "message": " खरीदने पर विचार करें।"
+  },
+  "settingsSaved": {
+    "message": "सेटिंग्स सहेजी गईं"
+  },
+  "settingsRestored": {
+    "message": "सेटिंग्स डिफ़ॉल्ट पर रीसेट की गईं"
+  },
+  "showOlder": {
+    "message": "पुराने दिखाएँ"
+  },
+  "showOlderTitle": {
+    "message": "पुराने संदेश दिखाएँ"
+  },
+  "collapse": {
+    "message": "सिकोड़ें"
+  },
+  "collapseTitle": {
+    "message": "पुराने संदेश सिकोड़ें"
+  },
+  "dragTitle": {
+    "message": "खींचें"
+  },
+  "statusActive": {
+    "message": "GPT Boost सक्रिय"
+  }
+}

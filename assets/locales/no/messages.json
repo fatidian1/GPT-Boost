@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Last inn lange ChatGPT-samtaler etter behov ved å vise bare de nyeste meldingene (kan konfigureres). Reduserer forsinkelser i lange chatter."
+  },
+  "statusBar": {
+    "message": "GPT Boost · synlige $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "1 eldre melding skjult – klikk for å laste inn de neste $1"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "$1 eldre meldinger skjult – klikk for å laste inn de neste $2"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – Alternativer"
+  },
+  "labelMaxVisible": {
+    "message": "Maksimalt antall synlige meldinger"
+  },
+  "defaultNumber": {
+    "message": "Standard: $1"
+  },
+  "labelBatchSize": {
+    "message": "Batchstørrelse (per visning)"
+  },
+  "labelAutoload": {
+    "message": "Vis eldre meldinger automatisk når jeg ruller til toppen"
+  },
+  "labelHideOldest": {
+    "message": "Skjul den eldste meldingen når en ny kommer"
+  },
+  "save": {
+    "message": "Lagre"
+  },
+  "reset": {
+    "message": "Tilbakestill til standard"
+  },
+  "hintApply": {
+    "message": "Endringene gjelder umiddelbart i åpne ChatGPT-faner."
+  },
+  "footerDescription": {
+    "message": "$1 reduserer forsinkelser i lange samtaler ved å bare beholde et meldingsvindu i DOM-en."
+  },
+  "footerSupportPrefix": {
+    "message": "Hvis du liker denne utvidelsen, vurder å spandere "
+  },
+  "footerSupportLinkText": {
+    "message": "en kaffe"
+  },
+  "footerSupportSuffix": {
+    "message": "."
+  },
+  "settingsSaved": {
+    "message": "Innstillinger lagret"
+  },
+  "settingsRestored": {
+    "message": "Innstillinger tilbakestilt til standard"
+  },
+  "showOlder": {
+    "message": "Vis eldre"
+  },
+  "showOlderTitle": {
+    "message": "Vis eldre meldinger"
+  },
+  "collapse": {
+    "message": "Skjul"
+  },
+  "collapseTitle": {
+    "message": "Skjul eldre meldinger"
+  },
+  "dragTitle": {
+    "message": "Dra"
+  },
+  "statusActive": {
+    "message": "GPT Boost aktiv"
+  }
+}

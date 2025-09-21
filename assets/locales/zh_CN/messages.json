@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "通过仅显示最新消息（可配置）来按需加载冗长的 ChatGPT 对话。减少长聊天的卡顿。"
+  },
+  "statusBar": {
+    "message": "GPT Boost · 可见 $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "隐藏了 1 条较早消息 — 点击加载接下来的 $1 条"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "隐藏了 $1 条较早消息 — 点击加载接下来的 $2 条"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – 选项"
+  },
+  "labelMaxVisible": {
+    "message": "最多可见消息数"
+  },
+  "defaultNumber": {
+    "message": "默认：$1"
+  },
+  "labelBatchSize": {
+    "message": "批量大小（每次显示）"
+  },
+  "labelAutoload": {
+    "message": "当我滚动到顶部时自动显示较早消息"
+  },
+  "labelHideOldest": {
+    "message": "出现新消息时隐藏最早的一条"
+  },
+  "save": {
+    "message": "保存"
+  },
+  "reset": {
+    "message": "重置为默认值"
+  },
+  "hintApply": {
+    "message": "更改会立即应用到已打开的 ChatGPT 标签页。"
+  },
+  "footerDescription": {
+    "message": "$1 通过只在 DOM 中保留一段消息窗口来减少长对话的卡顿。"
+  },
+  "footerSupportPrefix": {
+    "message": "如果你喜欢这个扩展，请考虑请我喝"
+  },
+  "footerSupportLinkText": {
+    "message": "杯咖啡"
+  },
+  "footerSupportSuffix": {
+    "message": "。"
+  },
+  "settingsSaved": {
+    "message": "设置已保存"
+  },
+  "settingsRestored": {
+    "message": "设置已恢复为默认值"
+  },
+  "showOlder": {
+    "message": "显示较早"
+  },
+  "showOlderTitle": {
+    "message": "显示较早的消息"
+  },
+  "collapse": {
+    "message": "收起"
+  },
+  "collapseTitle": {
+    "message": "收起较早的消息"
+  },
+  "dragTitle": {
+    "message": "拖动"
+  },
+  "statusActive": {
+    "message": "GPT Boost 已启用"
+  }
+}

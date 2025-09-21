@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Завантажуйте довгі розмови ChatGPT поступово, показуючи лише найновіші повідомлення (налаштовується). Зменшує затримки в довгих чатах."
+  },
+  "statusBar": {
+    "message": "GPT Boost · видно $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "Приховано 1 старе повідомлення — натисніть, щоб завантажити наступні $1"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "Приховано $1 старих повідомлень — натисніть, щоб завантажити наступні $2"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – Параметри"
+  },
+  "labelMaxVisible": {
+    "message": "Максимальна кількість видимих повідомлень"
+  },
+  "defaultNumber": {
+    "message": "Типово: $1"
+  },
+  "labelBatchSize": {
+    "message": "Розмір пакета (за одне показування)"
+  },
+  "labelAutoload": {
+    "message": "Автоматично показувати старі повідомлення, коли я прокручую догори"
+  },
+  "labelHideOldest": {
+    "message": "Приховувати найстаріше повідомлення, коли з’являється нове"
+  },
+  "save": {
+    "message": "Зберегти"
+  },
+  "reset": {
+    "message": "Скинути до типових"
+  },
+  "hintApply": {
+    "message": "Зміни застосовуються миттєво на відкритих вкладках ChatGPT."
+  },
+  "footerDescription": {
+    "message": "$1 зменшує затримки в довгих розмовах, залишаючи в DOM лише вікно повідомлень."
+  },
+  "footerSupportPrefix": {
+    "message": "Якщо вам подобається це розширення, розгляньте можливість пригостити мене "
+  },
+  "footerSupportLinkText": {
+    "message": "кавою"
+  },
+  "footerSupportSuffix": {
+    "message": "."
+  },
+  "settingsSaved": {
+    "message": "Налаштування збережено"
+  },
+  "settingsRestored": {
+    "message": "Налаштування скинуто до типових"
+  },
+  "showOlder": {
+    "message": "Показати старі"
+  },
+  "showOlderTitle": {
+    "message": "Показати старі повідомлення"
+  },
+  "collapse": {
+    "message": "Згорнути"
+  },
+  "collapseTitle": {
+    "message": "Згорнути старі повідомлення"
+  },
+  "dragTitle": {
+    "message": "Перетягнути"
+  },
+  "statusActive": {
+    "message": "GPT Boost активний"
+  }
+}
