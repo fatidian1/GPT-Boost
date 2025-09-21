@@ -52,70 +52,71 @@ jobs:
           name: gpt-boost-firefox-${{ github.ref_name }}.zip
           path: release.zip
 
-  publish_chrome:
-    environment: publish
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: gpt-boost-chrome-${{ github.ref_name }}.zip
-      - name: List Artifacts
-        run: ls -la .
-      - name: Upload to Chrome Web Store
-        uses: wdzeng/chrome-extension@v1
-        with:
-          extension-id: ${{ secrets.EXTENSION_ID }}
-          zip-path: gpt-boost-chrome-${{ github.ref_name }}.zip
-          client-id: ${{ secrets.CLIENT }}
-          client-secret: ${{ secrets.SECRET }}
-          refresh-token: ${{ secrets.TOKEN }}
-
-  publish_edge:
-    environment: publish
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: gpt-boost-edge-${{ github.ref_name }}.zip
-      - name: Upload to Microsoft Edge Add-ons
-        uses: wdzeng/edge-addon@v2
-        with:
-          product-id: ${{ secrets.MICROSOFT_PRODUCT_ID }}
-          zip-path: gpt-boost-edge-${{ github.ref_name }}.zip
-          api-key: ${{ secrets.MICROSOFT_API_KEY }}
-          client-id: ${{ secrets.MICROSOFT_CLIENT_ID }}
-
-  publish_firefox:
-    environment: publish
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: gpt-boost-firefox-${{ github.ref_name }}.zip
-      - name: Upload to Firefox Add-ons
-        uses: wdzeng/firefox-addon@v1
-        with:
-          addon-guid: ${{ secrets.FIREFOX_GUID }}
-          xpi-path: gpt-boost-firefox-${{ github.ref_name }}.zip
-          self-hosted: false
-          jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
-          jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
+#  publish_chrome:
+#    environment: publish
+#    runs-on: ubuntu-latest
+#    needs: build
+#    steps:
+#      - uses: actions/download-artifact@v4
+#        with:
+#          name: gpt-boost-chrome-${{ github.ref_name }}.zip
+#      - name: Upload to Chrome Web Store
+#        uses: wdzeng/chrome-extension@v1
+#        with:
+#          extension-id: ${{ secrets.EXTENSION_ID }}
+#          zip-path: release.zip
+#          client-id: ${{ secrets.CLIENT }}
+#          client-secret: ${{ secrets.SECRET }}
+#          refresh-token: ${{ secrets.TOKEN }}
+#
+#  publish_edge:
+#    environment: publish
+#    runs-on: ubuntu-latest
+#    needs: build
+#    steps:
+#      - uses: actions/download-artifact@v4
+#        with:
+#          name: gpt-boost-edge-${{ github.ref_name }}.zip
+#      - name: Upload to Microsoft Edge Add-ons
+#        uses: wdzeng/edge-addon@v2
+#        with:
+#          product-id: ${{ secrets.MICROSOFT_PRODUCT_ID }}
+#          zip-path: release.zip
+#          api-key: ${{ secrets.MICROSOFT_API_KEY }}
+#          client-id: ${{ secrets.MICROSOFT_CLIENT_ID }}
+#
+#  publish_firefox:
+#    environment: publish
+#    runs-on: ubuntu-latest
+#    needs: build
+#    steps:
+#      - uses: actions/download-artifact@v4
+#        with:
+#          name: gpt-boost-firefox-${{ github.ref_name }}.zip
+#      - name: Upload to Firefox Add-ons
+#        uses: wdzeng/firefox-addon@v1
+#        with:
+#          addon-guid: ${{ secrets.FIREFOX_GUID }}
+#          xpi-path: release.zip
+#          self-hosted: false
+#          jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
+#          jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
 
   github_release:
     runs-on: ubuntu-latest
     needs:
-      - publish_chrome
-      - publish_edge
-      - publish_firefox
+      - build
+#      - publish_chrome
+#      - publish_edge
+#      - publish_firefox
     steps:
       - uses: actions/download-artifact@v4
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            gpt-boost-chrome-${{ github.ref_name }}.zip
-            gpt-boost-edge-${{ github.ref_name }}.zip
-            gpt-boost-firefox-${{ github.ref_name }}.zip
+      - name: List Artifacts
+        run: ls -la .
+#      - name: Release
+#        uses: softprops/action-gh-release@v2
+#        with:
+#          files: |
+#            gpt-boost-chrome-${{ github.ref_name }}.zip
+#            gpt-boost-edge-${{ github.ref_name }}.zip
+#            gpt-boost-firefox-${{ github.ref_name }}.zip
