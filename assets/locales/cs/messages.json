@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Postupně načítejte dlouhé konverzace ChatGPT zobrazením pouze nejnovějších zpráv (lze nastavit). Snižuje zpoždění u dlouhých chatů."
+  },
+  "statusBar": {
+    "message": "GPT Boost · viditelné $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "Skryta 1 starší zpráva — kliknutím načtete dalších $1"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "Skryto $1 starších zpráv — kliknutím načtete dalších $2"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – Možnosti"
+  },
+  "labelMaxVisible": {
+    "message": "Maximální počet viditelných zpráv"
+  },
+  "defaultNumber": {
+    "message": "Výchozí: $1"
+  },
+  "labelBatchSize": {
+    "message": "Velikost dávky (na jedno zobrazení)"
+  },
+  "labelAutoload": {
+    "message": "Automaticky zobrazit starší zprávy při posunu na začátek"
+  },
+  "labelHideOldest": {
+    "message": "Skrýt nejstarší zprávu, když se objeví nová"
+  },
+  "save": {
+    "message": "Uložit"
+  },
+  "reset": {
+    "message": "Obnovit výchozí"
+  },
+  "hintApply": {
+    "message": "Změny se okamžitě použijí na otevřených kartách ChatGPT."
+  },
+  "footerDescription": {
+    "message": "$1 snižuje zpoždění v dlouhých konverzacích tím, že v DOM ponechá pouze okno zpráv."
+  },
+  "footerSupportPrefix": {
+    "message": "Pokud se vám toto rozšíření líbí, zvažte, že mi koupíte "
+  },
+  "footerSupportLinkText": {
+    "message": "kávu"
+  },
+  "footerSupportSuffix": {
+    "message": "."
+  },
+  "settingsSaved": {
+    "message": "Nastavení uloženo"
+  },
+  "settingsRestored": {
+    "message": "Nastavení obnoveno na výchozí hodnoty"
+  },
+  "showOlder": {
+    "message": "Zobrazit starší"
+  },
+  "showOlderTitle": {
+    "message": "Zobrazit starší zprávy"
+  },
+  "collapse": {
+    "message": "Sbalit"
+  },
+  "collapseTitle": {
+    "message": "Sbalit starší zprávy"
+  },
+  "dragTitle": {
+    "message": "Přetáhnout"
+  },
+  "statusActive": {
+    "message": "GPT Boost aktivní"
+  }
+}

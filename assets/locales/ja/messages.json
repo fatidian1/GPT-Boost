@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "最新のメッセージだけを表示して（設定可能）長い ChatGPT の会話を遅延読み込みします。長いチャットの遅延を軽減します。"
+  },
+  "statusBar": {
+    "message": "GPT Boost · 表示中 $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "古いメッセージ 1 件を非表示にしました — 次の $1 件を読み込むにはクリック"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "古いメッセージ $1 件を非表示にしました — 次の $2 件を読み込むにはクリック"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – オプション"
+  },
+  "labelMaxVisible": {
+    "message": "表示する最大メッセージ数"
+  },
+  "defaultNumber": {
+    "message": "既定値: $1"
+  },
+  "labelBatchSize": {
+    "message": "バッチサイズ（1 回の表示）"
+  },
+  "labelAutoload": {
+    "message": "上までスクロールしたときに古いメッセージを自動的に表示する"
+  },
+  "labelHideOldest": {
+    "message": "新しいメッセージが届いたら最も古いメッセージを非表示にする"
+  },
+  "save": {
+    "message": "保存"
+  },
+  "reset": {
+    "message": "既定にリセット"
+  },
+  "hintApply": {
+    "message": "変更は開いている ChatGPT タブにすぐに適用されます。"
+  },
+  "footerDescription": {
+    "message": "$1 は DOM にメッセージのウィンドウだけを保持することで長い会話の遅延を減らします。"
+  },
+  "footerSupportPrefix": {
+    "message": "この拡張機能が気に入ったら、よかったら"
+  },
+  "footerSupportLinkText": {
+    "message": "コーヒー"
+  },
+  "footerSupportSuffix": {
+    "message": "をごちそうしてください。"
+  },
+  "settingsSaved": {
+    "message": "設定を保存しました"
+  },
+  "settingsRestored": {
+    "message": "設定を既定値に戻しました"
+  },
+  "showOlder": {
+    "message": "過去を表示"
+  },
+  "showOlderTitle": {
+    "message": "過去のメッセージを表示"
+  },
+  "collapse": {
+    "message": "折りたたむ"
+  },
+  "collapseTitle": {
+    "message": "過去のメッセージを折りたたむ"
+  },
+  "dragTitle": {
+    "message": "ドラッグ"
+  },
+  "statusActive": {
+    "message": "GPT Boost は有効です"
+  }
+}

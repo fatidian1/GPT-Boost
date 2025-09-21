@@ -3,78 +3,78 @@
     "message": "GPT Boost"
   },
   "appDescription": {
-    "message": "Zoptymalizowanie długich konwersacji ChatGPT poprzez wyświetlanie tylko najnowszych wiadomości (konfigurowalne). Zmniejsza opóźnienia przy długich czatach."
+    "message": "Ładuj długie rozmowy ChatGPT na żądanie, wyświetlając tylko najnowsze wiadomości (konfigurowalne). Zmniejsza opóźnienia przy długich czatach."
   },
   "statusBar": {
-    "message": "GPT Boost · visible $1/$2"
+    "message": "GPT Boost · widoczne $1/$2"
   },
   "hiddenPlaceholderSingular": {
-    "message": "1 older message hidden — click to load next $1"
+    "message": "Ukryto 1 starszą wiadomość — kliknij, aby wczytać kolejne $1"
   },
   "hiddenPlaceholderPlural": {
-    "message": "$1 older messages hidden — click to load next $2"
+    "message": "Ukryto $1 starszych wiadomości — kliknij, aby wczytać kolejne $2"
   },
   "optionsTitle": {
-    "message": "GPT Boost – Options"
+    "message": "GPT Boost – Opcje"
   },
   "labelMaxVisible": {
-    "message": "Max visible messages"
+    "message": "Maksymalna liczba widocznych wiadomości"
   },
   "defaultNumber": {
-    "message": "Default: $1"
+    "message": "Domyślnie: $1"
   },
   "labelBatchSize": {
-    "message": "Batch size (per reveal)"
+    "message": "Wielkość partii (na odsłonięcie)"
   },
   "labelAutoload": {
-    "message": "Reveal older messages automatically when I scroll to the top"
+    "message": "Automatycznie pokazuj starsze wiadomości, gdy przewijam do góry"
   },
   "labelHideOldest": {
-    "message": "Hide the oldest message when a new appears"
+    "message": "Ukrywaj najstarszą wiadomość, gdy pojawi się nowa"
   },
   "save": {
-    "message": "Save"
+    "message": "Zapisz"
   },
   "reset": {
-    "message": "Reset to defaults"
+    "message": "Przywróć domyślne"
   },
   "hintApply": {
-    "message": "Changes apply instantly to open ChatGPT tabs."
+    "message": "Zmiany są stosowane natychmiast na otwartych kartach ChatGPT."
   },
   "footerDescription": {
-    "message": "$1 reduces lag on long conversations by only keeping a window of messages in the DOM."
+    "message": "$1 zmniejsza opóźnienia w długich rozmowach, pozostawiając w DOM jedynie okno wiadomości."
   },
   "footerSupportPrefix": {
-    "message": "If you like this extension consider buying me "
+    "message": "Jeśli podoba Ci się to rozszerzenie, rozważ postawienie mi "
   },
   "footerSupportLinkText": {
-    "message": "a coffee"
+    "message": "kawy"
   },
   "footerSupportSuffix": {
     "message": "."
   },
   "settingsSaved": {
-    "message": "Settings saved"
+    "message": "Ustawienia zapisane"
   },
   "settingsRestored": {
-    "message": "Settings restored to defaults"
+    "message": "Przywrócono ustawienia domyślne"
   },
   "showOlder": {
-    "message": "Show older"
+    "message": "Pokaż starsze"
   },
   "showOlderTitle": {
-    "message": "Show older messages"
+    "message": "Pokaż starsze wiadomości"
   },
   "collapse": {
-    "message": "Collapse"
+    "message": "Zwiń"
   },
   "collapseTitle": {
-    "message": "Collapse older messages"
+    "message": "Zwiń starsze wiadomości"
   },
   "dragTitle": {
-    "message": "Drag"
+    "message": "Przeciągnij"
   },
   "statusActive": {
-    "message": "GPT Boost active"
+    "message": "GPT Boost aktywny"
   }
 }

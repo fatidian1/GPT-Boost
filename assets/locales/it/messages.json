@@ -1,0 +1,80 @@
+{
+  "appName": {
+    "message": "GPT Boost"
+  },
+  "appDescription": {
+    "message": "Carica progressivamente le conversazioni lunghe di ChatGPT mostrando solo i messaggi più recenti (configurabile). Riduce il ritardo nelle chat lunghe."
+  },
+  "statusBar": {
+    "message": "GPT Boost · visibili $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "1 messaggio precedente nascosto — clicca per caricare i successivi $1"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "$1 messaggi precedenti nascosti — clicca per caricare i successivi $2"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – Opzioni"
+  },
+  "labelMaxVisible": {
+    "message": "Numero massimo di messaggi visibili"
+  },
+  "defaultNumber": {
+    "message": "Predefinito: $1"
+  },
+  "labelBatchSize": {
+    "message": "Dimensione del lotto (per ogni visualizzazione)"
+  },
+  "labelAutoload": {
+    "message": "Mostra automaticamente i messaggi più vecchi quando scorro verso l'alto"
+  },
+  "labelHideOldest": {
+    "message": "Nascondi il messaggio più vecchio quando ne arriva uno nuovo"
+  },
+  "save": {
+    "message": "Salva"
+  },
+  "reset": {
+    "message": "Ripristina predefiniti"
+  },
+  "hintApply": {
+    "message": "Le modifiche vengono applicate immediatamente alle schede ChatGPT aperte."
+  },
+  "footerDescription": {
+    "message": "$1 riduce il ritardo nelle conversazioni lunghe mantenendo nel DOM solo una finestra di messaggi."
+  },
+  "footerSupportPrefix": {
+    "message": "Se ti piace questa estensione, considera di offrirmi "
+  },
+  "footerSupportLinkText": {
+    "message": "un caffè"
+  },
+  "footerSupportSuffix": {
+    "message": "."
+  },
+  "settingsSaved": {
+    "message": "Impostazioni salvate"
+  },
+  "settingsRestored": {
+    "message": "Impostazioni ripristinate ai valori predefiniti"
+  },
+  "showOlder": {
+    "message": "Mostra più vecchi"
+  },
+  "showOlderTitle": {
+    "message": "Mostra messaggi più vecchi"
+  },
+  "collapse": {
+    "message": "Comprimi"
+  },
+  "collapseTitle": {
+    "message": "Comprimi i messaggi più vecchi"
+  },
+  "dragTitle": {
+    "message": "Trascina"
+  },
+  "statusActive": {
+    "message": "GPT Boost attivo"
+  }
+}
