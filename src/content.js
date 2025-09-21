@@ -1,7 +1,6 @@
 import { getMessage } from './i18n';
 
 (() => {
-  console.log('translations test', getMessage('appDescription'));
   // Enable verbose logging to debug infinite loading issues
   const DEBUG = false;
   const log = (...args) => {
@@ -174,10 +173,10 @@ import { getMessage } from './i18n';
       const pill = document.createElement('div');
       pill.className = 'gpt-boost-pill';
       pill.innerHTML = `
-        <span id="gpt-boost-status">GPT Boost active</span>
-        <button id="gpt-boost-show-older" title="Show older messages">Show older</button>
-        <button id="gpt-boost-collapse" title="Collapse older messages">Collapse</button>
-        <span class="gpt-boost-drag-handle" title="Drag">
+        <span id="gpt-boost-status">${getMessage('statusActive')}</span>
+        <button id="gpt-boost-show-older" title="${getMessage('showOlderTitle')}">${getMessage('showOlder')}</button>
+        <button id="gpt-boost-collapse" title="${getMessage('collapseTitle')}">${getMessage('collapse')}</button>
+        <span class="gpt-boost-drag-handle" title="${getMessage('dragTitle')}">
           <span class="gpt-boost-drag-dot"></span>
           <span class="gpt-boost-drag-dot"></span>
           <span class="gpt-boost-drag-dot"></span>
@@ -311,7 +310,7 @@ import { getMessage } from './i18n';
     currentStatus = { total, visible };
     const el = document.getElementById('gpt-boost-status');
     if (el) {
-      el.textContent = `GPT Boost · visible ${visible}/${total}`;
+      el.textContent = getMessage('statusBar', [String(visible), String(total)]);
     }
     log('updateStatus', { total, visible });
   }
@@ -425,7 +424,10 @@ import { getMessage } from './i18n';
   }
 
   function revealOlderText(hiddenCountTop) {
-    return `${hiddenCountTop} older message${hiddenCountTop === 1 ? '' : 's'} hidden — click to load next ${settings.batchSize}`;
+    if (hiddenCountTop === 1) {
+      return getMessage('hiddenPlaceholderSingular', [String(settings.batchSize)]);
+    }
+    return getMessage('hiddenPlaceholderPlural', [String(hiddenCountTop), String(settings.batchSize)]);
   }
 
   function revealOlder() {

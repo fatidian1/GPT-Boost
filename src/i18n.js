@@ -5,5 +5,5 @@ export const getMessage = (message, substitutions) => {
   if (browser && browser.i18n) {
     return browser.i18n.getMessage(message, substitutions);
   }
-  return substitutions;
+  return message;
 };

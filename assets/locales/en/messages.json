@@ -4,5 +4,77 @@
   },
   "appDescription": {
     "message": "Lazy-load long ChatGPT conversations by showing only the most recent messages (configurable). Reduces lag on long chats."
+  },
+  "statusBar": {
+    "message": "GPT Boost · visible $1/$2"
+  },
+  "hiddenPlaceholderSingular": {
+    "message": "1 older message hidden — click to load next $1"
+  },
+  "hiddenPlaceholderPlural": {
+    "message": "$1 older messages hidden — click to load next $2"
+  },
+  "optionsTitle": {
+    "message": "GPT Boost – Options"
+  },
+  "labelMaxVisible": {
+    "message": "Max visible messages"
+  },
+  "defaultNumber": {
+    "message": "Default: $1"
+  },
+  "labelBatchSize": {
+    "message": "Batch size (per reveal)"
+  },
+  "labelAutoload": {
+    "message": "Reveal older messages automatically when I scroll to the top"
+  },
+  "labelHideOldest": {
+    "message": "Hide the oldest message when a new appears"
+  },
+  "save": {
+    "message": "Save"
+  },
+  "reset": {
+    "message": "Reset to defaults"
+  },
+  "hintApply": {
+    "message": "Changes apply instantly to open ChatGPT tabs."
+  },
+  "footerDescription": {
+    "message": "$1 reduces lag on long conversations by only keeping a window of messages in the DOM."
+  },
+  "footerSupportPrefix": {
+    "message": "If you like this extension consider buying me "
+  },
+  "footerSupportLinkText": {
+    "message": "a coffee"
+  },
+  "footerSupportSuffix": {
+    "message": "."
+  },
+  "settingsSaved": {
+    "message": "Settings saved"
+  },
+  "settingsRestored": {
+    "message": "Settings restored to defaults"
+  },
+  "showOlder": {
+    "message": "Show older"
+  },
+  "showOlderTitle": {
+    "message": "Show older messages"
+  },
+  "collapse": {
+    "message": "Collapse"
+  },
+  "collapseTitle": {
+    "message": "Collapse older messages"
+  },
+  "dragTitle": {
+    "message": "Drag"
+  },
+  "statusActive": {
+    "message": "GPT Boost active"
   }
 }

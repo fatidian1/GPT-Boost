@@ -2,47 +2,45 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>GPT Boost – Options</title>
+    <title></title>
     <link rel="stylesheet" href="options.css" />
   </head>
   <body>
     <div class="wrap">
-      <h1>GPT Boost – Options</h1>
+      <h1 id="title"></h1>
       <form id="form">
         <label>
-          Max visible messages
+          <span id="labelMaxVisible"></span>
           <input type="number" id="maxVisible" min="1" step="1" />
-          <small>Default: 10</small>
+          <small id="default10a"></small>
         </label>
         <label>
-          Batch size (per reveal)
+          <span id="labelBatchSize"></span>
           <input type="number" id="batchSize" min="1" step="1" />
-          <small>Default: 10</small>
+          <small id="default10b"></small>
         </label>
         <label class="row">
           <input type="checkbox" id="autoloadOnScroll" />
-          Reveal older messages automatically when I scroll to the top
+          <span id="labelAutoloadOnScroll"></span>
         </label>
         <label class="row">
           <input type="checkbox" id="hideOldestOnNew" />
-          Hide the oldest message when a new appears
+          <span id="labelHideOldestOnNew"></span>
         </label>
         <div class="actions">
-          <button type="submit">Save</button>
-          <button type="button" id="reset">Reset to defaults</button>
+          <button type="submit" id="saveBtn"></button>
+          <button type="button" id="reset"></button>
         </div>
-        <p class="hint">Changes apply instantly to open ChatGPT tabs.</p>
+        <p class="hint" id="hint"></p>
       </form>
       <footer>
-        <p>
-          <strong>GPT Boost</strong> reduces lag on long conversations by only keeping a window of messages in the DOM.
-        </p>
-        <p>
-          If you like this extension consider buying me
-          <a href="https://buymeacoffee.com/fatidian1">a coffee</a>.
+        <p id="footerDesc"></p>
+        <p id="footerSupport">
+          <span></span>
+          <a id="coffeeLink" href="https://buymeacoffee.com/fatidian1"></a>.
         </p>
       </footer>
     </div>
-    <script src="options.js"></script>
+    <script type="module" src="options.js"></script>
   </body>
 </html>
