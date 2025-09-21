@@ -31,11 +31,20 @@ jobs:
       - name: Build chrome/edge zip file
         run: npm run build
 
+      - name: Get signing key
+        run: echo "${{ secrets.SIGNING_KEY }}" > key.pem
+
+      - name: Build opera crx file
+        run: npm run pack:opera
+
       - name: Rename chrome release file
         run: cp release.zip gpt-boost-chrome-${{ github.ref_name }}.zip
 
       - name: Rename edge release file
         run: mv release.zip gpt-boost-edge-${{ github.ref_name }}.zip
+
+      - name: Rename opera release file
+        run: mv release.crx gpt-boost-opera-${{ github.ref_name }}.crx
 
       - name: Upload chrome artifact
         uses: actions/upload-artifact@v4
@@ -63,6 +72,7 @@ jobs:
             gpt-boost-chrome-${{ github.ref_name }}.zip
             gpt-boost-edge-${{ github.ref_name }}.zip
             gpt-boost-firefox-${{ github.ref_name }}.zip
+            gpt-boost-opera-${{ github.ref_name }}.crx
 
   publish_chrome:
     environment: publish
@@ -128,3 +138,4 @@ jobs:
             gpt-boost-chrome-${{ github.ref_name }}.zip
             gpt-boost-edge-${{ github.ref_name }}.zip
             gpt-boost-firefox-${{ github.ref_name }}.zip
+            gpt-boost-opera-${{ github.ref_name }}.crx

@@ -13,6 +13,7 @@
     "start:firefox": "xt-build -e dev -p firefox -w",
     "build": "xt-build -e prod",
     "build:firefox": "xt-build -e prod -p firefox",
+    "pack:opera": "crx pack dist -o release.crx",
     "clean": "xt-clean",
     "docs": "xt-docs",
     "test": "xt-test",
@@ -30,6 +31,7 @@
     "test/**/*"
   ],
   "devDependencies": {
+    "crx": "^5.0.1",
     "extension-cli": "latest",
     "prettier": "^3.6.2"
   },

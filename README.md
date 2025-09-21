@@ -1,4 +1,4 @@
-# GPT Boost (Chrome/Edge/Firefox extension)
+# GPT Boost (Chrome/Edge/Firefox/Opera extension)
 
 GPT Boost reduces lag on long ChatGPT conversations by **lazy-loading**: it shows only the latest messages and hides older ones until you scroll to the top or click **Show older**. Thresholds are configurable.
 
@@ -19,12 +19,16 @@ You can download the extension from: https://microsoftedge.microsoft.com/addons/
 ## Install (Firefox)
 You can download the extension from: https://addons.mozilla.org/en-US/firefox/addon/gpt-boost/?utm_source=github
 
+## Install (Opera)
+Download `crx` file from the releases tab and install it in Opera extension settings.
+
 ## Install (Developer Mode)
-1. Download the ZIP from the releases tab and extract it.
-2. Open **chrome://extensions**, **edge://extensions** or **about:debugging**.
-3. Enable **Developer mode** (top right).
-4. Click **Load unpacked** and select the extracted `gpt-boost` folder.
-5. Visit ChatGPT and open a long conversation.
+1. Pull the repository.
+2. Install dependencies: `npm install`.
+3. Build the extension: `npm run build`.
+4. Open **chrome://extensions**, **edge://extensions**, **opera://extensions** or **about:debugging**.
+5. In chrome enable **Developer mode** (top right) (if not already enabled).
+6. Click **Load unpacked** and select the `dist` directory.
 
 ## Configure
 Open the extension’s **Options** page from your browser’s extensions list.
@@ -39,19 +43,51 @@ This extension was created with [Extension CLI](https://oss.mobilefirst.me/exten
 
 ### Available Commands
 
-| Commands | Description |
-| --- | --- |
-| `npm run start` | build extension, watch file changes |
-| `npm run build` | generate release version |
-| `npm run docs` | generate source code docs |
-| `npm run clean` | remove temporary files |
-| `npm run test` | run unit tests |
-| `npm run sync` | update config files |
+| Commands                | Description                                                                                             |
+|-------------------------|---------------------------------------------------------------------------------------------------------|
+| `npm run start`         | build extension, watch file changes                                                                     |
+| `npm run build`         | generate release version                                                                                |
+| `npm run build:firefox` | generate firefox release version                                                                        |
+| `npm run pack:opera`    | pack opera crx release version, requires `dist` directory to be available, so run `npm run build` first |
+| `npm run docs`          | generate source code docs                                                                               |
+| `npm run clean`         | remove temporary files                                                                                  |
+| `npm run test`          | run unit tests                                                                                          |
+| `npm run sync`          | update config files                                                                                     |
+| `npm run format`        | prettier reformat                                                                                       |
+| `npm run format:check`  | verify code format with prettier                                                                        |
 
 For CLI instructions see [User Guide &rarr;](https://oss.mobilefirst.me/extension-cli/)
+## Translations
+Translation files are located in `assets/locales/`.
+
+For now supported languages are:
+
+| Code    | Language         | Status                   |
+|---------|------------------|--------------------------|
+| `en`    | English          | Full translation         |
+| `pl`    | Polish           | Full translation         |
+| `ar`    | Arabic           | AI generated translation |
+| `cs`    | Czech            | AI generated translation |
+| `de`    | German           | AI generated translation |
+| `el`    | Greek            | AI generated translation |
+| `es`    | Spanish          | AI generated translation |
+| `fi`    | Finnish          | AI generated translation |
+| `hi`    | Hindi            | AI generated translation |
+| `it`    | Italian          | AI generated translation |
+| `ja`    | Japanese         | AI generated translation |
+| `nl`    | Dutch            | AI generated translation |
+| `no`    | Norwegian        | AI generated translation |
+| `ru`    | Russian          | AI generated translation |
+| `sr`    | Serbian          | AI generated translation |
+| `tr`    | Turkish          | AI generated translation |
+| `uk`    | Ukrainian        | AI generated translation |
+| `zh_CN` | Chinese (China)  | AI generated translation |
+| `zh_TW` | Chinese (Taiwan) | AI generated translation |
+
+If you want to help with translations, please create a pull request with the new/changed translation file.
 
 ## Notes
-- GPT Boost hides older DOM nodes (display: none) to reduce layout/paint cost. It does **not** modify or exfiltrate content.
+- GPT Boost hides older DOM nodes (`display: none`) to reduce layout/paint cost. It does **not** modify or exfiltrate content.
 - The ChatGPT DOM evolves. The extension attempts to detect messages via several robust selectors and re-applies windowing as the page updates.
 - You can always collapse back to the threshold using the **Collapse** button in the pill.
 
