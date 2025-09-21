@@ -57,9 +57,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v4
         with:
           name: gpt-boost-chrome-${{ github.ref_name }}.zip
+      - name: List Artifacts
+        run: ls -la .
       - name: Upload to Chrome Web Store
         uses: wdzeng/chrome-extension@v1
         with:
@@ -74,7 +76,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v4
         with:
           name: gpt-boost-edge-${{ github.ref_name }}.zip
       - name: Upload to Microsoft Edge Add-ons
@@ -90,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v4
         with:
           name: gpt-boost-firefox-${{ github.ref_name }}.zip
       - name: Upload to Firefox Add-ons
@@ -104,9 +106,12 @@ jobs:
 
   github_release:
     runs-on: ubuntu-latest
-    needs: build
+    needs:
+      - publish_chrome
+      - publish_edge
+      - publish_firefox
     steps:
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v4
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
