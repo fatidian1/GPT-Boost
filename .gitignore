@@ -4,3 +4,4 @@ dist/
 .nyc_output/
 release.zip
 release.crx
+key.pem
