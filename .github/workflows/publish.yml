@@ -76,7 +76,7 @@ jobs:
         uses: wdzeng/chrome-extension@v1
         with:
           extension-id: ${{ secrets.EXTENSION_ID }}
-          zip-path: release/gpt-boost-chrome-${{ github.ref_name }}.zip
+          zip-path: gpt-boost-chrome-${{ github.ref_name }}.zip
           client-id: ${{ secrets.CLIENT }}
           client-secret: ${{ secrets.SECRET }}
           refresh-token: ${{ secrets.TOKEN }}
@@ -93,7 +93,7 @@ jobs:
         uses: wdzeng/edge-addon@v2
         with:
           product-id: ${{ secrets.MICROSOFT_PRODUCT_ID }}
-          zip-path: release/gpt-boost-edge-${{ github.ref_name }}.zip
+          zip-path: gpt-boost-edge-${{ github.ref_name }}.zip
           api-key: ${{ secrets.MICROSOFT_API_KEY }}
           client-id: ${{ secrets.MICROSOFT_CLIENT_ID }}
 
@@ -109,7 +109,7 @@ jobs:
         uses: wdzeng/firefox-addon@v1
         with:
           addon-guid: ${{ secrets.FIREFOX_GUID }}
-          xpi-path: release/gpt-boost-firefox-${{ github.ref_name }}.zip
+          xpi-path: gpt-boost-firefox-${{ github.ref_name }}.zip
           self-hosted: false
           jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
           jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
@@ -128,6 +128,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            release/gpt-boost-chrome-${{ github.ref_name }}.zip
-            release/gpt-boost-edge-${{ github.ref_name }}.zip
-            release/gpt-boost-firefox-${{ github.ref_name }}.zip
+            gpt-boost-chrome-${{ github.ref_name }}.zip
+            gpt-boost-edge-${{ github.ref_name }}.zip
+            gpt-boost-firefox-${{ github.ref_name }}.zip
