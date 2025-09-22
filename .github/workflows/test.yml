@@ -35,7 +35,7 @@ jobs:
         run: npm run pack:opera
 
       - name: Publish to Opera Add-ons
-        uses: fatidian1/opera-addon@v1
+        uses: fatidian1/opera-addon@1.0.0
         with:
           package-id: ${{ secrets.OPERA_PACKAGE_ID }}
           package-path: release.crx
