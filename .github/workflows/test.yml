@@ -34,6 +34,9 @@ jobs:
       - name: Build opera crx file
         run: npm run pack:opera
 
+      - name: Install puppeteer
+        run: npm install puppeteer
+
       - name: Publish to Opera Add-ons
         uses: fatidian1/opera-addon@v1.0.0
         with:
