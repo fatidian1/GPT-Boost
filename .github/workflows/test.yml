@@ -1,0 +1,44 @@
+name: Publish Opera test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    environment: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: Get signing key
+        run: echo "${{ secrets.SIGNING_KEY }}" > key.pem
+
+      - name: Build opera crx file
+        run: npm run pack:opera
+
+      - name: Publish to Opera Add-ons
+        uses: fatidian1/opera-addon@v1
+        with:
+          package-id: ${{ secrets.OPERA_PACKAGE_ID }}
+          package-path: release.crx
+          email: ${{ secrets.OPERA_EMAIL }}
+          password: ${{ secrets.OPERA_PASSWORD }}
+          action: verify
