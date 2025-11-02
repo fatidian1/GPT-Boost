@@ -5,6 +5,8 @@ const DEFAULTS = {
   batchSize: 10,
   autoloadOnScroll: true,
   hideOldestOnNew: true,
+  deleteMessages: false,
+  hiddenDomBuffer: 0,
 };
 
 function localize() {
@@ -28,6 +30,14 @@ function localize() {
   if (lblAutoload) lblAutoload.textContent = getMessage('labelAutoload');
   const lblHideOldest = document.getElementById('labelHideOldestOnNew');
   if (lblHideOldest) lblHideOldest.textContent = getMessage('labelHideOldest');
+
+  const lblDeleteMode = document.getElementById('labelDeleteMode');
+  if (lblDeleteMode) lblDeleteMode.textContent = getMessage('labelDeleteMode');
+
+  const lblBuffer = document.getElementById('labelHiddenBuffer');
+  if (lblBuffer) lblBuffer.textContent = getMessage('labelHiddenBuffer');
+  const defBuffer = document.getElementById('defaultBufferText');
+  if (defBuffer) defBuffer.textContent = getMessage('defaultNumber', ['0']);
 
   const saveBtn = document.getElementById('saveBtn');
   if (saveBtn) saveBtn.textContent = getMessage('save');
@@ -60,7 +70,18 @@ function load() {
     document.getElementById('batchSize').value = res.batchSize;
     document.getElementById('autoloadOnScroll').checked = !!res.autoloadOnScroll;
     document.getElementById('hideOldestOnNew').checked = !!res.hideOldestOnNew;
+    document.getElementById('deleteMessages').checked = !!res.deleteMessages;
+    document.getElementById('hiddenDomBuffer').value = res.hiddenDomBuffer || 0;
+    updateBufferFieldVisibility();
   });
+}
+
+function updateBufferFieldVisibility() {
+  const deleteMessagesChecked = !!document.getElementById('deleteMessages').checked;
+  const bufferLabel = document.getElementById('hiddenDomBufferLabel');
+  if (bufferLabel) {
+    bufferLabel.style.display = deleteMessagesChecked ? '' : 'none';
+  }
 }
 
 function save(e) {
@@ -69,7 +90,16 @@ function save(e) {
   const batchSize = Math.max(1, parseInt(document.getElementById('batchSize').value || '10', 10));
   const autoloadOnScroll = !!document.getElementById('autoloadOnScroll').checked;
   const hideOldestOnNew = !!document.getElementById('hideOldestOnNew').checked;
-  chrome.storage.sync.set({ maxVisible, batchSize, autoloadOnScroll, hideOldestOnNew });
+  const deleteMessages = !!document.getElementById('deleteMessages').checked;
+  const hiddenDomBuffer = Math.max(0, parseInt(document.getElementById('hiddenDomBuffer').value || '0', 10));
+  chrome.storage.sync.set({
+    maxVisible,
+    batchSize,
+    autoloadOnScroll,
+    hideOldestOnNew,
+    deleteMessages,
+    hiddenDomBuffer,
+  });
   alert(getMessage('settingsSaved'));
 }
 
@@ -80,6 +110,7 @@ function reset() {
 
 document.getElementById('form').addEventListener('submit', save);
 document.getElementById('reset').addEventListener('click', reset);
+document.getElementById('deleteMessages').addEventListener('change', updateBufferFieldVisibility);
 document.addEventListener('DOMContentLoaded', () => {
   localize();
   load();

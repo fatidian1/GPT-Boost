@@ -32,6 +32,12 @@
   "labelHideOldest": {
     "message": "Hide the oldest message when a new appears"
   },
+  "labelDeleteMode": {
+    "message": "Physically delete old messages (saves memory, irreversible until page reload)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Keep this many hidden messages in DOM (for Show Older before forced reload)"
+  },
   "save": {
     "message": "Save"
   },
@@ -76,5 +82,14 @@
   },
   "statusActive": {
     "message": "GPT Boost active"
+  },
+  "deleteModeActive": {
+    "message": "Memory-optimized: messages are deleted"
+  },
+  "reloadPage": {
+    "message": "Reload page"
+  },
+  "reloadPageTitle": {
+    "message": "Reload to restore full message history from the server"
   }
 }

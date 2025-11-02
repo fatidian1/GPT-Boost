@@ -71,6 +71,18 @@
   "collapseTitle": {
     "message": "過去のメッセージを折りたたむ"
   },
+  "labelDeleteMode": {
+    "message": "古いメッセージを物理的に削除する（再読み込みまで元に戻せません）"
+  },
+  "deleteModeActive": {
+    "message": "メモリ最適化中：古いメッセージは削除されています"
+  },
+  "reloadPage": {
+    "message": "ページを再読み込み"
+  },
+  "reloadPageTitle": {
+    "message": "会話全体を復元するために再読み込みします"
+  },
   "dragTitle": {
     "message": "ドラッグ"
   },

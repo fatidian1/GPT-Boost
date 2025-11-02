@@ -15,6 +15,8 @@ import { getMessage } from './i18n';
     batchSize: 10, // number of messages to reveal/hide in a batch
     autoloadOnScroll: true, // reveal older messages when user scrolls to top
     hideOldestOnNew: true, // hide oldest visible message when new ones arrive
+    deleteMessages: false, // physically delete old messages instead of hiding (irreversible until reload)
+    hiddenDomBuffer: 0, // in delete mode: retain N hidden DOM messages beyond the visible threshold before pruning
   });
 
   let settings = { ...DEFAULTS };
@@ -58,7 +60,8 @@ import { getMessage } from './i18n';
         }
         if (changed) {
           log('Settings changed -> re-apply', settings);
-          scheduleApplyWindowing('settings changed'); // re-apply
+          syncUIState(); // update button states immediately
+          scheduleApplyWindowing('settings changed'); // re-apply windowing
         }
       });
     } catch (e) {
@@ -96,6 +99,9 @@ import { getMessage } from './i18n';
 
   let topSentinel = null;
   let uiBar = null;
+
+  // Track cumulative pruned (deleted) messages at the top for status display
+  let prunedTopCount = 0;
 
   // Cache of last applied state to avoid redundant DOM writes
   let lastApply = { total: null, hiddenTop: null };
@@ -176,6 +182,7 @@ import { getMessage } from './i18n';
         <span id="gpt-boost-status">${getMessage('statusActive')}</span>
         <button id="gpt-boost-show-older" title="${getMessage('showOlderTitle')}">${getMessage('showOlder')}</button>
         <button id="gpt-boost-collapse" title="${getMessage('collapseTitle')}">${getMessage('collapse')}</button>
+        <button id="gpt-boost-reload" title="${getMessage('reloadPageTitle')}" style="display: none;">${getMessage('reloadPage')}</button>
         <span class="gpt-boost-drag-handle" title="${getMessage('dragTitle')}">
           <span class="gpt-boost-drag-dot"></span>
           <span class="gpt-boost-drag-dot"></span>
@@ -195,6 +202,10 @@ import { getMessage } from './i18n';
       pill.querySelector('#gpt-boost-collapse').addEventListener('click', () => {
         log('UI: Collapse clicked');
         collapseToThreshold();
+      });
+      pill.querySelector('#gpt-boost-reload').addEventListener('click', () => {
+        log('UI: Reload page clicked');
+        window.location.reload();
       });
 
       // Dragging: only via the handle on the right edge
@@ -279,7 +290,7 @@ import { getMessage } from './i18n';
     }
 
     if (threadContainer && !topSentinel) {
-      if (settings.autoloadOnScroll) {
+      if (settings.autoloadOnScroll && !settings.deleteMessages) {
         log('ensureUI: creating top sentinel');
         topSentinel = document.createElement('div');
         topSentinel.className = 'gpt-boost-sentinel';
@@ -310,9 +321,34 @@ import { getMessage } from './i18n';
     currentStatus = { total, visible };
     const el = document.getElementById('gpt-boost-status');
     if (el) {
-      el.textContent = getMessage('statusBar', [String(visible), String(total)]);
+      let statusText = getMessage('statusBar', [String(visible), String(total)]);
+      if (settings.deleteMessages) {
+        statusText += ' — ' + getMessage('deleteModeActive');
+      }
+      el.textContent = statusText;
     }
     log('updateStatus', { total, visible });
+  }
+
+  function syncUIState() {
+    // Update button visibility and state based on delete mode
+    const showOlderBtn = document.getElementById('gpt-boost-show-older');
+    const reloadBtn = document.getElementById('gpt-boost-reload');
+    if (settings.deleteMessages) {
+      if (showOlderBtn) {
+        showOlderBtn.disabled = true;
+        showOlderBtn.style.opacity = '0.5';
+        showOlderBtn.title = 'Disabled in delete mode; use Reload page to restore history';
+      }
+      if (reloadBtn) reloadBtn.style.display = 'block';
+    } else {
+      if (showOlderBtn) {
+        showOlderBtn.disabled = false;
+        showOlderBtn.style.opacity = '1';
+        showOlderBtn.title = getMessage('showOlderTitle');
+      }
+      if (reloadBtn) reloadBtn.style.display = 'none';
+    }
   }
 
   function applyWindowing() {
@@ -382,17 +418,57 @@ import { getMessage } from './i18n';
       return;
     }
 
-    // Hide top older messages
+    // Hide or delete top older messages based on mode
     let visibleCount = 0;
-    messages.forEach((node, idx) => {
-      const shouldHide = idx < hiddenCountTop;
-      if (node.style.display !== (shouldHide ? 'none' : '')) {
-        // only log when changing
-        log('applyWindowing: set display', { idx, shouldHide });
+    if (settings.deleteMessages) {
+      // Delete mode with buffer: three-tier windowing
+      // Tier 1 (visible): maxVisible messages
+      // Tier 2 (hidden buffer): hiddenDomBuffer messages (in DOM, display:none, eligible for Show Older)
+      // Tier 3 (pruned): everything older is physically deleted
+      const buffer = Math.max(0, Number(settings.hiddenDomBuffer) || 0);
+      const pruneCount = Math.max(0, hiddenCountTop - buffer);
+
+      log('applyWindowing: delete mode', { hiddenCountTop, buffer, pruneCount });
+
+      // Remove pruned messages (oldest tier)
+      for (let idx = 0; idx < pruneCount; idx++) {
+        const node = messages[idx];
+        if (node) {
+          log('applyWindowing: pruning message at index', idx);
+          node.remove();
+          prunedTopCount++;
+        }
       }
-      node.style.display = shouldHide ? 'none' : '';
-      if (!shouldHide) visibleCount++;
-    });
+
+      // The hidden buffer remains in DOM with display:none
+      const hiddenBufferedStart = pruneCount;
+      const hiddenBufferedEnd = hiddenCountTop;
+      for (let idx = hiddenBufferedStart; idx < hiddenBufferedEnd; idx++) {
+        const node = messages[idx];
+        if (node && node.isConnected) {
+          node.style.display = 'none';
+        }
+      }
+
+      // Visible messages (rest)
+      for (let idx = hiddenCountTop; idx < messages.length; idx++) {
+        const node = messages[idx];
+        if (node && node.isConnected) {
+          node.style.display = '';
+          visibleCount++;
+        }
+      }
+    } else {
+      // Hide mode: use CSS display:none (current behavior, no deletion)
+      messages.forEach((node, idx) => {
+        const shouldHide = idx < hiddenCountTop;
+        if (node.style.display !== (shouldHide ? 'none' : '')) {
+          log('applyWindowing: set display', { idx, shouldHide });
+        }
+        node.style.display = shouldHide ? 'none' : '';
+        if (!shouldHide) visibleCount++;
+      });
+    }
 
     // update status
     updateStatus(total, visibleCount);
@@ -400,25 +476,27 @@ import { getMessage } from './i18n';
     // Remember last applied state
     lastApply = { total, hiddenTop: hiddenCountTop };
 
-    // Add or update a placeholder where we cut off
-    let placeholder = container.querySelector('.gpt-boost-hidden-placeholder');
-    if (hiddenCountTop > 0) {
-      if (!placeholder) {
-        log('applyWindowing: creating placeholder before index', hiddenCountTop);
-        placeholder = document.createElement('div');
-        placeholder.className = 'gpt-boost-hidden-placeholder';
-        placeholder.addEventListener('click', () => revealOlder());
-        if (messages[hiddenCountTop]) {
-          messages[hiddenCountTop].before(placeholder);
-        } else {
-          container.appendChild(placeholder);
+    // Add or update a placeholder where we cut off (only in hide mode)
+    if (!settings.deleteMessages) {
+      let placeholder = container.querySelector('.gpt-boost-hidden-placeholder');
+      if (hiddenCountTop > 0) {
+        if (!placeholder) {
+          log('applyWindowing: creating placeholder before index', hiddenCountTop);
+          placeholder = document.createElement('div');
+          placeholder.className = 'gpt-boost-hidden-placeholder';
+          placeholder.addEventListener('click', () => revealOlder());
+          if (messages[hiddenCountTop]) {
+            messages[hiddenCountTop].before(placeholder);
+          } else {
+            container.appendChild(placeholder);
+          }
         }
-      }
-      placeholder.textContent = revealOlderText(hiddenCountTop);
-    } else {
-      if (placeholder) {
-        log('applyWindowing: removing placeholder');
-        placeholder.remove();
+        placeholder.textContent = revealOlderText(hiddenCountTop);
+      } else {
+        if (placeholder) {
+          log('applyWindowing: removing placeholder');
+          placeholder.remove();
+        }
       }
     }
   }
@@ -438,25 +516,64 @@ import { getMessage } from './i18n';
       return;
     }
 
-    const batchSize = Math.max(1, Number(settings.batchSize) || DEFAULTS.batchSize);
-    const before = hiddenCountTop;
-    hiddenCountTop = Math.max(0, hiddenCountTop - batchSize);
-    visibleLimit += before - hiddenCountTop;
-    log('revealOlder: hiddenCountTop', { before, after: hiddenCountTop, batchSize, total: messages.length });
+    if (settings.deleteMessages) {
+      // In delete mode, can only reveal within the hidden buffer
+      const buffer = Math.max(0, Number(settings.hiddenDomBuffer) || 0);
+      const pruneCount = Math.max(0, hiddenCountTop - buffer);
 
-    let placeholder = container.querySelector('.gpt-boost-hidden-placeholder');
-    if (hiddenCountTop > 0) {
-      if (placeholder) {
-        placeholder.textContent = revealOlderText(hiddenCountTop);
-        messages[hiddenCountTop].before(placeholder);
+      if (pruneCount >= hiddenCountTop) {
+        // All hidden messages are pruned; buffer is exhausted
+        log('revealOlder: delete mode, buffer exhausted', { pruneCount, hiddenCountTop, buffer });
+        // Optionally show a hint: "Pruned messages cannot be revealed without reloading"
+        return;
       }
-    } else if (placeholder) {
-      placeholder.remove();
+
+      // Can reveal up to the pruned boundary
+      const batchSize = Math.max(1, Number(settings.batchSize) || DEFAULTS.batchSize);
+      const before = hiddenCountTop;
+      hiddenCountTop = Math.max(pruneCount, hiddenCountTop - batchSize);
+      visibleLimit += before - hiddenCountTop;
+      log('revealOlder: delete mode', { before, after: hiddenCountTop, pruneCount, batchSize });
+
+      let placeholder = container.querySelector('.gpt-boost-hidden-placeholder');
+      if (hiddenCountTop > pruneCount) {
+        if (placeholder) {
+          placeholder.textContent = revealOlderText(hiddenCountTop - pruneCount);
+          messages[hiddenCountTop].before(placeholder);
+        }
+      } else if (placeholder) {
+        placeholder.remove();
+      }
+
+      // Reveal range [hiddenCountTop, before)
+      for (let i = hiddenCountTop; i < before; i++) {
+        if (messages[i] && messages[i].isConnected) {
+          messages[i].style.display = '';
+        }
+      }
+    } else {
+      // Hide mode: original behavior
+      const batchSize = Math.max(1, Number(settings.batchSize) || DEFAULTS.batchSize);
+      const before = hiddenCountTop;
+      hiddenCountTop = Math.max(0, hiddenCountTop - batchSize);
+      visibleLimit += before - hiddenCountTop;
+      log('revealOlder: hide mode', { before, after: hiddenCountTop, batchSize, total: messages.length });
+
+      let placeholder = container.querySelector('.gpt-boost-hidden-placeholder');
+      if (hiddenCountTop > 0) {
+        if (placeholder) {
+          placeholder.textContent = revealOlderText(hiddenCountTop);
+          messages[hiddenCountTop].before(placeholder);
+        }
+      } else if (placeholder) {
+        placeholder.remove();
+      }
+      // reveal range [hiddenCountTop, before)
+      for (let i = hiddenCountTop; i < before; i++) {
+        if (messages[i]) messages[i].style.display = '';
+      }
     }
-    // reveal range [hiddenCountTop, before)
-    for (let i = hiddenCountTop; i < before; i++) {
-      if (messages[i]) messages[i].style.display = '';
-    }
+
     scheduleApplyWindowing('reveal older');
   }
 
