@@ -323,7 +323,7 @@ import { getMessage } from './i18n';
     if (el) {
       let statusText = getMessage('statusBar', [String(visible), String(total)]);
       if (settings.deleteMessages) {
-        statusText += ' — ' + getMessage('deleteModeActive');
+        statusText += ' · ' + getMessage('deleteModeActive');
       }
       el.textContent = statusText;
     }

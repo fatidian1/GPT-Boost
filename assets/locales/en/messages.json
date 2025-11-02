@@ -84,7 +84,7 @@
     "message": "GPT Boost active"
   },
   "deleteModeActive": {
-    "message": "Memory-optimized: messages are deleted"
+    "message": "DOM optimization: ON"
   },
   "reloadPage": {
     "message": "Reload page"
