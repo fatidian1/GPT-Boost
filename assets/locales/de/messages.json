@@ -32,6 +32,12 @@
   "labelHideOldest": {
     "message": "Älteste Nachricht ausblenden, wenn eine neue erscheint"
   },
+  "labelDeleteMode": {
+    "message": "Alte Nachrichten physisch löschen (spart Speicher, kann nicht rückgängig gemacht werden, bis die Seite neu geladen wird)"
+  },
+  "labelHiddenBuffer": {
+    "message": "So viele verborgene Nachrichten im DOM beibehalten (um ältere Nachrichten anzuzeigen, bevor ein Neuladen erzwungen wird)"
+  },
   "save": {
     "message": "Speichern"
   },

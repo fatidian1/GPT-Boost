@@ -32,6 +32,12 @@
   "labelHideOldest": {
     "message": "Piilota vanhin viesti, kun uusi saapuu"
   },
+  "labelDeleteMode": {
+    "message": "Poista vanhemmat viestit fyysisesti (säästää muistia, peruuttamaton kunnes sivu ladataan uudelleen)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Säilytä tämä määrä piilotettuja viestejä DOM-issa (näyttää vanhempia viestejä ennen pakotetua uudelleenlatausta)"
+  },
   "save": {
     "message": "Tallenna"
   },

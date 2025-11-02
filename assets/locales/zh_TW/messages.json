@@ -32,6 +32,12 @@
   "labelHideOldest": {
     "message": "出現新訊息時隱藏最早的那一則"
   },
+  "labelDeleteMode": {
+    "message": "物理刪除舊訊息（節省記憶體，重新載入頁面前無法復原）"
+  },
+  "labelHiddenBuffer": {
+    "message": "在 DOM 中保留這麼多則隱藏訊息（強制重新載入前可顯示較早的訊息）"
+  },
   "save": {
     "message": "儲存"
   },

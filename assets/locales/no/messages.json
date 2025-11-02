@@ -32,6 +32,12 @@
   "labelHideOldest": {
     "message": "Skjul den eldste meldingen når en ny kommer"
   },
+  "labelDeleteMode": {
+    "message": "Fysisk slette gamle meldinger (sparer minne, kan ikke angres før siden lastes på nytt)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Behold dette antallet skjulte meldinger i DOM (for å vise eldre meldinger før tvungen ominnlasting)"
+  },
   "save": {
     "message": "Lagre"
   },

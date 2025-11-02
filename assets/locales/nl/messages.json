@@ -32,6 +32,12 @@
   "labelHideOldest": {
     "message": "Verberg het oudste bericht wanneer er een nieuw binnenkomt"
   },
+  "labelDeleteMode": {
+    "message": "Fysiek oude berichten verwijderen (bespaart geheugen, onherroepelijk tot pagina herladen)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Dit aantal verborgen berichten in DOM houden (om oudere berichten weer te geven voordat pagina herladen wordt geforceerd)"
+  },
   "save": {
     "message": "Opslaan"
   },

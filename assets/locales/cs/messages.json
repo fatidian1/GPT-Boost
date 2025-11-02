@@ -32,6 +32,12 @@
   "labelHideOldest": {
     "message": "Skrýt nejstarší zprávu, když se objeví nová"
   },
+  "labelDeleteMode": {
+    "message": "Fyzicky vymazat staré zprávy (šetří paměť, je nevratné do znovunačtení stránky)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Zachovat tolik skrytých zpráv v DOM (pro zobrazení starších zpráv před vynuceným znovunačtením)"
+  },
   "save": {
     "message": "Uložit"
   },

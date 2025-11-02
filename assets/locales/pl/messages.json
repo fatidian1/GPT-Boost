@@ -32,6 +32,12 @@
   "labelHideOldest": {
     "message": "Ukrywaj najstarszą wiadomość, gdy pojawi się nowa"
   },
+  "labelDeleteMode": {
+    "message": "Fizycznie usuń stare wiadomości (oszczędza pamięć, nieodwracalne do przeładowania strony)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Zachowaj tyle ukrytych wiadomości w DOM (aby pokazywały starsze przed wymuszonym przeładowaniem)"
+  },
   "save": {
     "message": "Zapisz"
   },

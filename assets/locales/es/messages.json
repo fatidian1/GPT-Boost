@@ -32,6 +32,12 @@
   "labelHideOldest": {
     "message": "Ocultar el mensaje más antiguo cuando llegue uno nuevo"
   },
+  "labelDeleteMode": {
+    "message": "Eliminar físicamente mensajes antiguos (ahorra memoria, irreversible hasta recargar la página)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Mantener esta cantidad de mensajes ocultos en el DOM (para mostrar más antiguos antes de forzar la recarga)"
+  },
   "save": {
     "message": "Guardar"
   },
