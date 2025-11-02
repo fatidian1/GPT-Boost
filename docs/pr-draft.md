@@ -7,12 +7,12 @@ feat: Add optional DOM pruning for older messages to reduce lag on long conversa
 This PR adds an opt-in mode that physically deletes old message nodes beyond the configured threshold. It keeps the DOM small and responsive while preserving the current default behavior (hide-only).
 
 ## Details
-- Adds `deleteMessages` option in the Options page
-- In delete mode:
-  - Windowing removes old nodes (`node.remove()`)
-  - Disables Show Older; adds a Reload Page button
-  - Disables autoload-on-scroll sentinel
-  - Status pill shows a small badge
+- Adds `deleteMessages` and `hiddenDomBuffer` options in the Options page
+- In delete mode with buffer:
+  - Two-tier windowing: keep latest `maxVisible` visible, next `hiddenDomBuffer` hidden in DOM, prune the rest
+  - Show Older reveals from the buffer; older than buffer require Reload page
+  - Autoload-on-scroll may be disabled in delete mode (or only active while buffer exists)
+  - Status pill shows a small badge (optionally pruned count)
 
 ## Why
 Long ChatGPT threads accumulate thousands of nodes, slowing layout/paint and increasing memory. Pruning reduces DOM size materially.

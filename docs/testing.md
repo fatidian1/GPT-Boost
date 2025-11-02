@@ -6,12 +6,13 @@
    - Placeholder shows correct hidden counts
    - Autoload-on-scroll reveals on reaching top
 
-2. Delete mode enabled
-   - Oldest messages beyond threshold are removed
-   - DOM node count remains bounded by `maxVisible`
-   - "Show older" button disabled/hidden
+2. Delete mode with buffer
+   - Set hiddenDomBuffer to a small number (e.g., 5)
+   - Messages beyond `maxVisible + hiddenDomBuffer` are pruned (deleted)
+   - Hidden buffer exists: Show Older reveals from buffer; once buffer is exhausted, it stops revealing
+   - DOM node count remains bounded by `maxVisible + hiddenDomBuffer`
    - "Reload page" button present and reloads the conversation
-   - Status pill shows delete mode badge
+   - Status pill shows delete mode badge (optionally pruned count)
 
 3. Navigation & SPA behavior
    - Route changes (/c/*, /share/*) keep observers functional

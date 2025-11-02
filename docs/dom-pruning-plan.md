@@ -32,7 +32,11 @@ Add a new boolean setting in storage and Options UI:
 
 - `deleteMessages` (default: `false`)
   - OFF (default): current behavior (hide using CSS display:none)
-  - ON: physically remove old message nodes from the DOM to keep only the most recent N nodes
+  - ON: physically remove old message nodes from the DOM
+
+- `hiddenDomBuffer` (default: `0`)
+  - The number of oldest messages to keep in the DOM but hidden (a buffer behind the visible window)
+  - When `deleteMessages=true`, messages older than `(maxVisible + hiddenDomBuffer)` are pruned (deleted)
 
 Strings to add (i18n):
 
@@ -53,28 +57,33 @@ Optional (if we keep a cut-point notice in delete mode):
   - Cut-point placeholder shows remaining hidden count and reveals on click.
 
 - Delete mode (new):
-  - Oldest messages beyond the threshold are removed via `node.remove()`.
-  - "Show older" is disabled or hidden (no nodes to reveal).
-  - "Collapse" still works (recomputes the threshold and trims DOM accordingly).
-  - Status text indicates delete mode is active (e.g., `deleteModeActive`).
-  - A dedicated "Reload page" button reloads the conversation to restore full history from the server.
+  - Two-tier windowing:
+    - Keep latest `maxVisible` messages visible
+    - Keep up to `hiddenDomBuffer` older messages in the DOM but hidden (eligible for "Show older")
+    - Prune any remaining older messages (physically delete)
+  - "Show older" continues to work while hidden buffer exists; once exhausted, older pruned history requires reload
+  - "Collapse" still works (recomputes the threshold and trims DOM accordingly)
+  - Status text indicates delete mode is active (e.g., `deleteModeActive`) and can optionally display pruned count
+  - A dedicated "Reload page" button reloads the conversation to restore full history from the server
 
 ## 5) Algorithm Adjustments
 
 - Windowing (`applyWindowing()`):
-  - Compute `hiddenCountTop` the same way to define the cut-point index `k`.
-  - If `deleteMessages=false`: keep current behavior (toggle `display`).
-  - If `deleteMessages=true`:
-    - For indices `< k`, remove nodes: `node.remove()` and increment `prunedTopCount`.
-    - For indices `>= k`, ensure `node.style.display = ''`.
-    - Update status using the new visible total (either `totalBefore - k` or a fresh `collectMessages()` count).
-    - Skip the hidden placeholder in delete mode (no hidden nodes remain).
+  - Compute the desired hidden count as today (based on `maxVisible`, `hideOldestOnNew`, and `visibleLimit`). Let this be `hiddenDesired`.
+  - If `deleteMessages=false`: keep current behavior (toggle `display` for the first `hiddenDesired` nodes).
+  - If `deleteMessages=true` with buffer `B = hiddenDomBuffer`:
+    - Compute how many to prune (delete) from the top: `pruneCount = max(0, hiddenDesired - B)`
+    - Physically delete the first `pruneCount` nodes
+    - The remaining hidden count becomes `hiddenBuffered = hiddenDesired - pruneCount` (guaranteed `<= B`)
+    - Apply `display:none` to the first `hiddenBuffered` nodes; clear display for the rest (visible)
+    - Track `prunedTopCount += pruneCount` for status/telemetry
 
 - Reveal (`revealOlder()`):
-  - If `deleteMessages=true`: no-op (rely on the new Reload button).
+  - If `deleteMessages=false`: unchanged (reveal from hidden pool)
+  - If `deleteMessages=true`: reveal from the hidden buffer while `hiddenBuffered > 0`; once buffer is exhausted, show a hint (or simply do nothing) since older messages were pruned. Users can use Reload to get full history
 
 - Auto-reveal on scroll (IntersectionObserver):
-  - If `deleteMessages=true`: do not attach the top sentinel (disable auto-reveal).
+  - If `deleteMessages=true`: keep auto-reveal enabled only while hidden buffer exists; safe fallback is to guard with `!settings.deleteMessages` to avoid surprises
 
 - Collapse (`collapseToThreshold()`):
   - Works in both modes. In delete mode, remove the oldest nodes until only threshold remain, then scroll to bottom.
@@ -82,9 +91,9 @@ Optional (if we keep a cut-point notice in delete mode):
 ## 6) UI/UX Changes
 
 - Pill buttons:
-  - Keep "Collapse" unchanged.
-  - In delete mode, hide or disable "Show older"; add a new "Reload page" button (`window.location.reload()`).
-  - Status text shows visible/total plus a delete-mode badge, e.g., "GPT Boost · visible 10/10 — Memory-optimized".
+  - Keep "Collapse" unchanged
+  - In delete mode, keep "Show older" active as long as there is hidden buffer; disable when buffer is empty; add a new "Reload page" button
+  - Status text shows visible/total plus a delete-mode badge (optionally append pruned count)
 
 - Options page:
   - Add checkbox for `deleteMessages` with a clear warning: irreversible during the current session; use reload to restore full history.
@@ -92,7 +101,9 @@ Optional (if we keep a cut-point notice in delete mode):
 ## 7) Data Model & Internal State
 
 - Existing: `hiddenCountTop`, `visibleLimit`, `lastApply`, `currentStatus`.
-- New: `prunedTopCount` (number) — cumulative count of deleted (pruned) messages at the top since page load.
+- New:
+  - `prunedTopCount` (number): cumulative count of deleted (pruned) messages at the top since page load
+  - `hiddenDomBuffer` (number, from settings): buffer size for retained hidden DOM
 
 Notes:
 
@@ -121,9 +132,9 @@ Notes:
 
 ## 10) Incremental Delivery
 
-- PR 1: Settings toggle + i18n + UI changes (button states) with the feature flag wired, still using hide mode.
-- PR 2: Switch algorithm to physical deletion when the flag is ON; add `prunedTopCount` and the Reload affordance.
-- PR 3: Polish (status text badge, minor CSS) and README update.
+- PR 1: Settings toggle + i18n + UI changes（deleteMessages + hiddenDomBuffer、Reload ボタン、状態バッジ）ただし削除はまだ無効
+- PR 2: アルゴリズムに二段階ウィンドウイング（削除＋隠しバッファ）を実装し、reveal/autoload の分岐を導入
+- PR 3: 仕上げ（ステータスに pruned 数の表示、README 更新、軽微な CSS）
 
 ## 11) Acceptance Criteria
 
@@ -140,7 +151,7 @@ This section describes exact edits aligned with the current codebase to avoid am
 
 1) Extend defaults and state
 
-- Add to `DEFAULTS`: `deleteMessages: false`
+- Add to `DEFAULTS`: `deleteMessages: false`, `hiddenDomBuffer: 0`
 - Add module state: `let prunedTopCount = 0;`
 
 2) Settings plumbing
@@ -161,13 +172,12 @@ This section describes exact edits aligned with the current codebase to avoid am
 
 - Compute `threshold`, `batchSize`, and `hiddenCountTop` as today.
 - Let `totalBefore = messages.length`.
-- If `!settings.deleteMessages`: keep current style-based hiding logic.
-- Else (delete mode):
-  - For indices `< hiddenCountTop`: `node.remove()`; increment `prunedTopCount`.
-  - For indices `>= hiddenCountTop`: ensure `node.style.display = ''`.
-  - Determine visible totals as `visibleTotal = totalBefore - hiddenCountTop` (or `collectMessages().length`).
-  - Call `updateStatus(visibleTotal, visibleTotal)`.
-  - Skip creating the hidden placeholder in delete mode.
+- If `!settings.deleteMessages`: keep current style-based hiding logic
+- Else (delete mode with buffer):
+  - Compute `pruneCount = max(0, hiddenDesired - settings.hiddenDomBuffer)`
+  - Remove first `pruneCount` nodes; `prunedTopCount += pruneCount`
+  - Hide the next `hiddenBuffered = hiddenDesired - pruneCount` nodes (`display:none`)
+  - Clear display for the rest (visible)
 
 5) Status badge (optional)
 
@@ -190,6 +200,12 @@ Insert below the existing checkboxes:
   <span id="labelDeleteMode"></span>
 </label>
 
+<label>
+  <span id="labelHiddenBuffer"></span>
+  <input type="number" id="hiddenDomBuffer" min="0" step="1" />
+  <small id="defaultHiddenBuffer"></small>
+</label>
+
 ### C) `src/options.js`
 
 1) Extend defaults:
@@ -200,27 +216,35 @@ const DEFAULTS = {
   autoloadOnScroll: true,
   hideOldestOnNew: true,
   deleteMessages: false,
+  hiddenDomBuffer: 0,
 };
 
-2) Localize label:
+2) Localize labels:
 
 const lblDeleteMode = document.getElementById('labelDeleteMode');
 if (lblDeleteMode) lblDeleteMode.textContent = getMessage('labelDeleteMode');
+const lblHiddenBuffer = document.getElementById('labelHiddenBuffer');
+if (lblHiddenBuffer) lblHiddenBuffer.textContent = getMessage('labelHiddenBuffer');
+const defHidden = document.getElementById('defaultHiddenBuffer');
+if (defHidden) defHidden.textContent = getMessage('defaultNumber', ['0']);
 
-3) Load persisted value:
+3) Load persisted values:
 
 document.getElementById('deleteMessages').checked = !!res.deleteMessages;
+document.getElementById('hiddenDomBuffer').value = String(Math.max(0, res.hiddenDomBuffer || 0));
 
 4) Save on submit:
 
 const deleteMessages = !!document.getElementById('deleteMessages').checked;
-chrome.storage.sync.set({ maxVisible, batchSize, autoloadOnScroll, hideOldestOnNew, deleteMessages });
+const hiddenDomBuffer = Math.max(0, parseInt(document.getElementById('hiddenDomBuffer').value || '0', 10));
+chrome.storage.sync.set({ maxVisible, batchSize, autoloadOnScroll, hideOldestOnNew, deleteMessages, hiddenDomBuffer });
 
 ### D) `assets/locales/*/messages.json`
 
 Add (at minimum in `en`):
 
 - "labelDeleteMode": { "message": "Physically delete old messages (irreversible until page reload)" }
+- "labelHiddenBuffer": { "message": "Keep hidden DOM messages (buffer)" }
 - "deleteModeActive": { "message": "Memory-optimized: old messages are deleted" }
 - "reloadPage": { "message": "Reload page" }
 - "reloadPageTitle": { "message": "Reload conversation to restore full history" }
