@@ -323,11 +323,12 @@ import { getMessage } from './i18n';
     if (el) {
       let statusText;
       if (settings.deleteMessages) {
-        // Delete mode: show visible/buffered/total
+        // Delete mode: show visible/buffered/total (including pruned count)
+        const trueTotal = total + prunedTopCount;
         statusText = getMessage('statusBarDeleteMode', [
           String(visible),
           String(settings.hiddenDomBuffer),
-          String(total),
+          String(trueTotal),
         ]);
       } else {
         // Normal mode: show visible/total
@@ -335,7 +336,7 @@ import { getMessage } from './i18n';
       }
       el.textContent = statusText;
     }
-    log('updateStatus', { total, visible });
+    log('updateStatus', { total, visible, prunedTopCount });
   }
 
   function syncUIState() {
@@ -413,6 +414,7 @@ import { getMessage } from './i18n';
     if (sawZeroThenGrew && total > 0) {
       log('applyWindowing: detected chat load (0 -> >0). Collapsing to threshold by default');
       sawZeroThenGrew = false; // reset the flag
+      prunedTopCount = 0; // reset pruned count on new chat
       // compute hiddenCountTop to collapse now
       const threshold = Math.max(1, Number(settings.maxVisible) || DEFAULTS.maxVisible);
       hiddenCountTop = Math.max(0, total - threshold);
