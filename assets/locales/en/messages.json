@@ -33,10 +33,10 @@
     "message": "Hide the oldest message when a new appears"
   },
   "labelDeleteMode": {
-    "message": "Physically delete old messages (saves memory, irreversible until page reload)"
+    "message": "Delete old messages from DOM (irreversible until page reload)"
   },
   "labelHiddenBuffer": {
-    "message": "Keep this many hidden messages in DOM (for Show Older before forced reload)"
+    "message": "Keep this many hidden messages in DOM (for Show Older before reload)"
   },
   "save": {
     "message": "Save"

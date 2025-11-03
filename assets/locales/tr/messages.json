@@ -33,10 +33,10 @@
     "message": "Yeni bir ileti geldiğinde en eski iletiyi gizle"
   },
   "labelDeleteMode": {
-    "message": "Eski iletileri fiziksel olarak sil (belleği tasarrufu sağlar, sayfa yeniden yüklenene kadar geri alınamaz)"
+    "message": "Eski iletileri DOM'dan sil (belleği tasarrufu sağlar, sayfa yeniden yüklenene kadar geri alınamaz)"
   },
   "labelHiddenBuffer": {
-    "message": "Bu sayıda gizli iletiyi DOM'da tut (zorunlu yeniden yükleme öncesi eski iletileri göstermek için)"
+    "message": "DOM'da saklı tutulacak ileti sayısı (zorunlu yeniden yükleme öncesi eskilerinleri göstermek için)"
   },
   "save": {
     "message": "Kaydet"
@@ -82,5 +82,14 @@
   },
   "statusActive": {
     "message": "GPT Boost etkin"
+  },
+  "deleteModeActive": {
+    "message": "DOM Optimizasyonu: AÇIK"
+  },
+  "reloadPage": {
+    "message": "Sayfayı yenile"
+  },
+  "reloadPageTitle": {
+    "message": "Tam konuşmayı geri yüklemek için sayfayı yenileyin"
   }
 }

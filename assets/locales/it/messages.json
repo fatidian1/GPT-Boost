@@ -33,10 +33,10 @@
     "message": "Nascondi il messaggio più vecchio quando ne arriva uno nuovo"
   },
   "labelDeleteMode": {
-    "message": "Elimina fisicamente i messaggi vecchi (risparmia memoria, irreversibile fino al ricaricamento della pagina)"
+    "message": "Elimina i messaggi vecchi dal DOM (risparmia memoria, irreversibile fino al ricaricamento)"
   },
   "labelHiddenBuffer": {
-    "message": "Mantieni questo numero di messaggi nascosti nel DOM (per mostrare messaggi più vecchi prima del ricaricamento forzato)"
+    "message": "Numero di messaggi nascosti da mantenere nel DOM (per mostrare quelli più vecchi prima del ricaricamento forzato)"
   },
   "save": {
     "message": "Salva"
@@ -82,5 +82,14 @@
   },
   "statusActive": {
     "message": "GPT Boost attivo"
+  },
+  "deleteModeActive": {
+    "message": "Ottimizzazione DOM: ATTIVO"
+  },
+  "reloadPage": {
+    "message": "Ricarica pagina"
+  },
+  "reloadPageTitle": {
+    "message": "Ricarica la pagina per ripristinare la conversazione completa"
   }
 }

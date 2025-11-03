@@ -72,10 +72,10 @@
     "message": "過去のメッセージを折りたたむ"
   },
   "labelDeleteMode": {
-    "message": "古いメッセージを物理的に削除する（再読み込みまで元に戻せません）"
+    "message": "古いメッセージをDOMから削除する（再読み込みまで元に戻せません）"
   },
   "deleteModeActive": {
-    "message": "メモリ最適化中：古いメッセージは削除されています"
+    "message": "DOM最適化中"
   },
   "reloadPage": {
     "message": "ページを再読み込み"

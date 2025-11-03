@@ -33,10 +33,10 @@
     "message": "出現新訊息時隱藏最早的那一則"
   },
   "labelDeleteMode": {
-    "message": "物理刪除舊訊息（節省記憶體，重新載入頁面前無法復原）"
+    "message": "從 DOM 刪除舊訊息（節省記憶體，重新載入前無法復原）"
   },
   "labelHiddenBuffer": {
-    "message": "在 DOM 中保留這麼多則隱藏訊息（強制重新載入前可顯示較早的訊息）"
+    "message": "在 DOM 中保留的隱藏訊息數量（強制重新載入前可顯示較早的訊息）"
   },
   "save": {
     "message": "儲存"
@@ -82,5 +82,14 @@
   },
   "statusActive": {
     "message": "GPT Boost 已啟用"
+  },
+  "deleteModeActive": {
+    "message": "DOM 優化：開啟"
+  },
+  "reloadPage": {
+    "message": "重新載入頁面"
+  },
+  "reloadPageTitle": {
+    "message": "重新載入頁面以恢復完整對話"
   }
 }

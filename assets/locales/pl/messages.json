@@ -33,10 +33,10 @@
     "message": "Ukrywaj najstarszą wiadomość, gdy pojawi się nowa"
   },
   "labelDeleteMode": {
-    "message": "Fizycznie usuń stare wiadomości (oszczędza pamięć, nieodwracalne do przeładowania strony)"
+    "message": "Usuń stare wiadomości z DOM (nieodwracalne do przeładowania)"
   },
   "labelHiddenBuffer": {
-    "message": "Zachowaj tyle ukrytych wiadomości w DOM (aby pokazywały starsze przed wymuszonym przeładowaniem)"
+    "message": "Zachowaj tyle ukrytych wiadomości w DOM (aby pokazywały starsze przed przeładowaniem)"
   },
   "save": {
     "message": "Zapisz"
@@ -82,5 +82,14 @@
   },
   "statusActive": {
     "message": "GPT Boost aktywny"
+  },
+  "deleteModeActive": {
+    "message": "Optymalizacja DOM: WŁĄCZONA"
+  },
+  "reloadPage": {
+    "message": "Przeładuj stronę"
+  },
+  "reloadPageTitle": {
+    "message": "Przeładuj stronę, aby przywrócić pełną rozmowę"
   }
 }

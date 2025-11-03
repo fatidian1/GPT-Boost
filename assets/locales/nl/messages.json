@@ -33,10 +33,10 @@
     "message": "Verberg het oudste bericht wanneer er een nieuw binnenkomt"
   },
   "labelDeleteMode": {
-    "message": "Fysiek oude berichten verwijderen (bespaart geheugen, onherroepelijk tot pagina herladen)"
+    "message": "Oude berichten uit de DOM verwijderen (bespaart geheugen, onherroepelijk tot pagina herladen)"
   },
   "labelHiddenBuffer": {
-    "message": "Dit aantal verborgen berichten in DOM houden (om oudere berichten weer te geven voordat pagina herladen wordt geforceerd)"
+    "message": "Aantal verborgen berichten in DOM houden (voor weergave van oudere berichten vóór geforceerd herladen)"
   },
   "save": {
     "message": "Opslaan"
@@ -82,5 +82,14 @@
   },
   "statusActive": {
     "message": "GPT Boost actief"
+  },
+  "deleteModeActive": {
+    "message": "DOM-optimalisatie: AAN"
+  },
+  "reloadPage": {
+    "message": "Pagina herladen"
+  },
+  "reloadPageTitle": {
+    "message": "Herladen om het volledige gesprek te herstellen"
   }
 }

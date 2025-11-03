@@ -33,10 +33,10 @@
     "message": "Skjul den eldste meldingen når en ny kommer"
   },
   "labelDeleteMode": {
-    "message": "Fysisk slette gamle meldinger (sparer minne, kan ikke angres før siden lastes på nytt)"
+    "message": "Slett gamle meldinger fra DOM (sparer minne, kan ikke angres før siden lastes på nytt)"
   },
   "labelHiddenBuffer": {
-    "message": "Behold dette antallet skjulte meldinger i DOM (for å vise eldre meldinger før tvungen ominnlasting)"
+    "message": "Antall skjulte meldinger å beholde i DOM (for å vise eldre før tvungen ominnlasting)"
   },
   "save": {
     "message": "Lagre"
@@ -82,5 +82,14 @@
   },
   "statusActive": {
     "message": "GPT Boost aktiv"
+  },
+  "deleteModeActive": {
+    "message": "DOM-optimalisering: PÅ"
+  },
+  "reloadPage": {
+    "message": "Last siden på nytt"
+  },
+  "reloadPageTitle": {
+    "message": "Last siden på nytt for å gjenopprette hele samtalen"
   }
 }
