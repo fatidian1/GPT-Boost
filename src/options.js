@@ -55,7 +55,6 @@ function localize() {
   coffeeLink.href = 'https://buymeacoffee.com/fatidian1';
   coffeeLink.innerText = getMessage('footerSupportLinkText');
   if (coffeePara) {
-    console.log('link', { l: getMessage('footerSupportPrefix') });
     coffeePara.innerHTML = [
       getMessage('footerSupportPrefix'),
       coffeeLink.outerHTML,
