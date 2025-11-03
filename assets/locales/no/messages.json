@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · synlige $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · synlige $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "1 eldre melding skjult – klikk for å laste inn de neste $1"
   },

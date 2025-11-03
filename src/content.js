@@ -321,9 +321,17 @@ import { getMessage } from './i18n';
     currentStatus = { total, visible };
     const el = document.getElementById('gpt-boost-status');
     if (el) {
-      let statusText = getMessage('statusBar', [String(visible), String(total)]);
+      let statusText;
       if (settings.deleteMessages) {
-        statusText += ' · ' + getMessage('deleteModeActive');
+        // Delete mode: show visible/buffered/total
+        statusText = getMessage('statusBarDeleteMode', [
+          String(visible),
+          String(settings.hiddenDomBuffer),
+          String(total),
+        ]);
+      } else {
+        // Normal mode: show visible/total
+        statusText = getMessage('statusBar', [String(visible), String(total)]);
       }
       el.textContent = statusText;
     }

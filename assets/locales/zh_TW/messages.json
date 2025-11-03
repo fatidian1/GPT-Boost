@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · 可見 $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · 可見 $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "已隱藏 1 則較早的訊息 — 點擊載入接下來的 $1 則"
   },

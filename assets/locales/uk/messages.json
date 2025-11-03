@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · видно $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · видно $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "Приховано 1 старе повідомлення — натисніть, щоб завантажити наступні $1"
   },
