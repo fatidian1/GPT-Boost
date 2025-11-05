@@ -77,6 +77,9 @@
   "labelDeleteMode": {
     "message": "古いメッセージをDOMから削除する（再読み込みまで元に戻せません）"
   },
+  "labelHiddenBuffer": {
+    "message": "非表示メッセージの保持数"
+  },
   "deleteModeActive": {
     "message": "DOM最適化中"
   },
