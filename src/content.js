@@ -17,6 +17,7 @@ import { getMessage } from './i18n';
     hideOldestOnNew: true,
     deleteMessages: false,
     hiddenDomBuffer: 0,
+    userMessageMaxHeight: 200,
   });
 
   let settings = { ...DEFAULTS };
@@ -176,15 +177,13 @@ import { getMessage } from './i18n';
   // ─────────────────────────────────────────────────────────────────
   // Message Height Limiting
   // ─────────────────────────────────────────────────────────────────
-  const HEIGHT_THRESHOLD = 200;
-
   function applyHeightLimit(node) {
     if (node.dataset.gptBoostHeight) return; // already processed
     if (node.dataset.messageAuthorRole !== 'user') return; // only user messages
     node.dataset.gptBoostHeight = '1';
 
     // Check if content exceeds threshold
-    if (node.scrollHeight > HEIGHT_THRESHOLD) {
+    if (node.scrollHeight > settings.userMessageMaxHeight) {
       node.classList.add('gpt-boost-collapsed');
 
       node.addEventListener('click', (e) => {
