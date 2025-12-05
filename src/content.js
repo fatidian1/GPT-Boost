@@ -203,8 +203,8 @@ import { getMessage } from './i18n';
     }
   }
 
-  function applyHeightLimits(messages) {
-    messages.forEach(applyHeightLimit);
+  function applyHeightLimits() {
+    document.querySelectorAll('[data-message-author-role="user"]').forEach(applyHeightLimit);
   }
 
   // ─────────────────────────────────────────────────────────────────
@@ -412,8 +412,8 @@ import { getMessage } from './i18n';
     const hiddenCount = strategy.getHiddenCount(state.firstVisible, buffer);
     renderPlaceholder(messages, hiddenCount);
 
-    // Apply height limits to visible messages
-    applyHeightLimits(messages);
+    // Apply height limits to user messages
+    applyHeightLimits();
 
     log('applyWindowing:', { total, firstVisible: state.firstVisible, visible });
   }
