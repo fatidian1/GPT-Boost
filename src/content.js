@@ -33,6 +33,7 @@ import { getMessage } from './i18n';
   let threadContainer = null;
   let mainObserver = null;
   let topSentinel = null;
+  let sentinelObserver = null;
   let uiBar = null;
 
   // ─────────────────────────────────────────────────────────────────
@@ -274,11 +275,12 @@ import { getMessage } from './i18n';
       topSentinel = document.createElement('div');
       topSentinel.className = 'gpt-boost-sentinel';
       threadContainer.prepend(topSentinel);
-      new IntersectionObserver((entries) => {
+      sentinelObserver = new IntersectionObserver((entries) => {
         for (const e of entries) {
           if (e.isIntersecting && state.firstVisible > 0) revealOlder();
         }
-      }).observe(topSentinel);
+      });
+      sentinelObserver.observe(topSentinel);
     }
   }
 
@@ -479,6 +481,8 @@ import { getMessage } from './i18n';
     state.firstVisible = 0;
     state.prunedCount = 0;
     state.lastTotal = 0;
+    sentinelObserver?.disconnect();
+    sentinelObserver = null;
     topSentinel?.remove();
     topSentinel = null;
     scheduleApply('route change');
