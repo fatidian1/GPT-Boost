@@ -5,7 +5,9 @@ import { getMessage } from './i18n';
   const log = (...args) => {
     try {
       if (DEBUG) console.log('[GPT Boost]', ...args);
-    } catch (_) {}
+    } catch (_) {
+      // ignore: extension context may be invalidated
+    }
   };
 
   const DEFAULTS = Object.freeze({
@@ -61,7 +63,9 @@ import { getMessage } from './i18n';
         syncUIState();
         scheduleApply('settings changed');
       });
-    } catch (_) {}
+    } catch (_) {
+      // ignore: chrome.storage may not be available
+    }
   }
 
   // ─────────────────────────────────────────────────────────────────
@@ -166,6 +170,38 @@ import { getMessage } from './i18n';
 
   function getStrategy() {
     return settings.deleteMessages ? strategies.delete : strategies.hide;
+  }
+
+  // ─────────────────────────────────────────────────────────────────
+  // Message Height Limiting
+  // ─────────────────────────────────────────────────────────────────
+  const HEIGHT_THRESHOLD = 200;
+
+  function applyHeightLimit(node) {
+    if (node.dataset.gptBoostHeight) return; // already processed
+    if (node.dataset.messageAuthorRole !== 'user') return; // only user messages
+    node.dataset.gptBoostHeight = '1';
+
+    // Check if content exceeds threshold
+    if (node.scrollHeight > HEIGHT_THRESHOLD) {
+      node.classList.add('gpt-boost-collapsed');
+
+      node.addEventListener('click', () => {
+        node.classList.remove('gpt-boost-collapsed');
+        node.classList.add('gpt-boost-expanded');
+      });
+
+      node.addEventListener('mouseleave', () => {
+        if (node.classList.contains('gpt-boost-expanded')) {
+          node.classList.remove('gpt-boost-expanded');
+          node.classList.add('gpt-boost-collapsed');
+        }
+      });
+    }
+  }
+
+  function applyHeightLimits() {
+    document.querySelectorAll('[data-message-author-role="user"]').forEach(applyHeightLimit);
   }
 
   // ─────────────────────────────────────────────────────────────────
@@ -371,6 +407,9 @@ import { getMessage } from './i18n';
 
     const hiddenCount = strategy.getHiddenCount(state.firstVisible, buffer);
     renderPlaceholder(messages, hiddenCount);
+
+    // Apply height limits to visible messages
+    applyHeightLimits();
 
     log('applyWindowing:', { total, firstVisible: state.firstVisible, visible });
   }

@@ -26,6 +26,7 @@
   gap: 8px;
   align-items: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 
   button {
@@ -51,6 +52,7 @@
   margin-left: 4px;
   padding: 6px 4px 6px 6px; /* a bit more right padding for easier grab */
   cursor: grab;
+  -webkit-user-select: none;
   user-select: none;
 }
 .gpt-boost-drag-handle:active {
@@ -80,4 +82,28 @@
 .gpt-boost-sentinel {
   height: 1px;
   margin-top: 2px;
+}
+
+/* Message height limiting */
+[data-message-author-role].gpt-boost-collapsed {
+  max-height: 200px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(transparent, var(--main-surface-primary, #fff));
+    pointer-events: none;
+  }
+}
+
+[data-message-author-role].gpt-boost-expanded {
+  max-height: none;
+  overflow: visible;
 }
