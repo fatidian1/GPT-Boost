@@ -92,7 +92,7 @@
   cursor: pointer;
 
   &::after {
-    content: '';
+    content: '⌄';
     position: absolute;
     bottom: 0;
     left: 0;
@@ -100,6 +100,12 @@
     height: 40px;
     background: linear-gradient(transparent, var(--main-surface-primary, #fff));
     pointer-events: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--text-secondary, #666);
+    padding-bottom: 2px;
   }
 }
 
