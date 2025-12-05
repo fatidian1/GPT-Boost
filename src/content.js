@@ -186,13 +186,16 @@ import { getMessage } from './i18n';
     if (node.scrollHeight > HEIGHT_THRESHOLD) {
       node.classList.add('gpt-boost-collapsed');
 
-      node.addEventListener('click', () => {
-        node.classList.remove('gpt-boost-collapsed');
-        node.classList.add('gpt-boost-expanded');
-      });
+      node.addEventListener('click', (e) => {
+        // Do not toggle if user is selecting text
+        if (window.getSelection().toString().length > 0) return;
+        // Do not toggle if clicking a link or button
+        if (e.target.closest('a, button')) return;
 
-      node.addEventListener('mouseleave', () => {
-        if (node.classList.contains('gpt-boost-expanded')) {
+        if (node.classList.contains('gpt-boost-collapsed')) {
+          node.classList.remove('gpt-boost-collapsed');
+          node.classList.add('gpt-boost-expanded');
+        } else {
           node.classList.remove('gpt-boost-expanded');
           node.classList.add('gpt-boost-collapsed');
         }
@@ -200,8 +203,8 @@ import { getMessage } from './i18n';
     }
   }
 
-  function applyHeightLimits() {
-    document.querySelectorAll('[data-message-author-role="user"]').forEach(applyHeightLimit);
+  function applyHeightLimits(messages) {
+    messages.forEach(applyHeightLimit);
   }
 
   // ─────────────────────────────────────────────────────────────────
@@ -409,7 +412,7 @@ import { getMessage } from './i18n';
     renderPlaceholder(messages, hiddenCount);
 
     // Apply height limits to visible messages
-    applyHeightLimits();
+    applyHeightLimits(messages);
 
     log('applyWindowing:', { total, firstVisible: state.firstVisible, visible });
   }
