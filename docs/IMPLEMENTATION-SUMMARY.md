@@ -1,98 +1,98 @@
-# DOM Pruning 実装要約
+# DOM Pruning Implementation Summary
 
-**実装完了日**: 2025-11-03  
-**ステータス**: 準備完了、PR 申請待機中
+**Implementation Date**: 2025-11-03  
+**Status**: Published
 
-## 概要
+## Overview
 
-古いメッセージを物理削除してメモリ使用量を削減する機能を実装しました。opt-in 設定で既存ユーザーへの影響なし。
+Implemented a feature to physically delete old messages to reduce memory usage. This is an opt-in setting, ensuring no impact on existing users.
 
-## 追加機能
+## Added Features
 
-### 1. Delete Mode（削除モード）
-- `deleteMessages` 設定で有効化
-- 有効時：`hiddenDomBuffer` を超えるメッセージを物理削除
-- ページリロードで全履歴復元
+### 1. Delete Mode
+- Enabled via `deleteMessages` setting.
+- When active: Physically deletes messages exceeding the `hiddenDomBuffer`.
+- Page reload restores full history.
 
-### 2. Hidden Buffer（隠蔽バッファ）
-- `hiddenDomBuffer` 設定で調整
-- 削除前に保持する非表示メッセージ数
-- Show Older で復元可能
+### 2. Hidden Buffer
+- Adjustable via `hiddenDomBuffer` setting.
+- Number of hidden messages to keep in the DOM before deletion.
+- Messages can be restored using "Show Older".
 
-### 3. UI/オプション拡張
-- Options 画面に Delete Mode チェックボックス
-- Hidden Buffer 数値入力フィールド
-- Delete Mode 有効時のみ表示
+### 3. UI/Options Extension
+- Added Delete Mode checkbox to the Options screen.
+- Added Hidden Buffer numeric input field.
+- Only displayed when Delete Mode is enabled.
 
-### 4. i18n 対応
-- 新i18nキー：`labelDeleteMode`, `labelHiddenBuffer`, `deleteModeActive`, `reloadPage`
-- 全 19 ロケール対応済み
+### 4. i18n Support
+- New i18n keys: `labelDeleteMode`, `labelHiddenBuffer`, `deleteModeActive`, `reloadPage`.
+- All 19 locales supported.
 
-## 技術詳細
+## Technical Details
 
-### ファイル変更
+### File Changes
 
-| ファイル | 変更内容 |
+| File | Change Details |
 |---------|--------|
-| `src/content.js` | 三層ウィンドウイング（削除/隠蔽/表示） |
+| `src/content.js` | Three-layer windowing (Delete/Hide/Show) |
 | `src/options.js` | Delete Mode / Hidden Buffer UI |
-| `src/options.html` | 新フィールド追加 |
+| `src/options.html` | Added new fields |
 | `src/manifest.json` | ver 1.2.0 |
-| `assets/locales/*` | 新i18nキー追加 |
+| `assets/locales/*` | Added new i18n keys |
 | `package.json` | ver 1.2.0 |
 
-### 変更行数
-- JS追加：約49行（主にcontent.js）
-- i18n追加：複数ロケール同時
-- ビルド：成功確認済み
+### Lines of Code (LOC)
+- JS additions: approx. 49 lines (mainly in `content.js`)
+- i18n additions: multiple locales updated simultaneously
+- Build: Success confirmed
 
-## セキュリティ確認
-- ✅ Manifest 権限：storage のみ（外部アクセスなし）
-- ✅ 外部通信：検出されず（fetch/XHR/WebSocket なし）
-- ✅ 難読化・eval：検出されず
-- ✅ コード規約：Prettier / eslint 準拠
+## Security Verification
+- ✅ Manifest Permissions: "storage" only (no external access)
+- ✅ External Communication: None detected (no fetch/XHR/WebSocket)
+- ✅ Obfuscation/eval: None detected
+- ✅ Code Conventions: Compliant with Prettier / ESLint
 
-## PR 申請方法
+## How to Submit PR
 
-**重要**: PR は`feature/dom-pruning-code-only`ブランチから申請してください。
+**Important**: Please submit the PR from the `feature/dom-pruning-code-only` branch.
 
-詳細は [PR-GUIDE.md](./PR-GUIDE.md) を参照。
+Refer to [PR-GUIDE.md](./PR-GUIDE.md) for details.
 
-### 簡潔なステップ
+### Concise Steps
 ```bash
-# コード専用ブランチ作成（mainから開始）
+# Create code-only branch (start from main)
 git switch -c feature/dom-pruning-code-only main
 git checkout feature/dom-pruning -- src/ assets/locales
 
-# フォーマット・ビルド
+# Format and build
 npm run format
 npm run build
 
-# コミット・プッシュ
+# Commit and push
 git add -A
 git commit -m "feat: DOM pruning with memory optimization"
 git push origin feature/dom-pruning-code-only
 
-# GitHub で PR 作成
+# Create PR on GitHub
 ```
 
-## テスト検証リスト
-- [ ] Delete Mode OFF: 従来動作（hide のみ）
-- [ ] Delete Mode ON: 古いメッセージ物理削除
-- [ ] Hidden Buffer 0: 削除境界直後に削除
-- [ ] Hidden Buffer > 0: N個の隠蔽メッセージ保持
-- [ ] Show Older: バッファ内のメッセージ復元
-- [ ] Reload: 全履歴復元
-- [ ] DevTools Network: 外部通信なし
-- [ ] 長スレッド（数百メッセージ）: パフォーマンス問題なし
+## Test Verification List
+- [ ] Delete Mode OFF: Traditional behavior (hide only)
+- [ ] Delete Mode ON: Physical deletion of old messages
+- [ ] Hidden Buffer 0: Delete immediately after the hidden boundary
+- [ ] Hidden Buffer > 0: Maintain N hidden messages
+- [ ] Show Older: Restore messages from the buffer
+- [ ] Reload: Restore full history
+- [ ] DevTools Network: Confirm no external communication
+- [ ] Long threads (hundreds of messages): No performance issues
 
-## 今後の改善（スピンオフPR推奨）
-- `src/content.js` の分割（UI、ロジック、Observer）
-- ユニットテスト追加（Jest）
-- E2E テスト追加（Playwright）
-- CSP 明示化（manifest.json）
+## Future Improvements (Recommended as Spin-off PRs)
+- Split `src/content.js` (UI, Logic, Observer)
+- Add unit tests (Jest)
+- Add E2E tests (Playwright)
+- Explicitly define CSP (`manifest.json`)
 
-## 参考リソース
-- [設計詳細](./dom-pruning-plan.md)
-- [テスト手順](./testing.md)
-- [パフォーマンス計測](./perf-measurement-plan.md)
+## Reference Resources
+- [Design Details](./dom-pruning-plan.md)
+- [Testing Procedures](./testing.md)
+- [Performance Measurement](./perf-measurement-plan.md)

@@ -132,9 +132,9 @@ Notes:
 
 ## 10) Incremental Delivery
 
-- PR 1: Settings toggle + i18n + UI changes（deleteMessages + hiddenDomBuffer、Reload ボタン、状態バッジ）ただし削除はまだ無効
-- PR 2: アルゴリズムに二段階ウィンドウイング（削除＋隠しバッファ）を実装し、reveal/autoload の分岐を導入
-- PR 3: 仕上げ（ステータスに pruned 数の表示、README 更新、軽微な CSS）
+- PR 1: Settings toggle + i18n + UI changes (deleteMessages + hiddenDomBuffer, Reload button, status badge). Deletion logic still disabled.
+- PR 2: Implement two-stage windowing (deletion + hidden buffer) in the algorithm, and introduce reveal/autoload branching.
+- PR 3: Final touches (display pruned count in status, update README, minor CSS).
 
 ## 11) Acceptance Criteria
 
@@ -194,7 +194,7 @@ This section describes exact edits aligned with the current codebase to avoid am
 ### B) `src/options.html`
 
 Insert below the existing checkboxes:
-
+```html
 <label class="row">
   <input type="checkbox" id="deleteMessages" />
   <span id="labelDeleteMode"></span>
@@ -205,11 +205,12 @@ Insert below the existing checkboxes:
   <input type="number" id="hiddenDomBuffer" min="0" step="1" />
   <small id="defaultHiddenBuffer"></small>
 </label>
-
+```
 ### C) `src/options.js`
 
 1) Extend defaults:
 
+```javascript
 const DEFAULTS = {
   maxVisible: 10,
   batchSize: 10,
@@ -218,41 +219,45 @@ const DEFAULTS = {
   deleteMessages: false,
   hiddenDomBuffer: 0,
 };
+```
 
 2) Localize labels:
-
+```javascript
 const lblDeleteMode = document.getElementById('labelDeleteMode');
 if (lblDeleteMode) lblDeleteMode.textContent = getMessage('labelDeleteMode');
 const lblHiddenBuffer = document.getElementById('labelHiddenBuffer');
 if (lblHiddenBuffer) lblHiddenBuffer.textContent = getMessage('labelHiddenBuffer');
 const defHidden = document.getElementById('defaultHiddenBuffer');
 if (defHidden) defHidden.textContent = getMessage('defaultNumber', ['0']);
+```
 
 3) Load persisted values:
 
+```javascript
 document.getElementById('deleteMessages').checked = !!res.deleteMessages;
 document.getElementById('hiddenDomBuffer').value = String(Math.max(0, res.hiddenDomBuffer || 0));
-
+```
 4) Save on submit:
 
+```javascript
 const deleteMessages = !!document.getElementById('deleteMessages').checked;
 const hiddenDomBuffer = Math.max(0, parseInt(document.getElementById('hiddenDomBuffer').value || '0', 10));
 chrome.storage.sync.set({ maxVisible, batchSize, autoloadOnScroll, hideOldestOnNew, deleteMessages, hiddenDomBuffer });
-
+```
 ### D) `assets/locales/*/messages.json`
 
 Add (at minimum in `en`):
 
-- "labelDeleteMode": { "message": "Physically delete old messages (irreversible until page reload)" }
-- "labelHiddenBuffer": { "message": "Keep hidden DOM messages (buffer)" }
-- "deleteModeActive": { "message": "Memory-optimized: old messages are deleted" }
-- "reloadPage": { "message": "Reload page" }
-- "reloadPageTitle": { "message": "Reload conversation to restore full history" }
+- `"labelDeleteMode": { "message": "Physically delete old messages (irreversible until page reload)" }`
+- `"labelHiddenBuffer": { "message": "Keep hidden DOM messages (buffer)" }`
+- `"deleteModeActive": { "message": "Memory-optimized: old messages are deleted" }`
+- `"reloadPage": { "message": "Reload page" }`
+- `"reloadPageTitle": { "message": "Reload conversation to restore full history" }`
 
 Optional (if a cut-point notice is preserved in delete mode):
 
-- "prunedPlaceholderSingular": { "message": "1 older message pruned — click to reload page" }
-- "prunedPlaceholderPlural": { "message": "$1 older messages pruned — click to reload page" }
+- `"prunedPlaceholderSingular": { "message": "1 older message pruned — click to reload page" }`
+- `"prunedPlaceholderPlural": { "message": "$1 older messages pruned — click to reload page" }`
 
 ### E) `README.md`
 

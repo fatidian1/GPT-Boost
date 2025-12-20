@@ -99,6 +99,10 @@ If you want to help with translations, please create a pull request with the new
 ## Contributing
 Pull requests are welcome, please open an issue first to discuss what you would like to change.
 
+## Contributors
+- [@fatidian1](https://github.com/fatidian1)
+- [@tsuchim](https://github.com/tsuchim)
+
 ## Support me
 If you like this extension, please consider buying me a coffee: https://buymeacoffee.com/fatidian1
 

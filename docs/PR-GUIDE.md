@@ -1,28 +1,28 @@
-# DOM Pruning Feature — PR 申請ガイド
+# DOM Pruning Feature — PR Submission Guide
 
-このドキュメントは、DOM Pruning 機能の PR を上流リポジトリに申請する際の手順を記載しています。
+This document describes the procedure for submitting a PR for the DOM Pruning feature to the upstream repository.
 
-## 概要
+## Overview
 
-この機能では、以下を追加しました：
-- **DOM削除モード**: 古いメッセージを物理削除してメモリを節約（オプトイン）
-- **Hidden Buffer**: 削除前に一定数のメッセージを DOM に保持し、Show Older で復元可能
-- **UI/設定パネル**: Delete Mode と Hidden Buffer の設定をオプション画面に追加
-- **多言語対応**: i18n キーを全 19 ロケールに追加
+In this feature, we added:
+- **DOM Delete Mode**: Physically deletes old messages to save memory (opt-in)
+- **Hidden Buffer**: Keeps a certain number of messages in the DOM before deletion, allowing restoration via "Show Older"
+- **UI/Settings Panel**: Added Delete Mode and Hidden Buffer settings to the options screen
+- **Multi-language Support**: Added i18n keys for all 19 locales
 
-## PR 申請直前の準備（推奨フロー）
+## Preparation Before PR Submission (Recommended Flow)
 
-### ステップ 1: コード専用ブランチの作成
+### Step 1: Create a Code-Only Branch
 
-PR には最小限の変更のみを含めることで、レビューワークを減らし、受け入れを容易にします。
+By including only the minimal changes in the PR, you reduce review workload and make acceptance easier.
 
-**コード関連ファイルのみを含む専用ブランチを作成：**
+**Create a dedicated branch containing only code-related files:**
 
 ```powershell
-# mainから新規ブランチを作成
+# Create a new branch from main
 git switch -c feature/dom-pruning-code-only main
 
-# feature/dom-pruningからコード関連ファイルのみを取り込む
+# Import only code-related files from feature/dom-pruning
 git checkout feature/dom-pruning -- `
   src/content.js `
   src/options.js `
@@ -31,20 +31,20 @@ git checkout feature/dom-pruning -- `
   assets/locales
 ```
 
-### ステップ 2: フォーマット・ビルド検証
+### Step 2: Format and Build Verification
 
 ```powershell
-# Prettier で フォーマットを統一
+# Standardize formatting with Prettier
 npm run format
 
-# ビルド成功を確認
+# Confirm successful build
 npm run build
 ```
 
-### ステップ 3: コミット・PR 作成
+### Step 3: Commit and Create PR
 
 ```powershell
-# コミット
+# Commit
 git add -A
 git commit -m "feat: DOM pruning with memory optimization
 
@@ -53,67 +53,67 @@ git commit -m "feat: DOM pruning with memory optimization
 - Add DOM Pruning settings to options panel
 - Add i18n support for 19 locales"
 
-# リモートにプッシュして PR を作成
+# Push to remote and create PR
 git push origin feature/dom-pruning-code-only
 ```
 
-### ステップ 4: PR 本文に下記を記載
+### Step 4: Include the following in the PR description
 
 ```markdown
-## 変更内容
+## Changes
 
-- **機能**: 古いメッセージの物理削除オプション + 復元可能な Hidden Buffer
-- **セキュリティ**: manifest 権限は最小化（storage のみ）、外部通信なし
-- **対応言語**: 19 ロケール全対応
+- **Feature**: Physical deletion option for old messages + restorable Hidden Buffer
+- **Security**: Manifest permissions minimized (storage only), no external communication
+- **Locales**: Full support for 19 locales
 
-## レビューポイント
+## Review Points
 
-### セキュリティ（必須）
-- [ ] manifest に不要な権限がない（host_permissions も確認）
-- [ ] src/ に fetch/XHR/WebSocket/eval/new Function 等が無い
-- [ ] Delete Mode は opt-in で、UI に不可逆性の警告がある
+### Security (Required)
+- [ ] No unnecessary permissions in manifest (check host_permissions too)
+- [ ] No fetch/XHR/WebSocket/eval/new Function etc. in src/
+- [ ] Delete Mode is opt-in, with an irreversibility warning in the UI
 
-### 動作確認（推奨）
-- [ ] hiddenDomBuffer の境界値テスト（0, 1, 大きな値）
-- [ ] Delete Mode OFF/ON での切替動作
-- [ ] 長い会話（数百メッセージ）でのパフォーマンス
-- [ ] DevTools Network タブで外部通信が無いことを確認
+### Functional Verification (Recommended)
+- [ ] Boundary value test for hiddenDomBuffer (0, 1, large values)
+- [ ] Switching behavior with Delete Mode OFF/ON
+- [ ] Performance in long conversations (hundreds of messages)
+- [ ] Confirm no external communication in DevTools Network tab
 
-### コード品質
-- [ ] i18n キーが全ロケールに追加済み
-- [ ] npm run format で フォーマット検証済み
-- [ ] npm run build が成功
+### Code Quality
+- [ ] i18n keys added to all locales
+- [ ] Formatting verified with npm run format
+- [ ] npm run build successful
 
-## テスト環境
+## Test Environment
 
 Chrome / Edge (Manifest v3)
 ```
 
-## 並行作業（オリジナルブランチは そのまま）
+## Parallel Work (Keep original branch as is)
 
-- `feature/dom-pruning` ブランチはドキュメント・設定を含む完全版として **ローカルに保持**
-- PR は `feature/dom-pruning-code-only` で申請
-- PR がマージされた後、必要に応じて分割・リファクタをスピンオフで実施（テスト追加、ファイル分割など）
+- Keep the `feature/dom-pruning` branch **locally** as the full version including documentation and settings.
+- Submit the PR using `feature/dom-pruning-code-only`.
+- After the PR is merged, perform splitting/refactoring as spin-offs if necessary (adding tests, file splitting, etc.).
 
-## よくある質問
+## Frequently Asked Questions
 
-**Q: ドキュメント（docs/）は PR に含める？**  
-A: いいえ。コード専用ブランチを使うため、PR には含まれません。ドキュメントはあなたの fork に保持されます。
+**Q: Should I include documentation (docs/) in the PR?**  
+A: No. Since we use a code-only branch, it won't be included in the PR. Documentation remains in your fork.
 
-**Q: バージョン更新は？**  
-A: マージ後、リポジトリメイナーが package.json と manifest.json のバージョンを更新します（こちらで提案可）。
+**Q: What about version updates?**  
+A: After merging, the repository maintainer will update the versions in package.json and manifest.json (you can suggest this).
 
-**Q: テストは必須？**  
-A: ユニットテストは無いため、PR に「手動テスト手順」を記載し、レビュアーが Chrome デベロッパーモードで動作確認できるようにします。
+**Q: Are tests mandatory?**  
+A: Since there are no unit tests, include "manual test procedures" in the PR so that reviewers can verify behavior in Chrome developer mode.
 
-**Q: Delete Mode は本当に不可逆？**  
-A: はい。ページをリロードするまでは Show Older で復元可能ですが、ページをリロードすると、削除されたメッセージはサーバー取得に頼るしかありません（これが仕様）。
+**Q: Is Delete Mode really irreversible?**  
+A: Yes. It can be restored with "Show Older" until the page is reloaded, but once reloaded, deleted messages must be retrieved from the server (this is by design).
 
-## チェックリスト（PR作成前）
+## Checklist (Before Creating PR)
 
-- [ ] `feature/dom-pruning-code-only` ブランチを作成済み
-- [ ] npm run format → npm run build が成功
-- [ ] Git log で コミットメッセージが分かりやすい
-- [ ] PR 本文に変更内容と レビューポイント を記載
-- [ ] Origin リポジトリに fork 側のブランチをプッシュ
-- [ ] GitHub で PR を作成し、レビュアー / Maintainer を指定
+- [ ] `feature/dom-pruning-code-only` branch created
+- [ ] npm run format → npm run build successful
+- [ ] Clear and understandable commit messages in Git log
+- [ ] PR description includes changes and review points
+- [ ] Pushed the fork-side branch to the origin repository
+- [ ] Created PR on GitHub and specified reviewers / Maintainer
