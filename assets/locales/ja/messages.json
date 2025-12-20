@@ -3,10 +3,13 @@
     "message": "GPT Boost"
   },
   "appDescription": {
-    "message": "最新のメッセージだけを表示して（設定可能）長い ChatGPT の会話を遅延読み込みします。長いチャットの遅延を軽減します。"
+    "message": "最新のメッセージだけを表示して、長い ChatGPT の会話を遅延読み込みし、ブラウザの負荷を軽減します (カスタマイズ可能)"
   },
   "statusBar": {
     "message": "GPT Boost · 表示中 $1/$2"
+  },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · 表示中 $1/$2/$3"
   },
   "hiddenPlaceholderSingular": {
     "message": "古いメッセージ 1 件を非表示にしました — 次の $1 件を読み込むにはクリック"
@@ -15,7 +18,7 @@
     "message": "古いメッセージ $1 件を非表示にしました — 次の $2 件を読み込むにはクリック"
   },
   "optionsTitle": {
-    "message": "GPT Boost – オプション"
+    "message": "GPT Boost - オプション"
   },
   "labelMaxVisible": {
     "message": "表示する最大メッセージ数"
@@ -24,7 +27,7 @@
     "message": "既定値: $1"
   },
   "labelBatchSize": {
-    "message": "バッチサイズ（1 回の表示）"
+    "message": "バッチサイズ (1回の表示)"
   },
   "labelAutoload": {
     "message": "上までスクロールしたときに古いメッセージを自動的に表示する"
@@ -45,13 +48,13 @@
     "message": "$1 は DOM にメッセージのウィンドウだけを保持することで長い会話の遅延を減らします。"
   },
   "footerSupportPrefix": {
-    "message": "この拡張機能が気に入ったら、よかったら"
+    "message": "この拡張機能が気に入ったら、ぜひ "
   },
   "footerSupportLinkText": {
-    "message": "コーヒー"
+    "message": "コーヒーを一杯"
   },
   "footerSupportSuffix": {
-    "message": "をごちそうしてください。"
+    "message": " おごってください！"
   },
   "settingsSaved": {
     "message": "設定を保存しました"
@@ -70,6 +73,21 @@
   },
   "collapseTitle": {
     "message": "過去のメッセージを折りたたむ"
+  },
+  "labelDeleteMode": {
+    "message": "古いメッセージをDOMから削除する (再読み込みまで元に戻せません)"
+  },
+  "labelHiddenBuffer": {
+    "message": "非表示メッセージの保持数"
+  },
+  "deleteModeActive": {
+    "message": "DOM最適化中"
+  },
+  "reloadPage": {
+    "message": "ページを再読み込み"
+  },
+  "reloadPageTitle": {
+    "message": "会話全体を復元するために再読み込みします"
   },
   "dragTitle": {
     "message": "ドラッグ"

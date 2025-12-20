@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · 可见 $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · 可见 $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "隐藏了 1 条较早消息 — 点击加载接下来的 $1 条"
   },
@@ -31,6 +34,12 @@
   },
   "labelHideOldest": {
     "message": "出现新消息时隐藏最早的一条"
+  },
+  "labelDeleteMode": {
+    "message": "从 DOM 中删除旧消息（重新加载前无法恢复）"
+  },
+  "labelHiddenBuffer": {
+    "message": "在 DOM 中保留这么多条隐藏消息（重新加载前可显示更早的消息）"
   },
   "save": {
     "message": "保存"
@@ -76,5 +85,14 @@
   },
   "statusActive": {
     "message": "GPT Boost 已启用"
+  },
+  "deleteModeActive": {
+    "message": "DOM 优化：开启"
+  },
+  "reloadPage": {
+    "message": "重新加载页面"
+  },
+  "reloadPageTitle": {
+    "message": "重新加载页面以恢复完整对话"
   }
 }

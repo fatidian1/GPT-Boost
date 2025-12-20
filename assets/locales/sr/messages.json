@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · видљиво $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · видљиво $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "1 старија порука је скривена — кликните да учитате наредних $1"
   },
@@ -31,6 +34,12 @@
   },
   "labelHideOldest": {
     "message": "Сакриј најстарију поруку када се појави нова"
+  },
+  "labelDeleteMode": {
+    "message": "Обриши старе поруке из DOM-а (штеди меморију, неповратно до поновног учитавања)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Број скривених порука за задржавање у DOM-у (за приказ старијих пре принудног учитавања)"
   },
   "save": {
     "message": "Сачувај"
@@ -76,5 +85,14 @@
   },
   "statusActive": {
     "message": "GPT Boost је активан"
+  },
+  "deleteModeActive": {
+    "message": "Оптимизација DOM-а: УКЉ."
+  },
+  "reloadPage": {
+    "message": "Учитај страницу поново"
+  },
+  "reloadPageTitle": {
+    "message": "Учитајте страницу поново да бисте приказали комплетан разговор"
   }
 }

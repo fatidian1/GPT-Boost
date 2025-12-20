@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · مرئية $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · مرئية $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "تم إخفاء رسالة قديمة واحدة — انقر لتحميل $1 التالية"
   },
@@ -31,6 +34,12 @@
   },
   "labelHideOldest": {
     "message": "إخفاء أقدم رسالة عند ظهور رسالة جديدة"
+  },
+  "labelDeleteMode": {
+    "message": "حذف الرسائل القديمة من DOM (لا يمكن عكسه حتى إعادة التحميل)"
+  },
+  "labelHiddenBuffer": {
+    "message": "احتفظ بهذا العدد من الرسائل المخفية في DOM (لإظهار الأقدم قبل إعادة التحميل)"
   },
   "save": {
     "message": "حفظ"
@@ -76,5 +85,14 @@
   },
   "statusActive": {
     "message": "GPT Boost نشط"
+  },
+  "deleteModeActive": {
+    "message": "تحسين DOM: مفعل"
+  },
+  "reloadPage": {
+    "message": "إعادة تحميل الصفحة"
+  },
+  "reloadPageTitle": {
+    "message": "إعادة تحميل الصفحة لاستعادة المحادثة الكاملة"
   }
 }

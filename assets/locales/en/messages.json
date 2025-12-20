@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · visible $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · visible $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "1 older message hidden — click to load next $1"
   },
@@ -31,6 +34,12 @@
   },
   "labelHideOldest": {
     "message": "Hide the oldest message when a new appears"
+  },
+  "labelDeleteMode": {
+    "message": "Delete old messages from DOM (irreversible until page reload)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Keep this many hidden messages in DOM (for Show Older before reload)"
   },
   "save": {
     "message": "Save"
@@ -76,5 +85,14 @@
   },
   "statusActive": {
     "message": "GPT Boost active"
+  },
+  "deleteModeActive": {
+    "message": "DOM optimization: ON"
+  },
+  "reloadPage": {
+    "message": "Reload page"
+  },
+  "reloadPageTitle": {
+    "message": "Reload to restore full message history from the server"
   }
 }

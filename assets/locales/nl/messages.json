@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · zichtbaar $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · zichtbaar $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "1 ouder bericht verborgen — klik om de volgende $1 te laden"
   },
@@ -31,6 +34,12 @@
   },
   "labelHideOldest": {
     "message": "Verberg het oudste bericht wanneer er een nieuw binnenkomt"
+  },
+  "labelDeleteMode": {
+    "message": "Oude berichten uit de DOM verwijderen (bespaart geheugen, onherroepelijk tot pagina herladen)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Aantal verborgen berichten in DOM houden (voor weergave van oudere berichten vóór geforceerd herladen)"
   },
   "save": {
     "message": "Opslaan"
@@ -76,5 +85,14 @@
   },
   "statusActive": {
     "message": "GPT Boost actief"
+  },
+  "deleteModeActive": {
+    "message": "DOM-optimalisatie: AAN"
+  },
+  "reloadPage": {
+    "message": "Pagina herladen"
+  },
+  "reloadPageTitle": {
+    "message": "Herladen om het volledige gesprek te herstellen"
   }
 }

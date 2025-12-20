@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · видно $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · видно $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "Скрыто 1 старое сообщение — нажмите, чтобы загрузить следующие $1"
   },
@@ -31,6 +34,12 @@
   },
   "labelHideOldest": {
     "message": "Скрывать самое старое сообщение, когда появляется новое"
+  },
+  "labelDeleteMode": {
+    "message": "Удалять старые сообщения из DOM (необратимо до перезагрузки)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Сохранять столько скрытых сообщений в DOM (для показа старых перед перезагрузкой)"
   },
   "save": {
     "message": "Сохранить"
@@ -76,5 +85,14 @@
   },
   "statusActive": {
     "message": "GPT Boost активен"
+  },
+  "deleteModeActive": {
+    "message": "Оптимизация DOM: ВКЛ"
+  },
+  "reloadPage": {
+    "message": "Перезагрузить страницу"
+  },
+  "reloadPageTitle": {
+    "message": "Перезагрузить страницу, чтобы восстановить полную беседу"
   }
 }

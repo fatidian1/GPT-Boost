@@ -1,0 +1,11 @@
+# Normalize all text files to LF in repo; convert to native on checkout only if configured
+* text=auto eol=lf
+
+# Keep binary images untouched
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.gif -text
+*.ico -text
+
+# Preserve line endings for minified/bundled outputs if needed (none currently)
