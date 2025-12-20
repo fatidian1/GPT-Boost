@@ -31,11 +31,13 @@ Download `crx` file from the releases tab and install it in Opera extension sett
 6. Click **Load unpacked** and select the `dist` directory.
 
 ## Configure
-Open the extension’s **Options** page from your browser’s extensions list.
+Open the extension's **Options** page from your browser's extensions list.
 - **Max visible messages**: how many messages are kept on-screen (default 10).
 - **Batch size**: how many older messages are revealed per click/scroll (default 10).
 - **Auto-reveal on scroll**: automatically reveal older messages when you reach the top.
 - **Hide the oldest message when a new appears**: keep the current number of visible messages constant (default on).
+- **Physically delete old messages** (optional): replace hiding with physical DOM removal to save memory on very long conversations. **Warning**: deleted messages cannot be recovered without reloading the page. Disabled by default.
+  - **Keep this many hidden messages in DOM** (when delete mode is active): retain a buffer of hidden messages before hard pruning. This allows the **Show older** button to work within the buffer before forcing a page reload. Set to 0 to disable the buffer (all older messages are pruned immediately).
 
 ## Development
 
@@ -96,6 +98,10 @@ If you want to help with translations, please create a pull request with the new
 
 ## Contributing
 Pull requests are welcome, please open an issue first to discuss what you would like to change.
+
+## Contributors
+- [@fatidian1](https://github.com/fatidian1)
+- [@tsuchim](https://github.com/tsuchim)
 
 ## Support me
 If you like this extension, please consider buying me a coffee: https://buymeacoffee.com/fatidian1

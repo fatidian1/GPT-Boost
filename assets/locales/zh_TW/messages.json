@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · 可見 $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · 可見 $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "已隱藏 1 則較早的訊息 — 點擊載入接下來的 $1 則"
   },
@@ -31,6 +34,12 @@
   },
   "labelHideOldest": {
     "message": "出現新訊息時隱藏最早的那一則"
+  },
+  "labelDeleteMode": {
+    "message": "從 DOM 刪除舊訊息（節省記憶體，重新載入前無法復原）"
+  },
+  "labelHiddenBuffer": {
+    "message": "在 DOM 中保留的隱藏訊息數量（強制重新載入前可顯示較早的訊息）"
   },
   "save": {
     "message": "儲存"
@@ -76,5 +85,14 @@
   },
   "statusActive": {
     "message": "GPT Boost 已啟用"
+  },
+  "deleteModeActive": {
+    "message": "DOM 優化：開啟"
+  },
+  "reloadPage": {
+    "message": "重新載入頁面"
+  },
+  "reloadPageTitle": {
+    "message": "重新載入頁面以恢復完整對話"
   }
 }

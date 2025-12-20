@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · näkyvissä $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · näkyvissä $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "1 vanhempi viesti piilotettu — lataa seuraavat $1 napsauttamalla"
   },
@@ -31,6 +34,12 @@
   },
   "labelHideOldest": {
     "message": "Piilota vanhin viesti, kun uusi saapuu"
+  },
+  "labelDeleteMode": {
+    "message": "Poista vanhemmat viestit DOM:sta (peruuttamaton kunnes sivua ladataan uudelleen)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Säilytä tämä määrä piilotettuja viestejä DOM-issa (näyttää vanhempia ennen uudelleenlatausta)"
   },
   "save": {
     "message": "Tallenna"
@@ -76,5 +85,14 @@
   },
   "statusActive": {
     "message": "GPT Boost käytössä"
+  },
+  "deleteModeActive": {
+    "message": "DOM-optimointi: PÄÄLLÄ"
+  },
+  "reloadPage": {
+    "message": "Lataa sivu uudelleen"
+  },
+  "reloadPageTitle": {
+    "message": "Lataa sivu uudelleen palauttaaksesi koko keskustelun"
   }
 }

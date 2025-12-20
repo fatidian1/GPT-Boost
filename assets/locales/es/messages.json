@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · visibles $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · visibles $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "1 mensaje antiguo oculto — haz clic para cargar los siguientes $1"
   },
@@ -31,6 +34,12 @@
   },
   "labelHideOldest": {
     "message": "Ocultar el mensaje más antiguo cuando llegue uno nuevo"
+  },
+  "labelDeleteMode": {
+    "message": "Eliminar mensajes antiguos del DOM (irreversible hasta recargar)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Mantener esta cantidad de mensajes ocultos en el DOM (para mostrar antiguos antes de recargar)"
   },
   "save": {
     "message": "Guardar"
@@ -76,5 +85,14 @@
   },
   "statusActive": {
     "message": "GPT Boost activo"
+  },
+  "deleteModeActive": {
+    "message": "Optimización del DOM: ACTIVADO"
+  },
+  "reloadPage": {
+    "message": "Recargar página"
+  },
+  "reloadPageTitle": {
+    "message": "Recargar página para restaurar la conversación completa"
   }
 }

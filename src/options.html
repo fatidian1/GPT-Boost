@@ -27,6 +27,15 @@
           <input type="checkbox" id="hideOldestOnNew" />
           <span id="labelHideOldestOnNew"></span>
         </label>
+        <label class="row">
+          <input type="checkbox" id="deleteMessages" />
+          <span id="labelDeleteMode"></span>
+        </label>
+        <label id="hiddenDomBufferLabel" style="display: none">
+          <span id="labelHiddenBuffer"></span>
+          <input type="number" id="hiddenDomBuffer" min="0" step="1" />
+          <small id="defaultBufferText"></small>
+        </label>
         <div class="actions">
           <button type="submit" id="saveBtn"></button>
           <button type="button" id="reset"></button>

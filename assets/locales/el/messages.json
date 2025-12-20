@@ -8,6 +8,9 @@
   "statusBar": {
     "message": "GPT Boost · ορατά $1/$2"
   },
+  "statusBarDeleteMode": {
+    "message": "GPT Boost · ορατά $1/$2/$3"
+  },
   "hiddenPlaceholderSingular": {
     "message": "Έχει αποκρυφτεί 1 παλαιότερο μήνυμα — κάντε κλικ για να φορτώσετε τα επόμενα $1"
   },
@@ -31,6 +34,12 @@
   },
   "labelHideOldest": {
     "message": "Απόκρυψη του παλαιότερου μηνύματος όταν εμφανίζεται ένα νέο"
+  },
+  "labelDeleteMode": {
+    "message": "Διαγραφή παλαιών μηνυμάτων από το DOM (μη αναστρέψιμη έως την επαναφόρτωση)"
+  },
+  "labelHiddenBuffer": {
+    "message": "Διατήρηση αυτού του αριθμού κρυμμένων μηνυμάτων στο DOM (για εμφάνιση παλαιότερων πριν την επαναφόρτωση)"
   },
   "save": {
     "message": "Αποθήκευση"
@@ -76,5 +85,14 @@
   },
   "statusActive": {
     "message": "Το GPT Boost είναι ενεργό"
+  },
+  "deleteModeActive": {
+    "message": "Βελτιστοποίηση DOM: ΕΝ"
+  },
+  "reloadPage": {
+    "message": "Επαναφόρτωση σελίδας"
+  },
+  "reloadPageTitle": {
+    "message": "Επαναφορτώστε τη σελίδα για να αποκαταστήσετε την πλήρη συνομιλία"
   }
 }
