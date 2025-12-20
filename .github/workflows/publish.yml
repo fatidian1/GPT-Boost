@@ -47,18 +47,6 @@ jobs:
       - name: Rename opera release file
         run: mv release.crx gpt-boost-opera-${{ github.ref_name }}.crx
 
-      - name: Upload chrome artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: gpt-boost-chrome-${{ github.ref_name }}.zip
-          path: release.zip
-
-      - name: Upload edge artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: gpt-boost-edge-${{ github.ref_name }}.zip
-          path: release.zip
-
       - name: Build firefox zip file
         run: npm run build:firefox
 
@@ -125,22 +113,22 @@ jobs:
           jwt-issuer: ${{ secrets.FIREFOX_JWT_ISSUER }}
           jwt-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
 
-  publish_opera:
-    environment: publish
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: release
-      - name: Publish to Opera Add-ons
-        uses: fatidian1/opera-addon@v1
-        with:
-          package-id: ${{ secrets.OPERA_PACKAGE_ID }}
-          package-path: gpt-boost-opera-${{ github.ref_name }}.crx
-          email: ${{ secrets.OPERA_EMAIL }}
-          password: ${{ secrets.OPERA_PASSWORD }}
-          action: publish
+#  publish_opera:
+#    environment: publish
+#    runs-on: ubuntu-latest
+#    needs: build
+#    steps:
+#      - uses: actions/download-artifact@v4
+#        with:
+#          name: release
+#      - name: Publish to Opera Add-ons
+#        uses: fatidian1/opera-addon@v1
+#        with:
+#          package-id: ${{ secrets.OPERA_PACKAGE_ID }}
+#          package-path: gpt-boost-opera-${{ github.ref_name }}.crx
+#          email: ${{ secrets.OPERA_EMAIL }}
+#          password: ${{ secrets.OPERA_PASSWORD }}
+#          action: publish
 
   github_release:
     runs-on: ubuntu-latest
