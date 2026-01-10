@@ -216,6 +216,7 @@ import { getMessage } from './i18n';
       if (!el) {
         el = document.createElement('div');
         el.className = 'gpt-boost-hidden-placeholder';
+        el.isGptBoost = true;
         el.addEventListener('click', revealOlder);
       }
       el.textContent =
@@ -245,9 +246,11 @@ import { getMessage } from './i18n';
 
     if (!uiBar) {
       uiBar = document.createElement('div');
+      uiBar.isGptBoost = true;
       uiBar.className = 'gpt-boost-bar';
       const pill = document.createElement('div');
       pill.className = 'gpt-boost-pill';
+      pill.isGptBoost = true;
       pill.innerHTML = `
         <span id="gpt-boost-status">${getMessage('statusActive')}</span>
         <button id="gpt-boost-show-older" title="${getMessage('showOlderTitle')}">${getMessage('showOlder')}</button>
@@ -273,6 +276,7 @@ import { getMessage } from './i18n';
     if (threadContainer && !topSentinel && settings.autoloadOnScroll && !settings.deleteMessages) {
       topSentinel = document.createElement('div');
       topSentinel.className = 'gpt-boost-sentinel';
+      topSentinel.isGptBoost = true;
       threadContainer.prepend(topSentinel);
       sentinelObserver = new IntersectionObserver((entries) => {
         for (const e of entries) {
@@ -387,11 +391,13 @@ import { getMessage } from './i18n';
     const threshold = Math.max(1, settings.maxVisible);
     const buffer = Math.max(0, settings.hiddenDomBuffer);
 
+    const prevTotal = state.lastTotal;
+
     // On new chat load (total was 0, now > 0), reset
-    if (state.lastTotal === 0 && total > 0) {
+    if (prevTotal === 0 && total > 0) {
       state.firstVisible = Math.max(0, total - threshold);
       state.prunedCount = 0;
-    } else if (settings.hideOldestOnNew) {
+    } else if (settings.hideOldestOnNew && total > prevTotal) {
       state.firstVisible = Math.max(0, total - threshold);
     } else {
       state.firstVisible = Math.min(state.firstVisible, Math.max(0, total - threshold));
@@ -419,6 +425,7 @@ import { getMessage } from './i18n';
   }
 
   function revealOlder() {
+    log('revealOlder: start');
     const messages = collectMessages();
     if (!messages.length || state.firstVisible === 0) return;
 
@@ -463,7 +470,14 @@ import { getMessage } from './i18n';
 
   function setupObserver() {
     mainObserver?.disconnect();
-    mainObserver = new MutationObserver(() => {
+    mainObserver = new MutationObserver((mutations) => {
+      //detect if mutations are only created by the extension
+      for (const mutation of mutations) {
+        if (mutation.target.isGptBoost) return;
+        if (mutation.addedNodes.values().some((e) => e.isGptBoost)) return;
+        if (mutation.removedNodes.values().some((e) => e.isGptBoost)) return;
+      }
+      log('mutations', mutations);
       if (!container?.isConnected) container = findContainer();
       if (uiBar && !uiBar.isConnected) document.body.appendChild(uiBar);
       scheduleApply('dom mutation');
