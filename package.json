@@ -33,7 +33,7 @@
   "devDependencies": {
     "crx": "^5.0.1",
     "extension-cli": "latest",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.2"
   },
   "xtdocs": {
     "source": {
