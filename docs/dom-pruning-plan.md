@@ -149,17 +149,17 @@ This section describes exact edits aligned with the current codebase to avoid am
 
 ### A) `src/content.js`
 
-1) Extend defaults and state
+1. Extend defaults and state
 
 - Add to `DEFAULTS`: `deleteMessages: false`, `hiddenDomBuffer: 0`
 - Add module state: `let prunedTopCount = 0;`
 
-2) Settings plumbing
+2. Settings plumbing
 
 - `loadSettings()` already uses `chrome.storage.sync.get(DEFAULTS, ...)` → the new key will load automatically.
 - `watchSettings()` iterates `Object.keys(DEFAULTS)` → the new key will update live automatically.
 
-3) UI creation (`ensureUI()`)
+3. UI creation (`ensureUI()`)
 
 - Only create the top sentinel/IntersectionObserver when `settings.autoloadOnScroll && !settings.deleteMessages`.
 - After creating the pill, add a conditional Reload button when delete mode is on:
@@ -168,7 +168,7 @@ This section describes exact edits aligned with the current codebase to avoid am
 - Disable or hide "Show older" when delete mode is on:
   - Example: `btn.disabled = true; btn.classList.add('disabled');`
 
-4) Windowing (`applyWindowing()`)
+4. Windowing (`applyWindowing()`)
 
 - Compute `threshold`, `batchSize`, and `hiddenCountTop` as today.
 - Let `totalBefore = messages.length`.
@@ -179,21 +179,22 @@ This section describes exact edits aligned with the current codebase to avoid am
   - Hide the next `hiddenBuffered = hiddenDesired - pruneCount` nodes (`display:none`)
   - Clear display for the rest (visible)
 
-5) Status badge (optional)
+5. Status badge (optional)
 
 - When `settings.deleteMessages === true`, append ` — ${getMessage('deleteModeActive')}` to the status element’s text after setting counts.
 
-6) Reveal (`revealOlder()`)
+6. Reveal (`revealOlder()`)
 
 - Early return when `settings.deleteMessages === true` (no-op). Reload is handled by the new button.
 
-7) Autoload on scroll
+7. Autoload on scroll
 
 - Guard the `IntersectionObserver` with `!settings.deleteMessages`.
 
 ### B) `src/options.html`
 
 Insert below the existing checkboxes:
+
 ```html
 <label class="row">
   <input type="checkbox" id="deleteMessages" />
@@ -206,9 +207,10 @@ Insert below the existing checkboxes:
   <small id="defaultHiddenBuffer"></small>
 </label>
 ```
+
 ### C) `src/options.js`
 
-1) Extend defaults:
+1. Extend defaults:
 
 ```javascript
 const DEFAULTS = {
@@ -221,7 +223,8 @@ const DEFAULTS = {
 };
 ```
 
-2) Localize labels:
+2. Localize labels:
+
 ```javascript
 const lblDeleteMode = document.getElementById('labelDeleteMode');
 if (lblDeleteMode) lblDeleteMode.textContent = getMessage('labelDeleteMode');
@@ -231,19 +234,21 @@ const defHidden = document.getElementById('defaultHiddenBuffer');
 if (defHidden) defHidden.textContent = getMessage('defaultNumber', ['0']);
 ```
 
-3) Load persisted values:
+3. Load persisted values:
 
 ```javascript
 document.getElementById('deleteMessages').checked = !!res.deleteMessages;
 document.getElementById('hiddenDomBuffer').value = String(Math.max(0, res.hiddenDomBuffer || 0));
 ```
-4) Save on submit:
+
+4. Save on submit:
 
 ```javascript
 const deleteMessages = !!document.getElementById('deleteMessages').checked;
 const hiddenDomBuffer = Math.max(0, parseInt(document.getElementById('hiddenDomBuffer').value || '0', 10));
 chrome.storage.sync.set({ maxVisible, batchSize, autoloadOnScroll, hideOldestOnNew, deleteMessages, hiddenDomBuffer });
 ```
+
 ### D) `assets/locales/*/messages.json`
 
 Add (at minimum in `en`):

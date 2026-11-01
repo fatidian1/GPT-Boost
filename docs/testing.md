@@ -1,6 +1,7 @@
 # Manual Testing Plan for DOM Pruning
 
 ## Scenarios
+
 1. Default (hide) mode parity
    - Ensure reveal/collapse works as before
    - Placeholder shows correct hidden counts
@@ -15,7 +16,7 @@
    - Status pill shows delete mode badge (optionally pruned count)
 
 3. Navigation & SPA behavior
-   - Route changes (/c/*, /share/*) keep observers functional
+   - Route changes (/c/_, /share/_) keep observers functional
    - UI pill persists; no duplicates
 
 4. Robustness
@@ -23,6 +24,7 @@
    - No console errors; no infinite observer loops
 
 ## Suggested steps
+
 - Set maxVisible=10, batchSize=10
 - Post > 50 alternating user/assistant messages
 - Toggle delete mode ON and continue posting; observe DOM size and responsiveness

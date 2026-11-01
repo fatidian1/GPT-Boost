@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [],
+  "categories": {
+    "correctness": "off"
+  },
+  "globals": {
+    "document": "off",
+    "escape": "off",
+    "navigator": "off",
+    "unescape": "off",
+    "window": "off",
+    "chrome": "readonly",
+    "browser": "readonly"
+  },
+  "env": { "browser": true, "es2021": true, "node": true }
+}

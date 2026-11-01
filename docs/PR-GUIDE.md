@@ -5,6 +5,7 @@ This document describes the procedure for submitting a PR for the DOM Pruning fe
 ## Overview
 
 In this feature, we added:
+
 - **DOM Delete Mode**: Physically deletes old messages to save memory (opt-in)
 - **Hidden Buffer**: Keeps a certain number of messages in the DOM before deletion, allowing restoration via "Show Older"
 - **UI/Settings Panel**: Added Delete Mode and Hidden Buffer settings to the options screen
@@ -69,17 +70,20 @@ git push origin feature/dom-pruning-code-only
 ## Review Points
 
 ### Security (Required)
+
 - [ ] No unnecessary permissions in manifest (check host_permissions too)
 - [ ] No fetch/XHR/WebSocket/eval/new Function etc. in src/
 - [ ] Delete Mode is opt-in, with an irreversibility warning in the UI
 
 ### Functional Verification (Recommended)
+
 - [ ] Boundary value test for hiddenDomBuffer (0, 1, large values)
 - [ ] Switching behavior with Delete Mode OFF/ON
 - [ ] Performance in long conversations (hundreds of messages)
 - [ ] Confirm no external communication in DevTools Network tab
 
 ### Code Quality
+
 - [ ] i18n keys added to all locales
 - [ ] Formatting verified with npm run format
 - [ ] npm run build successful
