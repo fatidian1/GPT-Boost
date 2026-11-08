@@ -27,7 +27,7 @@
   "devDependencies": {
     "extension-cli": "latest",
     "oxfmt": "^0.75.0",
-    "oxlint": "^1.90.0"
+    "oxlint": "^1.91.0"
   },
   "xtdocs": {
     "source": {
